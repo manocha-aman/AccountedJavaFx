@@ -15,6 +15,17 @@ public enum FxmlView {
       return "/fxml/User.fxml";
     }
   },
+  DEPARTMENT {
+    @Override
+    public String getTitle() {
+      return getStringFromResourceBundle("department.title");
+    }
+
+    @Override
+    public String getFxmlFile() {
+      return "/fxml/Department.fxml";
+    }
+  },
   LOGIN {
     @Override
     public String getTitle() {

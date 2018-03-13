@@ -39,9 +39,6 @@ import java.util.regex.Pattern;
 public class UserController implements Initializable {
 
   @FXML
-  private Button btnLogout;
-
-  @FXML
   private Label userId;
 
   @FXML
@@ -150,14 +147,6 @@ public class UserController implements Initializable {
   @FXML
   private void exit(ActionEvent event) {
     Platform.exit();
-  }
-
-  /**
-   * Logout and go to the login page
-   */
-  @FXML
-  private void logout(ActionEvent event) throws IOException {
-    stageManager.switchScene(FxmlView.LOGIN);
   }
 
   @FXML

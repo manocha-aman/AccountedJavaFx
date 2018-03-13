@@ -11,12 +11,17 @@
     <menus>
         <Menu mnemonicParsing="false" text="File">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit"/>
+                <MenuItem mnemonicParsing="false" onAction="#exit" text="Logout"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
             <items>
                 <MenuItem mnemonicParsing="false" text="Delete"/>
+            </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Master">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#showDepartmentForm"  text="Department"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
