@@ -26,6 +26,7 @@ public class DepartmentController  implements Initializable {
   }
 
   public void saveDepartment(ActionEvent actionEvent) {
+	  System.out.println("Saving Department");
     Department department = new Department(new Long(id.getText()), code.getText(), name.getText());
 
     departmentRepository.save(department);
