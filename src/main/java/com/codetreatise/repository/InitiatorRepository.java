@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.codetreatise.bean.Initiator;
 
 @Repository
-public interface InitiatorRepository extends JpaRepository<Initiator, String> {
+public interface InitiatorRepository extends JpaRepository<Initiator, Long> {
+
+	Initiator findByName(String name);
 	
 }
