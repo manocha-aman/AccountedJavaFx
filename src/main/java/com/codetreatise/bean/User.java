@@ -9,11 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
-
 @Entity
 @Table(name="User")
 public class User {
