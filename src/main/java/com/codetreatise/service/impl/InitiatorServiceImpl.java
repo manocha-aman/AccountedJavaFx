@@ -55,4 +55,14 @@ public class InitiatorServiceImpl implements InitiatorService {
 		initiatorRepository.deleteInBatch(Initiators);
 	}
 
+	@Override
+	public boolean contains(String code) {
+		boolean result = false;
+		for (Initiator initiator : initiatorRepository.findAll()) {
+			if(initiator.getCode().equalsIgnoreCase(code.toString()))
+				return true;
+		}
+		return result;
+	}
+
 }

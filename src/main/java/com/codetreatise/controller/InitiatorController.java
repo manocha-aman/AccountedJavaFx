@@ -1,6 +1,8 @@
 package com.codetreatise.controller;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.codetreatise.bean.Initiator;
-import com.codetreatise.bean.User;
 import com.codetreatise.repository.InitiatorRepository;
 import com.codetreatise.service.InitiatorService;
 
@@ -20,27 +21,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 @Controller
 public class InitiatorController implements Initializable {
-	@FXML
-	private TextField id;
 	@FXML
 	private Label lblInitiator;
 	@FXML
 	private Button reset;
 	@FXML
 	private Button saveInitiator;
-	@FXML
-	private TableColumn<Initiator, Long> colId;
 	@FXML
 	private TableColumn<Initiator, Long> colCode;
 	@FXML
@@ -63,6 +61,7 @@ public class InitiatorController implements Initializable {
 	private TableView<Initiator> initiatorTable;
 
 	public void reset(ActionEvent actionEvent) {
+		clearFields();
 	}
 
 	// public void saveInitiator(ActionEvent actionEvent) {
@@ -78,7 +77,17 @@ public class InitiatorController implements Initializable {
 	// }
 
 	public void deleteInitiators(ActionEvent actionEvent) {
-		initiatorRepository.delete(Long.parseLong(getId().getText()));
+	    List<Initiator> initiators = initiatorTable.getSelectionModel().getSelectedItems();
+
+	    Alert alert = new Alert(AlertType.CONFIRMATION);
+	    alert.setTitle("Confirmation Dialog");
+	    alert.setHeaderText(null);
+	    alert.setContentText("Are you sure you want to delete the selected initiators?");
+	    Optional<ButtonType> action = alert.showAndWait();
+
+	    if (action.get() == ButtonType.OK) initiatorService.deleteInBatch(initiators);
+
+	    loadInitiatorDetails();
 	}
 
 	public void updateInitiator(ActionEvent actionEvent) {
@@ -93,32 +102,18 @@ public class InitiatorController implements Initializable {
 	}
 
 	private void setColumnProperties() {
-		    colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-		    colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		    colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
 	}
 
 	@FXML
 	private void saveInitiator(ActionEvent event) {
 
-		if (validate("Name", getName().getText(), "[a-zA-Z]+") && validate("id", getId().getText(), "[0-9]+")
-				&& validate("code", getCode().getText(), "[0-9]+")) {
+		if (validate("Name", getName().getText(), "[a-zA-Z]+") && validate("code", getCode().getText(), "[0-9]+")) {
 
-			String text = id.getText();
-			if (text == null || text == "") {
-				if (validate("Name", getName().getText(), "[a-zA-Z]+")
-						&& emptyValidation("Code", getCode().getText().isEmpty())) {
+			if (validate("Name", getName().getText(), "[a-zA-Z]+")
+					&& emptyValidation("Code", getCode().getText().isEmpty())) {
 
-					Initiator initiator = new Initiator();
-					initiator.setName(getName().getText());
-					initiator.setCode(getCode().getText());
-
-					Initiator newInitiator = initiatorService.save(initiator);
-
-					saveAlert(newInitiator);
-				}
-
-			} else {
 				Initiator initiator = new Initiator();
 				initiator.setName(getName().getText());
 				initiator.setCode(getCode().getText());
@@ -126,16 +121,25 @@ public class InitiatorController implements Initializable {
 				Initiator newInitiator = initiatorService.save(initiator);
 
 				saveAlert(newInitiator);
-				// Initiator initiator = initiatorService.find(Long.parseLong(text));
-				// initiator.setName(getName().getText());
-				// initiator.setCode(getCode().getText());
-				// Initiator updatedInitiator = initiatorService.update(initiator);
-				// updateAlert(updatedInitiator);
 			}
 
-			clearFields();
-			loadInitiatorDetails();
+		} else {
+//			Initiator initiator = new Initiator();
+//			initiator.setName(getName().getText());
+//			initiator.setCode(getCode().getText());
+//
+//			Initiator newInitiator = initiatorService.save(initiator);
+//
+//			saveAlert(newInitiator);
+			// Initiator initiator = initiatorService.find(Long.parseLong(text));
+			// initiator.setName(getName().getText());
+			// initiator.setCode(getCode().getText());
+			// Initiator updatedInitiator = initiatorService.update(initiator);
+			// updateAlert(updatedInitiator);
 		}
+
+		clearFields();
+		loadInitiatorDetails();
 
 	}
 
@@ -146,7 +150,6 @@ public class InitiatorController implements Initializable {
 	}
 
 	private void clearFields() {
-		id.setText(null);
 		name.clear();
 		code.clear();
 	}
@@ -164,7 +167,7 @@ public class InitiatorController implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Initiator saved successfully.");
 		alert.setHeaderText(null);
-		alert.setContentText("The initiator " + newInitiator.getName() + " has been created with code : "
+		alert.setContentText("An initiator " + newInitiator.getName() + " has been created with code : "
 				+ newInitiator.getCode() + ".");
 		alert.showAndWait();
 
@@ -177,6 +180,12 @@ public class InitiatorController implements Initializable {
 		if (!value.isEmpty()) {
 			Pattern p = Pattern.compile(pattern);
 			Matcher m = p.matcher(value);
+			if(field.equalsIgnoreCase("Code")) {
+				if((initiatorService.contains(value))) {
+					alreadyExistsValidationAlert(field, false);
+					return false;
+				}
+			}
 			if (m.find() && m.group().equals(value)) {
 				return true;
 			} else {
@@ -189,6 +198,14 @@ public class InitiatorController implements Initializable {
 		}
 	}
 
+	private void alreadyExistsValidationAlert(String field, boolean result) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Validation Error");
+		alert.setHeaderText(null);
+		alert.setContentText("This value exists. Please use a new value");
+		alert.showAndWait();
+	}
+	
 	private void validationAlert(String field, boolean empty) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Validation Error");
@@ -211,14 +228,6 @@ public class InitiatorController implements Initializable {
 			validationAlert(field, true);
 			return false;
 		}
-	}
-
-	public TextField getId() {
-		return id;
-	}
-
-	public void setId(TextField id) {
-		this.id = id;
 	}
 
 	public TextField getCode() {

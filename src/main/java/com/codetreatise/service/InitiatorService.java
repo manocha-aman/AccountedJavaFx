@@ -7,4 +7,6 @@ public interface InitiatorService extends GenericService<Initiator>{
 
 	Initiator findByName(String name);
 
+	boolean contains(String code);
+
 }

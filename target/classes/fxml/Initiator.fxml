@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import java.lang.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
@@ -16,21 +17,16 @@
     <left>
         <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
             <children>
-                <Label text="Add New Initiator" textFill="WHITE">
+                <Label alignment="BASELINE_CENTER" text="Add New Initiator" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font size="20.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="10.0" left="20.0" top="30.0" />
+                        <Insets left="60.0" top="30.0" />
                     </VBox.margin>
                 </Label>
                 <HBox prefHeight="30.0" prefWidth="265.0">
                     <children>
-                        <Label text="Initiator" textFill="#f8f7f7">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </Label>
                         <Label fx:id="lblInitiator">
                             <HBox.margin>
                                 <Insets left="25.0" />
@@ -41,11 +37,6 @@
                         <Insets left="25.0" />
                     </VBox.margin>
                 </HBox>
-                <TextField fx:id="id" prefHeight="30.0" prefWidth="246.0" promptText="Id">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin>
-                </TextField>
                 <TextField fx:id="code" prefHeight="30.0" prefWidth="246.0" promptText="Code">
                     <VBox.margin>
                         <Insets left="25.0" right="25.0" />
@@ -63,7 +54,7 @@
                                 <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
                             </effect>
                         </Button>
-                        <Button fx:id="saveUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveInitiator" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+                        <Button fx:id="saveInitiator" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveInitiator" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
                             <font>
                                 <Font size="15.0" />
                             </font>
@@ -89,13 +80,12 @@
         </VBox>
     </left>
     <center>
-        <VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
             <children>
-                <TableView fx:id="userTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+                <TableView fx:id="initiatorTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
                     <columns>
-                        <TableColumn fx:id="colUserId" maxWidth="700.0" prefWidth="20.0" text="ID" />
-                        <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="Code" />
-                        <TableColumn fx:id="colLastName" maxWidth="4000.0" prefWidth="75.0" text="Initiator" />
+                        <TableColumn fx:id="colCode" maxWidth="4000.0" prefWidth="75.0" text="Code" />
+                        <TableColumn fx:id="colName" maxWidth="4000.0" prefWidth="75.0" text="Initiator" />
                     </columns>
                     <VBox.margin>
                         <Insets left="10.0" right="5.0" />
