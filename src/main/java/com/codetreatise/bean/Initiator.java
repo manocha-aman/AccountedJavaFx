@@ -14,6 +14,9 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "Initiator")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Initiator implements Master {
 
   @Id
@@ -29,8 +32,6 @@ public class Initiator implements Master {
     this.name = name;
   }
 
-<<<<<<< HEAD
-=======
   public String getCode() {
     return code;
   }
@@ -46,5 +47,4 @@ public class Initiator implements Master {
   public void setName(String name) {
     this.name = name;
   }
->>>>>>> a12ee8a11a93ccf1bd82f7421043d3d84ede6575
 }

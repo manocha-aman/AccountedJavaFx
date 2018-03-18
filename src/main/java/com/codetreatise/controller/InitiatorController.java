@@ -1,14 +1,15 @@
 package com.codetreatise.controller;
 
-import com.codetreatise.bean.Initiator;
-<<<<<<< HEAD
-import com.codetreatise.service.InitiatorService;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.codetreatise.bean.Initiator;
 import com.codetreatise.repository.InitiatorRepository;
 import com.codetreatise.service.InitiatorServiceImpl;
-import com.codetreatise.service.InitiatorServiceImpl;
->>>>>>> a12ee8a11a93ccf1bd82f7421043d3d84ede6575
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
@@ -25,15 +25,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Controller
 public class InitiatorController implements Initializable {
