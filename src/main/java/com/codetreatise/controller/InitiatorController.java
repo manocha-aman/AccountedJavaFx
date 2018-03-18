@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.codetreatise.bean.Initiator;
-import com.codetreatise.repository.InitiatorRepository;
 import com.codetreatise.service.InitiatorService;
 
 import javafx.collections.FXCollections;
@@ -49,8 +48,6 @@ public class InitiatorController implements Initializable {
 	private TextField code;
 	@FXML
 	private TextField name;
-	@Autowired
-	private InitiatorRepository initiatorRepository;
 
 	@Autowired
 	private InitiatorService initiatorService;
@@ -63,18 +60,6 @@ public class InitiatorController implements Initializable {
 	public void reset(ActionEvent actionEvent) {
 		clearFields();
 	}
-
-	// public void saveInitiator(ActionEvent actionEvent) {
-	// System.out.println("SAVING INITIATOR");
-	// Initiator initiator = new Initiator();
-	// try {
-	// initiator = new Initiator(new Long(id.getText()), code.getText(),
-	// name.getText());
-	// } catch (Exception exception) {
-	// exception.getMessage();
-	// }
-	// initiatorRepository.save(initiator);
-	// }
 
 	public void deleteInitiators(ActionEvent actionEvent) {
 	    List<Initiator> initiators = initiatorTable.getSelectionModel().getSelectedItems();
@@ -123,19 +108,6 @@ public class InitiatorController implements Initializable {
 				saveAlert(newInitiator);
 			}
 
-		} else {
-//			Initiator initiator = new Initiator();
-//			initiator.setName(getName().getText());
-//			initiator.setCode(getCode().getText());
-//
-//			Initiator newInitiator = initiatorService.save(initiator);
-//
-//			saveAlert(newInitiator);
-			// Initiator initiator = initiatorService.find(Long.parseLong(text));
-			// initiator.setName(getName().getText());
-			// initiator.setCode(getCode().getText());
-			// Initiator updatedInitiator = initiatorService.update(initiator);
-			// updateAlert(updatedInitiator);
 		}
 
 		clearFields();
@@ -167,8 +139,7 @@ public class InitiatorController implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Initiator saved successfully.");
 		alert.setHeaderText(null);
-		alert.setContentText("An initiator " + newInitiator.getName() + " has been created with code : "
-				+ newInitiator.getCode() + ".");
+		alert.setContentText("An initiator " + newInitiator.getName() + " has been created with code : " + newInitiator.getCode() + ".");
 		alert.showAndWait();
 
 	}
