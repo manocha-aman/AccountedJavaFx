@@ -5,17 +5,19 @@
  */
 package com.codetreatise.config;
 
-import com.codetreatise.logging.ExceptionWriter;
-import javafx.stage.Stage;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ResourceBundle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.ResourceBundle;
+import com.codetreatise.logging.ExceptionWriter;
+
+import javafx.stage.Stage;
 
 @Configuration
 public class AppJavaConfig {

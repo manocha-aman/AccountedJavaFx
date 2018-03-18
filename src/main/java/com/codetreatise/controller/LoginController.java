@@ -1,8 +1,16 @@
 package com.codetreatise.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Controller;
+
 import com.codetreatise.config.StageManager;
 import com.codetreatise.service.UserServiceImpl;
 import com.codetreatise.view.FxmlView;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,12 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Controller;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author Ram Alapure

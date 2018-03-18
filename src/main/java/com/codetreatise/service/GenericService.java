@@ -1,8 +1,8 @@
 package com.codetreatise.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public class GenericService<T extends Object> {
   final JpaRepository<T, String> repository;

@@ -1,11 +1,11 @@
 package com.codetreatise.service;
 
-import com.codetreatise.bean.Department;
-import com.codetreatise.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+
+import com.codetreatise.bean.Department;
 
 @Service
 public class DepartmentServiceImpl extends GenericService<Department> {

@@ -2,8 +2,6 @@ package com.codetreatise.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import com.codetreatise.bean.User;
 import com.codetreatise.config.StageManager;
 import com.codetreatise.service.UserServiceImpl;
-import com.codetreatise.view.FxmlView;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +24,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;

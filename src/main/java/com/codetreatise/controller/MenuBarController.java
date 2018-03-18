@@ -1,17 +1,19 @@
 package com.codetreatise.controller;
 
-import com.codetreatise.config.StageManager;
-import com.codetreatise.view.FxmlView;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.codetreatise.config.StageManager;
+import com.codetreatise.view.FxmlView;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
 @Controller
 public class MenuBarController implements Initializable {

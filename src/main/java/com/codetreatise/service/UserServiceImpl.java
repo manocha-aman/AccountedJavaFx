@@ -1,9 +1,10 @@
 package com.codetreatise.service;
 
-import com.codetreatise.bean.User;
-import com.codetreatise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.codetreatise.bean.User;
+import com.codetreatise.repository.UserRepository;
 
 @Service
 public class UserServiceImpl {

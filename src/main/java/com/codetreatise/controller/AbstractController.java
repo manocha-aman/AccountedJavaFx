@@ -1,24 +1,21 @@
 package com.codetreatise.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import com.codetreatise.bean.Master;
 import com.codetreatise.service.GenericService;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public abstract class AbstractController<T extends Master, S extends GenericService<T>> implements Initializable {
 

@@ -1,13 +1,12 @@
 package com.codetreatise.view;
 
-import com.codetreatise.bean.Department;
+import java.util.ResourceBundle;
+
 import com.codetreatise.controller.DepartmentController;
 import com.codetreatise.controller.InitiatorController;
 import com.codetreatise.controller.LoginController;
 import com.codetreatise.controller.MenuBarController;
 import com.codetreatise.controller.UserController;
-
-import java.util.ResourceBundle;
 
 public enum FxmlView {
 	MENUBAR {

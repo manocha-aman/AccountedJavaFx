@@ -1,12 +1,14 @@
 package com.codetreatise;
 
-import com.codetreatise.config.StageManager;
-import com.codetreatise.view.FxmlView;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import com.codetreatise.config.StageManager;
+import com.codetreatise.view.FxmlView;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 @SpringBootApplication
 public class Main extends Application {

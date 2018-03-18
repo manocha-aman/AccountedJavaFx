@@ -1,9 +1,10 @@
 package com.codetreatise.controller;
 
-import com.codetreatise.bean.Department;
-import com.codetreatise.service.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.codetreatise.bean.Department;
+import com.codetreatise.service.DepartmentServiceImpl;
 
 @Controller
 public class DepartmentController extends AbstractController<Department, DepartmentServiceImpl> {

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,14 +18,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Initiator implements Master {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
-  private String code;
-  private String name;
+  @NonNull private String code;
+  @NonNull private String name;
 
   public Initiator(long id, String code, String name) {
     this.id = id;
@@ -32,19 +34,4 @@ public class Initiator implements Master {
     this.name = name;
   }
 
-  public String getCode() {
-    return code;
-  }
-
-  public void setCode(String code) {
-    this.code = code;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 }
