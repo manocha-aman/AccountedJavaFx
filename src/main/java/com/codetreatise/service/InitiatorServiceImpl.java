@@ -9,7 +9,8 @@ import com.codetreatise.bean.Initiator;
 
 @Service
 public class InitiatorServiceImpl extends GenericService<Initiator> {
-	public InitiatorServiceImpl(@Autowired @Qualifier("InitiatorRepository") JpaRepository<Initiator, String> repository) {
-		super(repository);
-	}
+
+  public InitiatorServiceImpl(@Autowired @Qualifier("InitiatorRepository") JpaRepository<Initiator, String> repository) {
+    super(repository);
+  }
 }
