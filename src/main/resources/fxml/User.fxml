@@ -152,7 +152,7 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem fx:id="deleteUsers" mnemonicParsing="false" onAction="#deleteUsers" text="Delete" />
+                      <MenuItem fx:id="deleteUsers" mnemonicParsing="false"  text="Delete" />
                     </items>
                   </ContextMenu>
                </contextMenu>

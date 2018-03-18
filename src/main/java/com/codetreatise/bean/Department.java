@@ -9,21 +9,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Department")
-public class Department {
-
+public class Department implements Master {
   @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private long id;
+  @Column(name = "code", updatable = false, nullable = false)
   private String code;
+  @Column(name = "name", updatable = true, nullable = false)
   private String name;
 
   private Department() {
   }
 
-  public Department(long id, String code, String name) {
-    this.id = id;
+  public Department(String code, String name) {
     this.code = code;
     this.name = name;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public String getName() {
+    return name;
   }
 }

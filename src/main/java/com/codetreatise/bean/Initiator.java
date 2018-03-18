@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Initiator")
-public class Initiator {
+@Table(name = "Initiator")
+public class Initiator implements Master {
 
   @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
   private String code;
@@ -27,19 +27,19 @@ public class Initiator {
     this.name = name;
   }
 
-public String getCode() {
-	return code;
-}
+  public String getCode() {
+    return code;
+  }
 
-public void setCode(String code) {
-	this.code = code;
-}
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-public String getName() {
-	return name;
-}
+  public String getName() {
+    return name;
+  }
 
-public void setName(String name) {
-	this.name = name;
-}
+  public void setName(String name) {
+    this.name = name;
+  }
 }
