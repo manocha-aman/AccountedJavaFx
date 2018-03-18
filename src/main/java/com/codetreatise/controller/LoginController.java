@@ -1,7 +1,7 @@
 package com.codetreatise.controller;
 
 import com.codetreatise.config.StageManager;
-import com.codetreatise.service.UserService;
+import com.codetreatise.service.UserServiceImpl;
 import com.codetreatise.view.FxmlView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +38,7 @@ public class LoginController implements Initializable {
   private Label lblLogin;
 
   @Autowired
-  private UserService userService;
+  private UserServiceImpl userService;
 
   @Lazy
   @Autowired
