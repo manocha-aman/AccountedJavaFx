@@ -1,18 +1,14 @@
 package com.codetreatise.controller;
 
-import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import com.codetreatise.bean.Initiator;
+<<<<<<< HEAD
 import com.codetreatise.service.InitiatorService;
 
+=======
+import com.codetreatise.repository.InitiatorRepository;
+import com.codetreatise.service.InitiatorServiceImpl;
+import com.codetreatise.service.InitiatorServiceImpl;
+>>>>>>> a12ee8a11a93ccf1bd82f7421043d3d84ede6575
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,191 +25,124 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class InitiatorController implements Initializable {
-	@FXML
-	private Label lblInitiator;
-	@FXML
-	private Button reset;
-	@FXML
-	private Button saveInitiator;
-	@FXML
-	private TableColumn<Initiator, Long> colCode;
-	@FXML
-	private TableColumn<Initiator, String> colName;
-	@FXML
-	private MenuItem deleteInitiators;
-	@FXML
-	private TextField code;
-	@FXML
-	private TextField name;
+  @FXML
+  private Label lblInitiator;
+  @FXML
+  private Button reset;
+  @FXML
+  private Button saveInitiator;
+  @FXML
+  private TableColumn<Initiator, Long> colCode;
+  @FXML
+  private TableColumn<Initiator, String> colName;
+  @FXML
+  private MenuItem deleteInitiators;
+  @FXML
+  private TextField code;
+  @FXML
+  private TextField name;
+  @Autowired
+  private InitiatorRepository initiatorRepository;
 
-	@Autowired
-	private InitiatorService initiatorService;
+  @Autowired
+  private InitiatorServiceImpl initiatorService;
 
-	private ObservableList<Initiator> initiatorList = FXCollections.observableArrayList();
+  private ObservableList<Initiator> initiatorList = FXCollections.observableArrayList();
 
-	@FXML
-	private TableView<Initiator> initiatorTable;
+  @FXML
+  private TableView<Initiator> initiatorTable;
 
-	public void reset(ActionEvent actionEvent) {
-		clearFields();
-	}
+  public void reset(ActionEvent actionEvent) {
+    clearFields();
+  }
 
-	public void deleteInitiators(ActionEvent actionEvent) {
-	    List<Initiator> initiators = initiatorTable.getSelectionModel().getSelectedItems();
+  private void clearFields() {
+    name.clear();
+    code.clear();
+  }
 
-	    Alert alert = new Alert(AlertType.CONFIRMATION);
-	    alert.setTitle("Confirmation Dialog");
-	    alert.setHeaderText(null);
-	    alert.setContentText("Are you sure you want to delete the selected initiators?");
-	    Optional<ButtonType> action = alert.showAndWait();
 
-	    if (action.get() == ButtonType.OK) initiatorService.deleteInBatch(initiators);
+  private void loadInitiatorDetails() {
+    initiatorList.clear();
+    initiatorList.addAll(initiatorService.findAll());
+    initiatorTable.setItems(initiatorList);
+  }
 
-	    loadInitiatorDetails();
-	}
+  public void updateInitiator(ActionEvent actionEvent) {
+    // initiatorRepository.
+  }
 
-	public void updateInitiator(ActionEvent actionEvent) {
-		// initiatorRepository.
-	}
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    initiatorTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    setColumnProperties();
+    loadInitiatorDetails();
+  }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		initiatorTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		setColumnProperties();
-		loadInitiatorDetails();
-	}
+  private void setColumnProperties() {
+    colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+  }
 
-	private void setColumnProperties() {
-		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
-	}
+  @FXML
+  private void saveInitiator(ActionEvent event) {
 
-	@FXML
-	private void saveInitiator(ActionEvent event) {
 
-		if (validate("Name", getName().getText(), "[a-zA-Z]+") && validate("code", getCode().getText(), "[0-9]+")) {
+    Initiator initiator = new Initiator();
+    initiator.setName(getName().getText());
+    initiator.setCode(getCode().getText());
 
-			if (validate("Name", getName().getText(), "[a-zA-Z]+")
-					&& emptyValidation("Code", getCode().getText().isEmpty())) {
+    Initiator newInitiator = initiatorService.save(initiator);
+    clearFields();
+    loadInitiatorDetails();
 
-				Initiator initiator = new Initiator();
-				initiator.setName(getName().getText());
-				initiator.setCode(getCode().getText());
+  }
 
-				Initiator newInitiator = initiatorService.save(initiator);
+  private void saveAlert(Initiator newInitiator) {
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle("Initiator saved successfully.");
+    alert.setHeaderText(null);
+    alert.setContentText("An initiator " + newInitiator.getName() + " has been created with code : "
+                             + newInitiator.getCode() + ".");
+    alert.showAndWait();
+  }
 
-				saveAlert(newInitiator);
-			}
 
-		}
 
-		clearFields();
-		loadInitiatorDetails();
 
-	}
+  public TextField getCode() {
+    return code;
+  }
 
-	private void loadInitiatorDetails() {
-		initiatorList.clear();
-		initiatorList.addAll(initiatorService.findAll());
-		initiatorTable.setItems(initiatorList);
-	}
+  public void setCode(TextField code) {
+    this.code = code;
+  }
 
-	private void clearFields() {
-		name.clear();
-		code.clear();
-	}
+  public TextField getName() {
+    return name;
+  }
 
-	private void updateAlert(Initiator initiator) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Initiator updated successfully.");
-		alert.setHeaderText(null);
-		alert.setContentText("The initiator " + initiator.getName() + " has been updated.");
-		alert.showAndWait();
-	}
+  public void setName(TextField name) {
+    this.name = name;
+  }
 
-	private void saveAlert(Initiator newInitiator) {
-
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Initiator saved successfully.");
-		alert.setHeaderText(null);
-		alert.setContentText("An initiator " + newInitiator.getName() + " has been created with code : " + newInitiator.getCode() + ".");
-		alert.showAndWait();
-
-	}
-
-	/*
-	 * Validations {Needs to be moved to a common code. Duplicacy for every form}
-	 */
-	private boolean validate(String field, String value, String pattern) {
-		if (!value.isEmpty()) {
-			Pattern p = Pattern.compile(pattern);
-			Matcher m = p.matcher(value);
-			if(field.equalsIgnoreCase("Code")) {
-				if((initiatorService.contains(value))) {
-					alreadyExistsValidationAlert(field, false);
-					return false;
-				}
-			}
-			if (m.find() && m.group().equals(value)) {
-				return true;
-			} else {
-				validationAlert(field, false);
-				return false;
-			}
-		} else {
-			validationAlert(field, true);
-			return false;
-		}
-	}
-
-	private void alreadyExistsValidationAlert(String field, boolean result) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Validation Error");
-		alert.setHeaderText(null);
-		alert.setContentText("This value exists. Please use a new value");
-		alert.showAndWait();
-	}
-	
-	private void validationAlert(String field, boolean empty) {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Validation Error");
-		alert.setHeaderText(null);
-		if (field.equals("Role"))
-			alert.setContentText("Please Select " + field);
-		else {
-			if (empty)
-				alert.setContentText("Please Enter " + field);
-			else
-				alert.setContentText("Please Enter Valid " + field);
-		}
-		alert.showAndWait();
-	}
-
-	private boolean emptyValidation(String field, boolean empty) {
-		if (!empty) {
-			return true;
-		} else {
-			validationAlert(field, true);
-			return false;
-		}
-	}
-
-	public TextField getCode() {
-		return code;
-	}
-
-	public void setCode(TextField code) {
-		this.code = code;
-	}
-
-	public TextField getName() {
-		return name;
-	}
-
-	public void setName(TextField name) {
-		this.name = name;
-	}
+  private void updateAlert(Initiator initiator) {
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle("Initiator updated successfully.");
+    alert.setHeaderText(null);
+    alert.setContentText("The initiator " + initiator.getName() + " has been updated.");
+    alert.showAndWait();
+  }
 }

@@ -5,9 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.codetreatise.bean.Initiator;
 
-@Repository
-public interface InitiatorRepository extends JpaRepository<Initiator, Long> {
-
-	Initiator findByName(String name);
-	
+@Repository("InitiatorRepository")
+public interface InitiatorRepository extends JpaRepository<Initiator, String> {
 }

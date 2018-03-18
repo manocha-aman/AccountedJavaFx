@@ -13,15 +13,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Initiator")
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class Initiator {
+@Table(name = "Initiator")
+public class Initiator implements Master {
 
   @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
   private String code;
@@ -33,4 +29,22 @@ public class Initiator {
     this.name = name;
   }
 
+<<<<<<< HEAD
+=======
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+>>>>>>> a12ee8a11a93ccf1bd82f7421043d3d84ede6575
 }

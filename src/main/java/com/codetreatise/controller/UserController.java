@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 
 import com.codetreatise.bean.User;
 import com.codetreatise.config.StageManager;
-import com.codetreatise.service.UserService;
-
+import com.codetreatise.service.UserServiceImpl;
+import com.codetreatise.view.FxmlView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -154,7 +154,7 @@ public class UserController implements Initializable {
   @Autowired
   private StageManager stageManager;
   @Autowired
-  private UserService userService;
+  private UserServiceImpl userService;
   private ObservableList<User> userList = FXCollections.observableArrayList();
   private ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
 
@@ -182,46 +182,18 @@ public class UserController implements Initializable {
 
   @FXML
   private void saveUser(ActionEvent event) {
+    User user = new User();
+    user.setFirstName(getFirstName());
+    user.setLastName(getLastName());
+    user.setDob(getDob());
+    user.setGender(getGender());
+    user.setRole(getRole());
+    user.setEmail(getEmail());
+    user.setPassword(getPassword());
 
-    if (validate("First Name", getFirstName(), "[a-zA-Z]+") &&
-        validate("Last Name", getLastName(), "[a-zA-Z]+") &&
-        emptyValidation("DOB", dob.getEditor().getText().isEmpty()) &&
-        emptyValidation("Role", getRole() == null)) {
+    User newUser = userService.save(user);
 
-      if (userId.getText() == null || userId.getText() == "") {
-        if (validate(
-            "Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
-            emptyValidation("Password", getPassword().isEmpty())) {
-
-          User user = new User();
-          user.setFirstName(getFirstName());
-          user.setLastName(getLastName());
-          user.setDob(getDob());
-          user.setGender(getGender());
-          user.setRole(getRole());
-          user.setEmail(getEmail());
-          user.setPassword(getPassword());
-
-          User newUser = userService.save(user);
-
-          saveAlert(newUser);
-        }
-
-      } else {
-        User user = userService.find(Long.parseLong(userId.getText()));
-        user.setFirstName(getFirstName());
-        user.setLastName(getLastName());
-        user.setDob(getDob());
-        user.setGender(getGender());
-        user.setRole(getRole());
-        User updatedUser = userService.update(user);
-        updateAlert(updatedUser);
-      }
-
-      clearFields();
-      loadUserDetails();
-    }
-
+    saveAlert(newUser);
   }
 
   private void saveAlert(User user) {
@@ -282,7 +254,7 @@ public class UserController implements Initializable {
    */
   private void loadUserDetails() {
     userList.clear();
-    userList.addAll(userService.findAll());
+//    userList.addAll(userService.());
 
     userTable.setItems(userList);
   }
@@ -327,20 +299,6 @@ public class UserController implements Initializable {
     }
   }
 
-  @FXML
-  private void deleteUsers(ActionEvent event) {
-    List<User> users = userTable.getSelectionModel().getSelectedItems();
-
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Confirmation Dialog");
-    alert.setHeaderText(null);
-    alert.setContentText("Are you sure you want to delete selected?");
-    Optional<ButtonType> action = alert.showAndWait();
-
-    if (action.get() == ButtonType.OK) userService.deleteInBatch(users);
-
-    loadUserDetails();
-  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

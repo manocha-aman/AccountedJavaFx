@@ -27,6 +27,7 @@ public class StageManager {
 
   public void switchScene(final FxmlView view) {
     Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
+//    springFXMLLoader.loader.getNamespace().put("controllerName", view.getController());
     show(viewRootNodeHierarchy, view.getTitle());
   }
 

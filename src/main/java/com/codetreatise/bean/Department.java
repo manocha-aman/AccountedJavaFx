@@ -14,22 +14,26 @@ import lombok.ToString;
 
 @Entity
 @Table(name="Department")
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class Department {
-
+public class Department implements Master {
   @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private long id;
+  @Column(name = "code", updatable = false, nullable = false)
   private String code;
+  @Column(name = "name", updatable = true, nullable = false)
   private String name;
 
-  public Department(long id, String code, String name) {
-    this.id = id;
+  private Department() {
+  }
+
+  public Department(String code, String name) {
     this.code = code;
     this.name = name;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public String getName() {
+    return name;
   }
 }
