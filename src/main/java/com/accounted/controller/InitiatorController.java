@@ -1,10 +1,10 @@
-package com.codetreatise.controller;
+package com.accounted.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.codetreatise.bean.Initiator;
-import com.codetreatise.service.InitiatorServiceImpl;
+import com.accounted.bean.Initiator;
+import com.accounted.service.InitiatorServiceImpl;
 
 @Controller
 public class InitiatorController extends AbstractController<Initiator, InitiatorServiceImpl> {

@@ -1,11 +1,11 @@
-package com.codetreatise;
+package com.accounted;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.codetreatise.config.StageManager;
-import com.codetreatise.view.FxmlView;
+import com.accounted.config.StageManager;
+import com.accounted.view.FxmlView;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

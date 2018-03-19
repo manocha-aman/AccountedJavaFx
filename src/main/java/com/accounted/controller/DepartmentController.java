@@ -1,10 +1,10 @@
-package com.codetreatise.controller;
+package com.accounted.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.codetreatise.bean.Department;
-import com.codetreatise.service.DepartmentServiceImpl;
+import com.accounted.bean.Department;
+import com.accounted.service.DepartmentServiceImpl;
 
 @Controller
 public class DepartmentController extends AbstractController<Department, DepartmentServiceImpl> {

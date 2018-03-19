@@ -1,16 +1,16 @@
-package com.codetreatise.service;
+package com.accounted.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.codetreatise.bean.Initiator;
+import com.accounted.bean.Department;
 
 @Service
-public class InitiatorServiceImpl extends GenericService<Initiator> {
+public class DepartmentServiceImpl extends GenericService<Department> {
 
-  public InitiatorServiceImpl(@Autowired @Qualifier("InitiatorRepository") JpaRepository<Initiator, String> repository) {
+  public DepartmentServiceImpl(@Autowired @Qualifier("DepartmentRepository") JpaRepository<Department, String> repository) {
     super(repository);
   }
 }

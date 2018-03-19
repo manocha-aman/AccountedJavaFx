@@ -1,4 +1,4 @@
-package com.codetreatise.bean;
+package com.accounted.bean;
 
 import java.time.LocalDate;
 

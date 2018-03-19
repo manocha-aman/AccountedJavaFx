@@ -1,4 +1,4 @@
-package com.codetreatise.bean;
+package com.accounted.bean;
 
 public interface Master {
   String getCode();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codetreatise.config;
+package com.accounted.config;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
-import com.codetreatise.logging.ExceptionWriter;
+import com.accounted.logging.ExceptionWriter;
 
 import javafx.stage.Stage;
 

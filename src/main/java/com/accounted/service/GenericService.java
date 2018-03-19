@@ -1,4 +1,4 @@
-package com.codetreatise.service;
+package com.accounted.service;
 
 import java.util.List;
 

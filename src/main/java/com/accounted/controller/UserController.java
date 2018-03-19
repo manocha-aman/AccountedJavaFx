@@ -1,4 +1,4 @@
-package com.codetreatise.controller;
+package com.accounted.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
-import com.codetreatise.bean.User;
-import com.codetreatise.config.StageManager;
-import com.codetreatise.service.UserServiceImpl;
+import com.accounted.bean.User;
+import com.accounted.config.StageManager;
+import com.accounted.service.UserServiceImpl;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

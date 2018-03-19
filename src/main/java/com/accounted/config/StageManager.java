@@ -1,4 +1,4 @@
-package com.codetreatise.config;
+package com.accounted.config;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 
-import com.codetreatise.view.FxmlView;
+import com.accounted.view.FxmlView;
 
 import javafx.application.Platform;
 import javafx.scene.Parent;

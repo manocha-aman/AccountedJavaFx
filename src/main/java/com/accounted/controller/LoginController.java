@@ -1,4 +1,4 @@
-package com.codetreatise.controller;
+package com.accounted.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
-import com.codetreatise.config.StageManager;
-import com.codetreatise.service.UserServiceImpl;
-import com.codetreatise.view.FxmlView;
+import com.accounted.config.StageManager;
+import com.accounted.service.UserServiceImpl;
+import com.accounted.view.FxmlView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

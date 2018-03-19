@@ -1,10 +1,10 @@
-package com.codetreatise.controller;
+package com.accounted.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.codetreatise.bean.Master;
-import com.codetreatise.service.GenericService;
+import com.accounted.bean.Master;
+import com.accounted.service.GenericService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
