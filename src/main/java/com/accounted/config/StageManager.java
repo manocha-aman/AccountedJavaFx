@@ -6,11 +6,14 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 
+import com.accounted.Main;
 import com.accounted.view.FxmlView;
 
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -42,7 +45,15 @@ public class StageManager {
     primaryStage.setScene(scene);
     primaryStage.sizeToScene();
     primaryStage.centerOnScreen();
-
+    ImageView imageView = new ImageView();
+    Image imgLedger = new Image(getClass().getResourceAsStream("/images/a-logo.png"));
+    imageView.setImage(imgLedger);
+    imageView.setPreserveRatio(false);
+    imageView.setSmooth(true);
+    imageView.setCache(true);
+    primaryStage.getIcons().add(imgLedger);
+//    primaryStage.getIcons().add(new Image(StageManager.class.getResourceAsStream("ledger.png")));
+	
     try {
       primaryStage.show();
     } catch (Exception exception) {
