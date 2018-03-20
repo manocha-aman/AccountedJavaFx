@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.h2.util.StringUtils;
+import org.springframework.util.StringUtils;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -33,7 +33,7 @@ public class Department implements Master {
 	private String name;
 	
 	public Department(String code, String name) {
-		if (StringUtils.isNullOrEmpty(name) || StringUtils.isNullOrEmpty(code)) {
+		if (StringUtils.isEmpty(name) || StringUtils.isEmpty(code)) {
 			validationAlert();
 			throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
 		}
