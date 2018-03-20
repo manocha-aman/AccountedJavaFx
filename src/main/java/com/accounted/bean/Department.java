@@ -6,9 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.h2.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.accounted.alerts.ValidationAlerts;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
