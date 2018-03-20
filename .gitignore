@@ -2,6 +2,7 @@ target
 data
 .idea
 
+target/*
 */target/**
 */data/**
 .idea
