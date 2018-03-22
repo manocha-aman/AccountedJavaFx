@@ -50,11 +50,11 @@ public class LoginController implements Initializable {
   private void login(ActionEvent event) {
     if (userService.authenticate(getUsername(), getPassword())) {
 
-      stageManager.switchScene(FxmlView.USER);
+      stageManager.switchScene(FxmlView.TRANSACTION);
 
     } else {
       lblLogin.setText("Login Failed.");
-      stageManager.switchScene(FxmlView.USER);
+      stageManager.switchScene(FxmlView.TRANSACTION);
     }
   }
 

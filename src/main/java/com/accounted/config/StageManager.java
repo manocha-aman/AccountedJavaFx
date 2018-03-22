@@ -46,13 +46,12 @@ public class StageManager {
     primaryStage.sizeToScene();
     primaryStage.centerOnScreen();
     ImageView imageView = new ImageView();
-    Image imgLedger = new Image(getClass().getResourceAsStream("/images/a-logo.png"));
-    imageView.setImage(imgLedger);
+    Image imgLogo = new Image(getClass().getResourceAsStream("/images/a-logo.png"));
+    imageView.setImage(imgLogo);
     imageView.setPreserveRatio(false);
     imageView.setSmooth(true);
     imageView.setCache(true);
-    primaryStage.getIcons().add(imgLedger);
-//    primaryStage.getIcons().add(new Image(StageManager.class.getResourceAsStream("ledger.png")));
+    primaryStage.getIcons().add(imgLogo);
 	
     try {
       primaryStage.show();

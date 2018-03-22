@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
+
 <MenuBar BorderPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accounted.controller.MenuBarController">
     <menus>
         <Menu mnemonicParsing="false" text="File">
@@ -14,11 +16,12 @@
                 <!--<MenuItem mnemonicParsing="false" onAction="#delete" text="Delete" />-->
             <!--</items>-->
         <!--</Menu>-->
-        <Menu mnemonicParsing="false" text="SwitchForm">
+        <Menu mnemonicParsing="false" text="Forms">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#showDepartmentForm" text="Department" />
-            <MenuItem mnemonicParsing="false" onAction="#showInitiatorForm" text="Initiator" />
-            <MenuItem mnemonicParsing="false" onAction="#showUserForm" text="User" />
+                <MenuItem mnemonicParsing="false" onAction="#showDepartmentForm" text="AddDepartment" />
+            <MenuItem mnemonicParsing="false" onAction="#showInitiatorForm" text="AddInitiator" />
+            <MenuItem mnemonicParsing="false" onAction="#showUserForm" text="AddUser" />
+            <MenuItem mnemonicParsing="false" onAction="#showTransactionForm" text="New Transaction" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

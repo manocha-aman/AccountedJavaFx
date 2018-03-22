@@ -6,25 +6,10 @@ import com.accounted.controller.DepartmentController;
 import com.accounted.controller.InitiatorController;
 import com.accounted.controller.LoginController;
 import com.accounted.controller.MenuBarController;
+import com.accounted.controller.TransactionController;
 import com.accounted.controller.UserController;
 
 public enum FxmlView {
-	MENUBAR {
-		@Override
-		public String getTitle() {
-			return getStringFromResourceBundle("Menubar");
-		}
-
-		@Override
-		public String getFxmlFile() {
-			return "/fxml/MenuBar.fxml";
-		}
-
-		@Override
-		public Class getController() {
-			return MenuBarController.class;
-		}
-	},
 	DEPARTMENT {
 		@Override
 		public String getTitle() {
@@ -72,6 +57,38 @@ public enum FxmlView {
 		@Override
 		public Class getController() {
 			return LoginController.class;
+		}
+	},
+	MENUBAR {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("menubar.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/MenuBar.fxml";
+		}
+
+		@Override
+		public Class getController() {
+			return MenuBarController.class;
+		}
+	},
+	TRANSACTION {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("transaction.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/Transaction.fxml";
+		}
+
+		@Override
+		public Class getController() {
+			return TransactionController.class;
 		}
 	},
 	USER {
