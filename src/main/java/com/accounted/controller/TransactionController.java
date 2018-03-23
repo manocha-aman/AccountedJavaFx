@@ -3,16 +3,23 @@ package com.accounted.controller;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
+import com.accounted.bean.Department;
+import com.accounted.bean.Initiator;
+import com.accounted.bean.Ledger;
+import com.accounted.bean.Receiver;
 import com.accounted.bean.Transaction;
 import com.accounted.config.StageManager;
+import com.accounted.repository.DepartmentRepository;
+import com.accounted.repository.InitiatorRepository;
+import com.accounted.repository.LedgerRepository;
+import com.accounted.repository.ReceiverRepository;
 import com.accounted.service.TransactionServiceImpl;
 
 import javafx.application.Platform;
@@ -38,8 +45,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Ram Alapure
@@ -161,9 +166,25 @@ public class TransactionController implements Initializable {
 	private StageManager stageManager;
 
 	@Autowired
+	private InitiatorRepository initiatorRepository;
+	
+	@Autowired
+	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private LedgerRepository ledgerRepository;
+	
+	@Autowired
+	private ReceiverRepository receiverRepository;
+	
+	@Autowired
 	private TransactionServiceImpl transactionService;
 
 	private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+	private ObservableList<String> intiatorComboList = FXCollections.observableArrayList();
+	private ObservableList<String> departmentComboList = FXCollections.observableArrayList();
+	private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
+	private ObservableList<String> receiverComboList = FXCollections.observableArrayList();
 
 	@FXML
 	private void exit(ActionEvent event) {
@@ -197,6 +218,7 @@ public class TransactionController implements Initializable {
 		transaction.setSubjectMatter(getSubjectMatter());
 
 		Transaction newTransaction = transactionService.save(transaction);
+		loadTransactionDetails();
 
 		saveAlert(newTransaction);
 	}
@@ -206,16 +228,7 @@ public class TransactionController implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Transaction saved successfully.");
 		alert.setHeaderText(null);
-		alert.setContentText("New entry by " + transaction.getInitiator() + " created. Id - " + transaction.getId());
-		alert.showAndWait();
-	}
-
-	private void updateAlert(Transaction transaction) {
-
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Transaction updated successfully.");
-		alert.setHeaderText(null);
-		alert.setContentText("The transaction entry " + transaction.getId() + " has been updated.");
+		alert.setContentText("New entry created by " + transaction.getInitiator() + ". Id - " + transaction.getId());
 		alert.showAndWait();
 	}
 
@@ -252,63 +265,54 @@ public class TransactionController implements Initializable {
 	 */
 	private void loadTransactionDetails() {
 		transactionList.clear();
-		// transactionList.addAll(transactionService.());
+		 transactionList.addAll(transactionService.findAll());
 
 		transactionTable.setItems(transactionList);
-	}
-
-	/*
-	 * Validations
-	 */
-	private boolean validate(String field, String value, String pattern) {
-		if (!value.isEmpty()) {
-			Pattern p = Pattern.compile(pattern);
-			Matcher m = p.matcher(value);
-			if (m.find() && m.group().equals(value)) {
-				return true;
-			} else {
-				validationAlert(field, false);
-				return false;
-			}
-		} else {
-			validationAlert(field, true);
-			return false;
-		}
-	}
-
-	private void validationAlert(String field, boolean empty) {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Validation Error");
-		alert.setHeaderText(null);
-		if (field.equals("Role"))
-			alert.setContentText("Please Select " + field);
-		else {
-			if (empty)
-				alert.setContentText("Please Enter " + field);
-			else
-				alert.setContentText("Please Enter Valid " + field);
-		}
-		alert.showAndWait();
-	}
-
-	private boolean emptyValidation(String field, boolean empty) {
-		if (!empty) {
-			return true;
-		} else {
-			validationAlert(field, true);
-			return false;
-		}
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		loadInitiators();
+		loadDepartments();
+		loadLedgers();
+		loadReceivers();
 		transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
 		setColumnProperties();
-
 		// Add all transactions into table
 		loadTransactionDetails();
+	}
+
+	private void loadInitiators() {
+		List<Initiator> initiatorList = initiatorRepository.findAll();
+		for (Initiator initiator : initiatorList) {
+			intiatorComboList.add(initiator.getName());
+		}
+		cbInitiator.setItems(intiatorComboList);
+	}
+
+	private void loadDepartments() {
+		List<Department> departmentList = departmentRepository.findAll();
+		for (Department department : departmentList) {
+			departmentComboList.add(department.getName());
+		}
+		cbDepartment.setItems(departmentComboList);
+	}
+
+	private void loadLedgers() {
+		List<Ledger> ledgerList = ledgerRepository.findAll();
+		for (Ledger ledger : ledgerList) {
+			ledgerComboList.add(ledger.getName());
+		}
+		cbLedgerType.setItems(ledgerComboList);
+	}
+
+	private void loadReceivers() {
+		List<Receiver> receiverList = receiverRepository.findAll();
+		for (Receiver receiver : receiverList) {
+			receiverComboList.add(receiver.getName());
+		}
+		cbReceiver.setItems(receiverComboList);
 	}
 
 	/*

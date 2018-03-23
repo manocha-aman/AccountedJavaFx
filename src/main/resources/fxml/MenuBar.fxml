@@ -22,6 +22,8 @@
             <MenuItem mnemonicParsing="false" onAction="#showInitiatorForm" text="AddInitiator" />
             <MenuItem mnemonicParsing="false" onAction="#showUserForm" text="AddUser" />
             <MenuItem mnemonicParsing="false" onAction="#showTransactionForm" text="New Transaction" />
+            <MenuItem mnemonicParsing="false" onAction="#showReceiverForm" text="AddReceiver" />
+            <MenuItem mnemonicParsing="false" onAction="#showLedgerForm" text="AddLedger" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

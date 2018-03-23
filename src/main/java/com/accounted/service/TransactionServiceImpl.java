@@ -1,5 +1,7 @@
 package com.accounted.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class TransactionServiceImpl {
     this.repository = repository;
   }
 
+  public List<Transaction> findAll() {
+	  return repository.findAll();
+  }
+  
   public Transaction save(Transaction user) {
     return repository.save(user);
   }

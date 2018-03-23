@@ -251,8 +251,7 @@ public class UserController implements Initializable {
    */
   private void loadUserDetails() {
     userList.clear();
-//    userList.addAll(userService.());
-
+    userList.addAll(userService.findAll());
     userTable.setItems(userList);
   }
 
