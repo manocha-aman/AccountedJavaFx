@@ -4,8 +4,10 @@ import java.util.ResourceBundle;
 
 import com.accounted.controller.DepartmentController;
 import com.accounted.controller.InitiatorController;
+import com.accounted.controller.LedgerController;
 import com.accounted.controller.LoginController;
 import com.accounted.controller.MenuBarController;
+import com.accounted.controller.ReceiverController;
 import com.accounted.controller.TransactionController;
 import com.accounted.controller.UserController;
 
@@ -43,6 +45,22 @@ public enum FxmlView {
 			return InitiatorController.class;
 		}
 	},
+	LEDGER {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("ledger.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/Ledger.fxml";
+		}
+
+		@Override
+		public Class getController() {
+			return LedgerController.class;
+		}
+	},
 	LOGIN {
 		@Override
 		public String getTitle() {
@@ -73,6 +91,22 @@ public enum FxmlView {
 		@Override
 		public Class getController() {
 			return MenuBarController.class;
+		}
+	},
+	RECEIVER {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("receiver.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/Receiver.fxml";
+		}
+
+		@Override
+		public Class getController() {
+			return ReceiverController.class;
 		}
 	},
 	TRANSACTION {
