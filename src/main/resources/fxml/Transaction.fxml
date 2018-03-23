@@ -74,11 +74,11 @@
                <VBox.margin>
                   <Insets left="25.0" right="25.0" />
                </VBox.margin></TextField>
-            <PasswordField fx:id="subjectMatter" prefHeight="30.0" prefWidth="246.0" promptText="Subject Matter">
+            <TextField fx:id="subjectMatter" prefHeight="30.0" prefWidth="246.0" promptText="Subject Matter">
                <VBox.margin>
                   <Insets left="25.0" right="25.0" />
                </VBox.margin>
-            </PasswordField>
+            </TextField>
             <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
                <children>
                   <Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">

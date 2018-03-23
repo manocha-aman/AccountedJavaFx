@@ -73,7 +73,7 @@ public class TransactionController implements Initializable {
 	private TextField amount;
 
 	@FXML
-	private PasswordField subjectMatter;
+	private TextField subjectMatter;
 
 	@FXML
 	private Button reset;
