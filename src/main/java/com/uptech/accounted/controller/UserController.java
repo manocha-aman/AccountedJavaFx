@@ -72,53 +72,54 @@ public class UserController implements Initializable {
 
   @FXML
   private ComboBox<String> cbRole;
-  Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>> cellFactory =
-      new Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>>() {
+  Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>> cellFactory = new Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>>() {
+    @Override
+    public TableCell<User, Boolean> call(final TableColumn<User, Boolean> param) {
+      final TableCell<User, Boolean> cell = new TableCell<User, Boolean>() {
+        final Button btnEdit = new Button();
+        Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
+
         @Override
-        public TableCell<User, Boolean> call(final TableColumn<User, Boolean> param) {
-          final TableCell<User, Boolean> cell = new TableCell<User, Boolean>() {
-            final Button btnEdit = new Button();
-            Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
+        public void updateItem(Boolean check, boolean empty) {
+          super.updateItem(check, empty);
+          if (empty) {
+            setGraphic(null);
+            setText(null);
+          } else {
+            btnEdit.setOnAction(e -> {
+              User user = getTableView().getItems().get(getIndex());
+              updateUser(user);
+            });
 
-            @Override
-            public void updateItem(Boolean check, boolean empty) {
-              super.updateItem(check, empty);
-              if (empty) {
-                setGraphic(null);
-                setText(null);
-              } else {
-                btnEdit.setOnAction(e -> {
-                  User user = getTableView().getItems().get(getIndex());
-                  updateUser(user);
-                });
+            btnEdit.setStyle("-fx-background-color: transparent;");
+            ImageView iv = new ImageView();
+            iv.setImage(imgEdit);
+            iv.setPreserveRatio(true);
+            iv.setSmooth(true);
+            iv.setCache(true);
+            btnEdit.setGraphic(iv);
 
-                btnEdit.setStyle("-fx-background-color: transparent;");
-                ImageView iv = new ImageView();
-                iv.setImage(imgEdit);
-                iv.setPreserveRatio(true);
-                iv.setSmooth(true);
-                iv.setCache(true);
-                btnEdit.setGraphic(iv);
+            setGraphic(btnEdit);
+            setAlignment(Pos.CENTER);
+            setText(null);
+          }
+        }
 
-                setGraphic(btnEdit);
-                setAlignment(Pos.CENTER);
-                setText(null);
-              }
-            }
-
-            private void updateUser(User user) {
-              userId.setText(Long.toString(user.getId()));
-              firstName.setText(user.getFirstName());
-              lastName.setText(user.getLastName());
-              dob.setValue(user.getDob());
-              if (user.getGender().equals("Male")) rbMale.setSelected(true);
-              else rbFemale.setSelected(true);
-              cbRole.getSelectionModel().select(user.getRole());
-            }
-          };
-          return cell;
+        private void updateUser(User user) {
+          userId.setText(Long.toString(user.getId()));
+          firstName.setText(user.getFirstName());
+          lastName.setText(user.getLastName());
+          dob.setValue(user.getDob());
+          if (user.getGender().equals("Male"))
+            rbMale.setSelected(true);
+          else
+            rbFemale.setSelected(true);
+          cbRole.getSelectionModel().select(user.getRole());
         }
       };
+      return cell;
+    }
+  };
   @FXML
   private TextField email;
   @FXML
@@ -198,9 +199,8 @@ public class UserController implements Initializable {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("User saved successfully.");
     alert.setHeaderText(null);
-    alert.setContentText(
-        "The user " + user.getFirstName() + " " + user.getLastName() + " has been created and \n" + getGenderTitle(
-            user.getGender()) + " id is " + user.getId() + ".");
+    alert.setContentText("The user " + user.getFirstName() + " " + user.getLastName() + " has been created and \n"
+        + getGenderTitle(user.getGender()) + " id is " + user.getId() + ".");
     alert.showAndWait();
   }
 
@@ -213,8 +213,7 @@ public class UserController implements Initializable {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("User updated successfully.");
     alert.setHeaderText(null);
-    alert.setContentText(
-        "The user " + user.getFirstName() + " " + user.getLastName() + " has been updated.");
+    alert.setContentText("The user " + user.getFirstName() + " " + user.getLastName() + " has been updated.");
     alert.showAndWait();
   }
 
@@ -247,11 +246,11 @@ public class UserController implements Initializable {
   }
 
   /*
-   *  Add All users to observable list and update table
+   * Add All users to observable list and update table
    */
   private void loadUserDetails() {
     userList.clear();
-//    userList.addAll(userService.());
+    // userList.addAll(userService.());
 
     userTable.setItems(userList);
   }
@@ -279,10 +278,13 @@ public class UserController implements Initializable {
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle("Validation Error");
     alert.setHeaderText(null);
-    if (field.equals("Role")) alert.setContentText("Please Select " + field);
+    if (field.equals("Role"))
+      alert.setContentText("Please Select " + field);
     else {
-      if (empty) alert.setContentText("Please Enter " + field);
-      else alert.setContentText("Please Enter Valid " + field);
+      if (empty)
+        alert.setContentText("Please Enter " + field);
+      else
+        alert.setContentText("Please Enter Valid " + field);
     }
     alert.showAndWait();
   }
@@ -295,7 +297,6 @@ public class UserController implements Initializable {
       return false;
     }
   }
-
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -311,31 +312,22 @@ public class UserController implements Initializable {
   }
 
   /*
-   *  Set All userTable column properties
+   * Set All userTable column properties
    */
   private void setColumnProperties() {
-		/* Override date format in table
-		 * colDOB.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<LocalDate>() {
-			 String pattern = "dd/MM/yyyy";
-			 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-		     @Override
-		     public String toString(LocalDate date) {
-		         if (date != null) {
-		             return dateFormatter.format(date);
-		         } else {
-		             return "";
-		         }
-		     }
-
-		     @Override
-		     public LocalDate fromString(String string) {
-		         if (string != null && !string.isEmpty()) {
-		             return LocalDate.parse(string, dateFormatter);
-		         } else {
-		             return null;
-		         }
-		     }
-		 }));*/
+    /*
+     * Override date format in table
+     * colDOB.setCellFactory(TextFieldTableCell.forTableColumn(new
+     * StringConverter<LocalDate>() { String pattern = "dd/MM/yyyy";
+     * DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+     * 
+     * @Override public String toString(LocalDate date) { if (date != null) {
+     * return dateFormatter.format(date); } else { return ""; } }
+     * 
+     * @Override public LocalDate fromString(String string) { if (string != null
+     * && !string.isEmpty()) { return LocalDate.parse(string, dateFormatter); }
+     * else { return null; } } }));
+     */
 
     colUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
     colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));

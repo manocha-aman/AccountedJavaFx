@@ -14,23 +14,22 @@ import java.io.Writer;
  * to facilitate logging of exceptions
  */
 public class ExceptionWriter extends PrintWriter {
-    public ExceptionWriter(Writer writer) {
-        super(writer);
-    }
+  public ExceptionWriter(Writer writer) {
+    super(writer);
+  }
 
-    private String wrapAroundWithNewlines(String stringWithoutNewlines) {
-        return ("\n" + stringWithoutNewlines + "\n");
-    }
+  private String wrapAroundWithNewlines(String stringWithoutNewlines) {
+    return ("\n" + stringWithoutNewlines + "\n");
+  }
 
-    /*
-     * Convert a stacktrace into a string
-     */
-    public String getExceptionAsString(Throwable throwable) {
-        throwable.printStackTrace(this);
+  /*
+   * Convert a stacktrace into a string
+   */
+  public String getExceptionAsString(Throwable throwable) {
+    throwable.printStackTrace(this);
 
-        String exception = super.out.toString();
+    String exception = super.out.toString();
 
-        return (wrapAroundWithNewlines(exception));
-    }
+    return (wrapAroundWithNewlines(exception));
+  }
 }
-

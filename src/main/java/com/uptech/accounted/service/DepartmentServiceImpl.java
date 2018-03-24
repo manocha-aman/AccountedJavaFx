@@ -10,7 +10,8 @@ import com.uptech.accounted.bean.Department;
 @Service
 public class DepartmentServiceImpl extends GenericService<Department> {
 
-  public DepartmentServiceImpl(@Autowired @Qualifier("DepartmentRepository") JpaRepository<Department, String> repository) {
+  public DepartmentServiceImpl(
+      @Autowired @Qualifier("DepartmentRepository") JpaRepository<Department, String> repository) {
     super(repository);
   }
 }

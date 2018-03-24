@@ -35,9 +35,8 @@ public abstract class AbstractController<T extends Master, S extends GenericServ
   @FXML
   private TableColumn<T, String> colName;
   private ObservableList<T> list = FXCollections.observableArrayList();
-	@Autowired
-	private MasterValidationAlert masterValidationAlert;
-	
+  @Autowired
+  private MasterValidationAlert masterValidationAlert;
 
   public AbstractController(S service) {
     this.service = service;
@@ -54,10 +53,10 @@ public abstract class AbstractController<T extends Master, S extends GenericServ
 
   public void save(ActionEvent actionEvent) {
     T entity = createNewEntity();
-	if (StringUtils.isEmpty(name.getText()) || StringUtils.isEmpty(code.getText())) {
-		masterValidationAlert.validationAlert();
-		throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
-	}
+    if (StringUtils.isEmpty(name.getText()) || StringUtils.isEmpty(code.getText())) {
+      masterValidationAlert.validationAlert();
+      throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
+    }
 
     service.save(entity);
     clearFields();
@@ -97,7 +96,5 @@ public abstract class AbstractController<T extends Master, S extends GenericServ
     colName.setCellValueFactory(new PropertyValueFactory<>("name"));
     colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
   }
-
-
 
 }

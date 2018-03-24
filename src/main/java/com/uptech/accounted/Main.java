@@ -38,8 +38,7 @@ public class Main extends Application {
 
   /**
    * Useful to override this method by sub-classes wishing to change the first
-   * Scene to be displayed on startup. Example: Functional tests on main
-   * window.
+   * Scene to be displayed on startup. Example: Functional tests on main window.
    */
   protected void displayInitialScene() {
     stageManager.switchScene(FxmlView.LOGIN);

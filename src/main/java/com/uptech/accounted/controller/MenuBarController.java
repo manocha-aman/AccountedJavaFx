@@ -44,4 +44,3 @@ public class MenuBarController implements Initializable {
   }
 
 }
-

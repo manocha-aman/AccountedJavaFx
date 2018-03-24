@@ -24,18 +24,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Department implements Master {
-	@Id
-	@Column(name = "code", updatable = false, nullable = false)
-	@NonNull
-	private String code;
-	@Column(name = "name", updatable = true, nullable = false)
-	@NonNull
-	private String name;
-	
-	public Department(String code, String name) {
+  @Id
+  @Column(name = "code", updatable = false, nullable = false)
+  @NonNull
+  private String code;
+  @Column(name = "name", updatable = true, nullable = false)
+  @NonNull
+  private String name;
 
-		this.code = code;
-		this.name = name;
-	}
+  public Department(String code, String name) {
+
+    this.code = code;
+    this.name = name;
+  }
 
 }

@@ -28,18 +28,25 @@ public class User {
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
 
-  @NonNull private String firstName;
+  @NonNull
+  private String firstName;
 
-  @NonNull private String lastName;
+  @NonNull
+  private String lastName;
 
-  @NonNull private LocalDate dob;
+  @NonNull
+  private LocalDate dob;
 
-  @NonNull private String gender;
+  @NonNull
+  private String gender;
 
-  @NonNull private String role;
+  @NonNull
+  private String role;
 
-  @NonNull private String email;
+  @NonNull
+  private String email;
 
-  @NonNull private String password;
+  @NonNull
+  private String password;
 
 }

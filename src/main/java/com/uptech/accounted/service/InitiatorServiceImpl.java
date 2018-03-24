@@ -10,7 +10,8 @@ import com.uptech.accounted.bean.Initiator;
 @Service
 public class InitiatorServiceImpl extends GenericService<Initiator> {
 
-  public InitiatorServiceImpl(@Autowired @Qualifier("InitiatorRepository") JpaRepository<Initiator, String> repository) {
+  public InitiatorServiceImpl(
+      @Autowired @Qualifier("InitiatorRepository") JpaRepository<Initiator, String> repository) {
     super(repository);
   }
 }

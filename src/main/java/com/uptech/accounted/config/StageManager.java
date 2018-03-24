@@ -32,15 +32,16 @@ public class StageManager {
 
   public void switchScene(final FxmlView view) {
     Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
-//    springFXMLLoader.loader.getNamespace().put("controllerName", view.getController());
+    // springFXMLLoader.loader.getNamespace().put("controllerName",
+    // view.getController());
     show(viewRootNodeHierarchy, view.getTitle());
   }
 
   private void show(final Parent rootnode, String title) {
     Scene scene = prepareScene(rootnode);
-    //scene.getStylesheets().add("/styles/Styles.css");
+    // scene.getStylesheets().add("/styles/Styles.css");
 
-    //primaryStage.initStyle(StageStyle.TRANSPARENT);
+    // primaryStage.initStyle(StageStyle.TRANSPARENT);
     primaryStage.setTitle(title);
     primaryStage.setScene(scene);
     primaryStage.sizeToScene();
@@ -52,8 +53,9 @@ public class StageManager {
     imageView.setSmooth(true);
     imageView.setCache(true);
     primaryStage.getIcons().add(imgLogo);
-//    primaryStage.getIcons().add(new Image(StageManager.class.getResourceAsStream("ledger.png")));
-	
+    // primaryStage.getIcons().add(new
+    // Image(StageManager.class.getResourceAsStream("ledger.png")));
+
     try {
       primaryStage.show();
     } catch (Exception exception) {
@@ -72,8 +74,8 @@ public class StageManager {
   }
 
   /**
-   * Loads the object hierarchy from a FXML document and returns to root node
-   * of that hierarchy.
+   * Loads the object hierarchy from a FXML document and returns to root node of
+   * that hierarchy.
    *
    * @return Parent root node of the FXML document hierarchy
    */
