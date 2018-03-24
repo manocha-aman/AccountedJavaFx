@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<MenuBar BorderPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.accounted.controller.MenuBarController">
+<MenuBar BorderPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.MenuBarController">
     <menus>
         <Menu mnemonicParsing="false" text="File">
             <items>
