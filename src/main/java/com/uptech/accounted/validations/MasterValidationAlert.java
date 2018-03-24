@@ -8,11 +8,11 @@ import javafx.scene.control.Alert.AlertType;
 @Component
 public class MasterValidationAlert {
 
-  public void validationAlert() {
+  public void validationAlert(String errorText) {
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle("Validation Error");
     alert.setHeaderText(null);
-    alert.setContentText("Please Enter Valid name/code");
+    alert.setContentText(errorText);
     alert.showAndWait();
   }
 

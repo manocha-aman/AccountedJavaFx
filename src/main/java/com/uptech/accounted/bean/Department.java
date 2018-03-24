@@ -5,12 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
-
-import com.uptech.accounted.validations.MasterValidationAlert;
-
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -33,7 +27,8 @@ public class Department implements Master {
   private String name;
 
   public Department(String code, String name) {
-
+    if(code.isEmpty() || name.isEmpty())
+      throw new IllegalArgumentException("Fields can't be left blank");
     this.code = code;
     this.name = name;
   }

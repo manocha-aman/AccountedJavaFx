@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import com.uptech.accounted.bean.Master;
 import com.uptech.accounted.service.GenericService;
@@ -52,10 +51,11 @@ public abstract class AbstractController<T extends Master, S extends GenericServ
   }
 
   public void save(ActionEvent actionEvent) {
-    T entity = createNewEntity();
-    if (StringUtils.isEmpty(name.getText()) || StringUtils.isEmpty(code.getText())) {
-      masterValidationAlert.validationAlert();
-      throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
+    T entity = null;
+    try {
+      entity = createNewEntity();
+    } catch(IllegalArgumentException illegalArgumentException) {
+      masterValidationAlert.validationAlert(illegalArgumentException.getMessage());
     }
 
     service.save(entity);
