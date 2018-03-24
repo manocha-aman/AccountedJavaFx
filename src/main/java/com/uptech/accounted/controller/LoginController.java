@@ -19,11 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
-
 @Controller
 public class LoginController implements Initializable {
 

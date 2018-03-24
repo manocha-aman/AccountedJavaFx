@@ -41,11 +41,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
-
 @Controller
 public class UserController implements Initializable {
 
@@ -245,19 +240,12 @@ public class UserController implements Initializable {
     return password.getText();
   }
 
-  /*
-   * Add All users to observable list and update table
-   */
   private void loadUserDetails() {
     userList.clear();
-    // userList.addAll(userService.());
 
     userTable.setItems(userList);
   }
 
-  /*
-   * Validations
-   */
   private boolean validate(String field, String value, String pattern) {
     if (!value.isEmpty()) {
       Pattern p = Pattern.compile(pattern);
@@ -307,27 +295,10 @@ public class UserController implements Initializable {
 
     setColumnProperties();
 
-    // Add all users into table
     loadUserDetails();
   }
 
-  /*
-   * Set All userTable column properties
-   */
   private void setColumnProperties() {
-    /*
-     * Override date format in table
-     * colDOB.setCellFactory(TextFieldTableCell.forTableColumn(new
-     * StringConverter<LocalDate>() { String pattern = "dd/MM/yyyy";
-     * DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-     * 
-     * @Override public String toString(LocalDate date) { if (date != null) {
-     * return dateFormatter.format(date); } else { return ""; } }
-     * 
-     * @Override public LocalDate fromString(String string) { if (string != null
-     * && !string.isEmpty()) { return LocalDate.parse(string, dateFormatter); }
-     * else { return null; } } }));
-     */
 
     colUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
     colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
