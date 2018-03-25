@@ -7,5 +7,5 @@ import com.uptech.accounted.bean.Transaction;
 
 @Repository("TransactionRepository")
 public interface TransactionRepository extends JpaRepository<Transaction, String> {
-  public Transaction findById(long id);
+  public Transaction findByTransactionId(long transactionId);
 }

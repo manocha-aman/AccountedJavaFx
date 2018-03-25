@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.uptech.accounted.bean.Ledger;
 
 @Repository("LedgerRepository")
-public interface LedgerRepository extends JpaRepository<Ledger, String> {
+public interface LedgerRepository extends JpaRepository<Ledger, Long> {
 }

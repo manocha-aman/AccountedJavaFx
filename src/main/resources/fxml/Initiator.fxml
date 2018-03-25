@@ -21,7 +21,7 @@
 			styleClass="background" stylesheets="@../styles/Styles.css"
 			BorderPane.alignment="CENTER">
 			<children>
-				<Label alignment="BASELINE_CENTER" text="Add New Initiator"
+				<Label alignment="CENTER" text="Initiator"
 					textAlignment="CENTER" textFill="WHITE">
 					<font>
 						<Font size="20.0" />
@@ -30,18 +30,6 @@
 						<Insets left="60.0" top="30.0" />
 					</VBox.margin>
 				</Label>
-				<HBox prefHeight="30.0" prefWidth="265.0">
-					<children>
-						<Label fx:id="lblInitiator">
-							<HBox.margin>
-								<Insets left="25.0" />
-							</HBox.margin>
-						</Label>
-					</children>
-					<VBox.margin>
-						<Insets left="25.0" />
-					</VBox.margin>
-				</HBox>
 				<TextField fx:id="code" prefHeight="30.0" prefWidth="246.0"
 					promptText="Code">
 					<VBox.margin>

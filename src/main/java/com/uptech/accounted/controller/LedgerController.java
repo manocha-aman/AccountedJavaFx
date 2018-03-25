@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,7 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 @Controller
-public class LedgerController {
+public class LedgerController implements Initializable {
 
   @FXML
   TextField ledgerCode;
@@ -88,7 +89,6 @@ public class LedgerController {
   private void loadDetails() {
     ledgerList.clear();
     ledgerList.addAll(ledgerServiceImpl.findAll());
-
     ledgerTable.setItems(ledgerList);
     ledgerTable.setVisible(true);
   }
@@ -99,6 +99,7 @@ public class LedgerController {
     loadDetails();
   }
 
+  @Override
   public void initialize(URL location, ResourceBundle resources) {
     ledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     ledgerTable.setEditable(false);

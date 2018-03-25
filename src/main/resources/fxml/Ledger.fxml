@@ -20,11 +20,15 @@
 			styleClass="background" stylesheets="@../styles/Styles.css"
 			BorderPane.alignment="CENTER">
 			<children>
-				<HBox prefHeight="30.0" prefWidth="265.0">
+				<Label contentDisplay="CENTER" text="Ledger"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="20.0" />
+					</font>
 					<VBox.margin>
-						<Insets left="25.0" />
+						<Insets bottom="10.0" left="70.0" top="30.0" />
 					</VBox.margin>
-				</HBox>
+				</Label>
 				<TextField fx:id="ledgerCode" prefHeight="30.0" prefWidth="246.0"
 					promptText="Ledger Code">
 					<VBox.margin>
@@ -89,14 +93,14 @@
 
 		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0"
 			BorderPane.alignment="CENTER">
-			<Button fx:id="delete" mnemonicParsing="false" onAction="#delete"
-				prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
-				text="Delete">
-				<effect>
-					<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
-				</effect>
-			</Button>
 			<children>
+				<Button fx:id="delete" mnemonicParsing="false" onAction="#delete"
+					prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
+					text="Delete">
+					<effect>
+						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+					</effect>
+				</Button>
 				<TableView fx:id="ledgerTable" prefHeight="300.0"
 					prefWidth="679.0" tableMenuButtonVisible="true">
 					<columns>

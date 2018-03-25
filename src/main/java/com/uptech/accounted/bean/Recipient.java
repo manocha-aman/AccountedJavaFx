@@ -17,13 +17,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Receiver")
+@Table(name = "Recipient")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Builder
-public class Receiver implements Master {
+public class Recipient implements Master {
 	@Id
 	@Column(name = "code", updatable = false, nullable = false)
 	@NonNull
@@ -32,7 +32,7 @@ public class Receiver implements Master {
 	@NonNull
 	private String name;
 	
-	public Receiver(String code, String name) {
+	public Recipient(String code, String name) {
 		if (StringUtils.isEmpty(name) || StringUtils.isEmpty(code)) {
 			validationAlert();
 			throw new IllegalArgumentException("Name and Code can't be blank/empty/null");

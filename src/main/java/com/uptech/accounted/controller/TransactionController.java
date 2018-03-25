@@ -13,13 +13,13 @@ import org.springframework.stereotype.Controller;
 import com.uptech.accounted.bean.Department;
 import com.uptech.accounted.bean.Initiator;
 import com.uptech.accounted.bean.Ledger;
-import com.uptech.accounted.bean.Receiver;
+import com.uptech.accounted.bean.Recipient;
 import com.uptech.accounted.bean.Transaction;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
 import com.uptech.accounted.repository.LedgerRepository;
-import com.uptech.accounted.repository.ReceiverRepository;
+import com.uptech.accounted.repository.RecipientRepository;
 import com.uptech.accounted.service.TransactionServiceImpl;
 
 import javafx.application.Platform;
@@ -55,7 +55,7 @@ public class TransactionController implements Initializable {
 	private ComboBox<String> cbDepartment;
 
 	@FXML
-	private ComboBox<String> cbReceiver;
+	private ComboBox<String> cbRecipient;
 
 	@FXML
 	private ComboBox<String> cbLedgerType;
@@ -109,10 +109,10 @@ public class TransactionController implements Initializable {
 				}
 
 				private void updateTransaction(Transaction transaction) {
-					cbInitiator.getSelectionModel().select(transaction.getInitiator());
-					cbDepartment.getSelectionModel().select(transaction.getDepartment());
-					cbReceiver.getSelectionModel().select(transaction.getReceiver());
-					cbLedgerType.getSelectionModel().select(transaction.getLedgerType());
+					cbInitiator.getSelectionModel().select(transaction.getInitiator().getName());
+					cbDepartment.getSelectionModel().select(transaction.getDepartment().getName());
+					cbRecipient.getSelectionModel().select(transaction.getRecipient().getName());
+					cbLedgerType.getSelectionModel().select(transaction.getLedgerType().getLedgerName());
 					dateOfTransaction.setValue(transaction.getDateOfTransaction());
 					amount.setText(transaction.getAmount().toString());
 					subjectMatter.setText(transaction.getSubjectMatter());
@@ -138,7 +138,7 @@ public class TransactionController implements Initializable {
 	private TableColumn<Transaction, LocalDate> colDateOfTransaction;
 
 	@FXML
-	private TableColumn<Transaction, String> colReceiver;
+	private TableColumn<Transaction, String> colRecipient;
 
 	@FXML
 	private TableColumn<Transaction, String> colLedgerType;
@@ -153,7 +153,7 @@ public class TransactionController implements Initializable {
 	private TableColumn<Transaction, Boolean> colEdit;
 
 	@FXML
-	private MenuItem deleteTransactions;
+	private Button deleteTransactions;
 
 	@Lazy
 	@Autowired
@@ -169,7 +169,7 @@ public class TransactionController implements Initializable {
 	private LedgerRepository ledgerRepository;
 	
 	@Autowired
-	private ReceiverRepository receiverRepository;
+	private RecipientRepository recipientRepository;
 	
 	@Autowired
 	private TransactionServiceImpl transactionService;
@@ -178,7 +178,7 @@ public class TransactionController implements Initializable {
 	private ObservableList<String> intiatorComboList = FXCollections.observableArrayList();
 	private ObservableList<String> departmentComboList = FXCollections.observableArrayList();
 	private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
-	private ObservableList<String> receiverComboList = FXCollections.observableArrayList();
+	private ObservableList<String> recipientComboList = FXCollections.observableArrayList();
 
 	@FXML
 	private void exit(ActionEvent event) {
@@ -194,7 +194,7 @@ public class TransactionController implements Initializable {
 		cbInitiator.getSelectionModel().clearSelection();
 		cbDepartment.getSelectionModel().clearSelection();
 		dateOfTransaction.getEditor().clear();
-		cbReceiver.getSelectionModel().clearSelection();
+		cbRecipient.getSelectionModel().clearSelection();
 		cbLedgerType.getSelectionModel().clearSelection();
 		amount.clear();
 		subjectMatter.clear();
@@ -203,11 +203,11 @@ public class TransactionController implements Initializable {
 	@FXML
 	private void saveTransaction(ActionEvent event) {
 		Transaction transaction = new Transaction();
-		transaction.setInitiator(getInitiator());
-		transaction.setDepartment(getDepartment());
+		transaction.setInitiator(initiatorRepository.findOne(getInitiator()));
+		transaction.setDepartment(departmentRepository.findOne(getDepartment()));
 		transaction.setDateOfTransaction(getDateOfTransaction());
-		transaction.setReceiver(getReceiver());
-		transaction.setLedgerType(getLedgerType());
+		transaction.setRecipient(recipientRepository.findOne(getRecipient()));
+		transaction.setLedgerType(ledgerRepository.findOne(getLedgerId()));
 		transaction.setAmount(new BigDecimal(getAmount()));
 		transaction.setSubjectMatter(getSubjectMatter());
 
@@ -217,29 +217,36 @@ public class TransactionController implements Initializable {
 		saveAlert(newTransaction);
 	}
 
+	@FXML
+	private void deleteTransactions(ActionEvent event) {
+	    Transaction transaction = transactionTable.getSelectionModel().getSelectedItem();
+	    transactionService.delete(transaction);
+	    loadTransactionDetails();
+	}
+	
 	private void saveAlert(Transaction transaction) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Transaction saved successfully.");
 		alert.setHeaderText(null);
-		alert.setContentText("New entry created by " + transaction.getInitiator() + ". Id - " + transaction.getId());
+		alert.setContentText("New entry created by " + transaction.getInitiator() + ". Id - " + transaction.getTransactionId());
 		alert.showAndWait();
 	}
 
 	public String getInitiator() {
-		return cbInitiator.getSelectionModel().getSelectedItem();
+		return cbInitiator.getSelectionModel().getSelectedItem().split("-")[0];
 	}
 
 	public String getDepartment() {
-		return cbDepartment.getSelectionModel().getSelectedItem();
+		return cbDepartment.getSelectionModel().getSelectedItem().split("-")[0];
 	}
 
-	public String getReceiver() {
-		return cbReceiver.getSelectionModel().getSelectedItem();
+	public String getRecipient() {
+		return cbRecipient.getSelectionModel().getSelectedItem().split("-")[0];
 	}
 
-	public String getLedgerType() {
-		return cbLedgerType.getSelectionModel().getSelectedItem();
+	public long getLedgerId() {
+		return Long.parseLong(cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0]);
 	}
 
 	public LocalDate getDateOfTransaction() {
@@ -254,9 +261,6 @@ public class TransactionController implements Initializable {
 		return subjectMatter.getText();
 	}
 
-	/*
-	 * Add All transactions to observable list and update table
-	 */
 	private void loadTransactionDetails() {
 		transactionList.clear();
 		 transactionList.addAll(transactionService.findAll());
@@ -270,7 +274,7 @@ public class TransactionController implements Initializable {
 		loadInitiators();
 		loadDepartments();
 		loadLedgers();
-		loadReceivers();
+		loadRecipients();
 		transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		setColumnProperties();
 		// Add all transactions into table
@@ -280,15 +284,16 @@ public class TransactionController implements Initializable {
 	private void loadInitiators() {
 		List<Initiator> initiatorList = initiatorRepository.findAll();
 		for (Initiator initiator : initiatorList) {
-			intiatorComboList.add(initiator.getName());
+			intiatorComboList.add(initiator.getCode() + "-" + initiator.getName());
 		}
 		cbInitiator.setItems(intiatorComboList);
 	}
 
 	private void loadDepartments() {
 		List<Department> departmentList = departmentRepository.findAll();
+		departmentList.forEach(System.out::print);
 		for (Department department : departmentList) {
-			departmentComboList.add(department.getName());
+			departmentComboList.add(department.getCode() + "-" + department.getName());
 		}
 		cbDepartment.setItems(departmentComboList);
 	}
@@ -296,42 +301,25 @@ public class TransactionController implements Initializable {
 	private void loadLedgers() {
 		List<Ledger> ledgerList = ledgerRepository.findAll();
 		for (Ledger ledger : ledgerList) {
-			ledgerComboList.add(ledger.getLedgerName());
+			ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
 		}
 		cbLedgerType.setItems(ledgerComboList);
 	}
 
-	private void loadReceivers() {
-		List<Receiver> receiverList = receiverRepository.findAll();
-		for (Receiver receiver : receiverList) {
-			receiverComboList.add(receiver.getName());
+	private void loadRecipients() {
+		List<Recipient> recipientList = recipientRepository.findAll();
+		for (Recipient recipient : recipientList) {
+			recipientComboList.add(recipient.getCode() + "-" + recipient.getName());
 		}
-		cbReceiver.setItems(receiverComboList);
+		cbRecipient.setItems(recipientComboList);
 	}
 
-	/*
-	 * Set All transactionTable column properties
-	 */
 	private void setColumnProperties() {
-		/*
-		 * Override date format in table
-		 * colDOB.setCellFactory(TextFieldTableCell.forTableColumn(new
-		 * StringConverter<LocalDate>() { String pattern = "dd/MM/yyyy";
-		 * DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-		 * 
-		 * @Override public String toString(LocalDate date) { if (date != null) { return
-		 * dateFormatter.format(date); } else { return ""; } }
-		 * 
-		 * @Override public LocalDate fromString(String string) { if (string != null &&
-		 * !string.isEmpty()) { return LocalDate.parse(string, dateFormatter); } else {
-		 * return null; } } }));
-		 */
-
 		colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
 		colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiator"));
 		colDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
 		colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
-		colReceiver.setCellValueFactory(new PropertyValueFactory<>("receiver"));
+		colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
 		colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
 		colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatter"));

@@ -7,7 +7,7 @@ import com.uptech.accounted.controller.InitiatorController;
 import com.uptech.accounted.controller.LedgerController;
 import com.uptech.accounted.controller.LoginController;
 import com.uptech.accounted.controller.MenuBarController;
-import com.uptech.accounted.controller.ReceiverController;
+import com.uptech.accounted.controller.RecipientController;
 import com.uptech.accounted.controller.TransactionController;
 import com.uptech.accounted.controller.UserController;
 
@@ -93,20 +93,20 @@ public enum FxmlView {
 			return MenuBarController.class;
 		}
 	},
-	RECEIVER {
+	RECIPIENT {
 		@Override
 		public String getTitle() {
-			return getStringFromResourceBundle("receiver.title");
+			return getStringFromResourceBundle("recipient.title");
 		}
 
 		@Override
 		public String getFxmlFile() {
-			return "/fxml/Receiver.fxml";
+			return "/fxml/Recipient.fxml";
 		}
 
 		@Override
 		public Class getController() {
-			return ReceiverController.class;
+			return RecipientController.class;
 		}
 	},
 	TRANSACTION {

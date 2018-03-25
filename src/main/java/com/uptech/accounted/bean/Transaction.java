@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,21 +30,36 @@ public class Transaction {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private long id;
+  @Column(name = "transactionId", updatable = false, nullable = false)
+  private long transactionId;
 
-  @NonNull private String initiator;
+  @NonNull
+  @OneToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private Initiator initiator;
 
-  @NonNull private String department;
+  @NonNull
+  @OneToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private Department department;
 
-  @NonNull private LocalDate dateOfTransaction;
+  @NonNull
+  private LocalDate dateOfTransaction;
 
-  @NonNull private String receiver;
+  @NonNull
+  @OneToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private Recipient recipient;
 
-  @NonNull private String LedgerType;
+  @NonNull
+  @OneToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private Ledger LedgerType;
 
-  @NonNull private BigDecimal amount;
+  @NonNull
+  private BigDecimal amount;
 
-  @NonNull private String subjectMatter;
+  @NonNull
+  private String subjectMatter;
 
 }

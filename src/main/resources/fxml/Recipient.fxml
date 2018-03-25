@@ -9,18 +9,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.ReceiverController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.RecipientController">
     <top>
         <fx:include source="MenuBar.fxml" />
     </top>
     <left>
         <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
             <children>
-                <HBox prefHeight="30.0" prefWidth="265.0">
-                    <VBox.margin>
-                        <Insets left="25.0" />
-                    </VBox.margin>
-                </HBox>
+				<Label contentDisplay="CENTER" text="Recepient"
+					textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="20.0" />
+					</font>
+					<VBox.margin>
+						<Insets bottom="10.0" left="70.0" top="30.0" />
+					</VBox.margin>
+				</Label>
                 <TextField fx:id="code" prefHeight="30.0" prefWidth="246.0" promptText="Code">
                     <VBox.margin>
                         <Insets left="25.0" right="25.0" />
