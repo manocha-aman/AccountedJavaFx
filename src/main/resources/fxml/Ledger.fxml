@@ -9,82 +9,116 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
-    <top>
-        <fx:include source="MenuBar.fxml" />
-    </top>
-    <left>
-        <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="30.0" prefWidth="265.0">
-                    <VBox.margin>
-                        <Insets left="25.0" />
-                    </VBox.margin>
-                </HBox>
-                <TextField fx:id="code" prefHeight="30.0" prefWidth="246.0" promptText="Code">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin>
-                </TextField>
-                <TextField fx:id="name" prefHeight="30.0" prefWidth="246.0" promptText="Name">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin>
-                </TextField>
-                <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
-                    <children>
-                        <Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
-                            <effect>
-                                <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
-                            </effect>
-                        </Button>
-                        <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                            <effect>
-                                <DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
-                            </effect>
-                        </Button>
-                    </children>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <VBox.margin>
-                        <Insets left="110.0" />
-                    </VBox.margin>
-                </HBox>
-            </children>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-            <BorderPane.margin>
-                <Insets />
-            </BorderPane.margin>
-        </VBox>
-    </left>
-    <center>
+<BorderPane prefHeight="600.0" prefWidth="1000.0"
+	stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
+	<top>
+		<fx:include source="MenuBar.fxml" />
+	</top>
+	<left>
+		<VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0"
+			styleClass="background" stylesheets="@../styles/Styles.css"
+			BorderPane.alignment="CENTER">
+			<children>
+				<HBox prefHeight="30.0" prefWidth="265.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</HBox>
+				<TextField fx:id="ledgerCode" prefHeight="30.0" prefWidth="246.0"
+					promptText="Ledger Code">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<TextField fx:id="ledgerName" prefHeight="30.0" prefWidth="246.0"
+					promptText="Ledger Name">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<TextField fx:id="subLedgerCode" prefHeight="30.0"
+					prefWidth="246.0" promptText="SubLedger Code">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<TextField fx:id="subLedgerName" prefHeight="30.0"
+					prefWidth="246.0" promptText="SubLedger Name">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
+					<children>
+						<Button fx:id="reset" mnemonicParsing="false" onAction="#reset"
+							prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
+							text="Reset">
+							<effect>
+								<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+							</effect>
+						</Button>
+						<Button fx:id="save" alignment="CENTER" contentDisplay="CENTER"
+							mnemonicParsing="false" onAction="#save" prefHeight="30.0"
+							prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<effect>
+								<DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
+							</effect>
+						</Button>
+					</children>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<VBox.margin>
+						<Insets left="110.0" />
+					</VBox.margin>
+				</HBox>
+			</children>
+			<padding>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</padding>
+			<BorderPane.margin>
+				<Insets />
+			</BorderPane.margin>
+		</VBox>
+	</left>
+	<center>
 
-        <VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
-            <Button fx:id="delete" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
-                <effect>
-                    <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
-                </effect>
-            </Button>
-            <children>
-                <TableView fx:id="table" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
-                    <columns>
-                        <TableColumn fx:id="colCode" maxWidth="4000.0" prefWidth="75.0" text="Code" />
-                        <TableColumn fx:id="colName" maxWidth="4000.0" prefWidth="75.0" text="Name" />
-                    </columns>
-                    <VBox.margin>
-                        <Insets left="10.0" right="5.0" />
-                    </VBox.margin>
-                    <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                    </columnResizePolicy>
-                </TableView>
-            </children>
-        </VBox>
-    </center>
+		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0"
+			BorderPane.alignment="CENTER">
+			<Button fx:id="delete" mnemonicParsing="false" onAction="#delete"
+				prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
+				text="Delete">
+				<effect>
+					<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+				</effect>
+			</Button>
+			<children>
+				<TableView fx:id="ledgerTable" prefHeight="300.0"
+					prefWidth="679.0" tableMenuButtonVisible="true">
+					<columns>
+						<TableColumn fx:id="colLedgerId" maxWidth="4000.0"
+							prefWidth="75.0" text="Ledger Id" />
+						<TableColumn fx:id="colLedgerCode" maxWidth="4000.0"
+							prefWidth="75.0" text="Ledger Code" />
+						<TableColumn fx:id="colLedgerName" maxWidth="4000.0"
+							prefWidth="75.0" text="Ledger Name" />
+						<TableColumn fx:id="colSubLedgerCode" maxWidth="4000.0"
+							prefWidth="75.0" text="Sub Ledger Code" />
+						<TableColumn fx:id="colSubLedgerName" maxWidth="4000.0"
+							prefWidth="75.0" text="Sub Ledger Name" />
+					</columns>
+					<VBox.margin>
+						<Insets left="10.0" right="5.0" />
+					</VBox.margin>
+					<columnResizePolicy>
+						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+					</columnResizePolicy>
+				</TableView>
+			</children>
+		</VBox>
+	</center>
 </BorderPane>

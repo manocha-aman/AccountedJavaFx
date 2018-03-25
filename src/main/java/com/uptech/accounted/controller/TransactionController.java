@@ -296,7 +296,7 @@ public class TransactionController implements Initializable {
 	private void loadLedgers() {
 		List<Ledger> ledgerList = ledgerRepository.findAll();
 		for (Ledger ledger : ledgerList) {
-			ledgerComboList.add(ledger.getName());
+			ledgerComboList.add(ledger.getLedgerName());
 		}
 		cbLedgerType.setItems(ledgerComboList);
 	}
