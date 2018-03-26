@@ -8,6 +8,7 @@ import com.uptech.accounted.controller.LedgerController;
 import com.uptech.accounted.controller.LoginController;
 import com.uptech.accounted.controller.MenuBarController;
 import com.uptech.accounted.controller.ReceiverController;
+import com.uptech.accounted.controller.ReportsController;
 import com.uptech.accounted.controller.TransactionController;
 import com.uptech.accounted.controller.UserController;
 
@@ -139,6 +140,22 @@ public enum FxmlView {
 		@Override
 		public Class getController() {
 			return UserController.class;
+		}
+	},
+	REPORTS {
+		@Override
+		public String getTitle() {
+			return "Reports";
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/Reports.fxml";
+		}
+
+		@Override
+		public Class getController() {
+			return ReportsController.class;
 		}
 	};
 

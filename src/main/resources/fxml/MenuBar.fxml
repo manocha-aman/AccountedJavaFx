@@ -11,6 +11,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#exit" text="Logout" />
             </items>
         </Menu>
+
         <!--<Menu mnemonicParsing="false" text="Edit">-->
             <!--<items>-->
                 <!--<MenuItem mnemonicParsing="false" onAction="#delete" text="Delete" />-->
@@ -24,6 +25,7 @@
             <MenuItem mnemonicParsing="false" onAction="#showTransactionForm" text="New Transaction" />
             <MenuItem mnemonicParsing="false" onAction="#showReceiverForm" text="AddReceiver" />
             <MenuItem mnemonicParsing="false" onAction="#showLedgerForm" text="AddLedger" />
+            <MenuItem mnemonicParsing="false" onAction="#showReportsForm" text="Reports" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

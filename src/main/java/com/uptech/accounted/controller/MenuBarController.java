@@ -28,7 +28,6 @@ public class MenuBarController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
   }
 
   public void showDepartmentForm(ActionEvent actionEvent) {
@@ -54,5 +53,9 @@ public class MenuBarController implements Initializable {
   public void showUserForm(ActionEvent actionEvent) {
 	    stageManager.switchScene(FxmlView.USER);
 	  }
+
+  public void showReportsForm(ActionEvent actionEvent) {
+    stageManager.switchScene(FxmlView.REPORTS);
+  }
 
 }
