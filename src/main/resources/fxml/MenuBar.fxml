@@ -20,7 +20,6 @@
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#showDepartmentForm" text="Department" />
             <MenuItem mnemonicParsing="false" onAction="#showInitiatorForm" text="Initiator" />
-            <MenuItem mnemonicParsing="false" onAction="#showTransactionForm" text="Transaction" />
             <MenuItem mnemonicParsing="false" onAction="#showRecipientForm" text="Recepient" />
             <MenuItem mnemonicParsing="false" onAction="#showLedgerForm" text="Ledger" />
             </items>

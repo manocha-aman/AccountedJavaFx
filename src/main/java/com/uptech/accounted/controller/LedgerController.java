@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.uptech.accounted.bean.Ledger;
+import com.uptech.accounted.repository.LedgerRepository;
 import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.validations.MasterValidationAlert;
 
@@ -35,6 +36,8 @@ public class LedgerController implements Initializable {
   @FXML
   private TableView<Ledger> ledgerTable;
   @FXML
+  private TableView<Ledger> subLedgerTable;
+  @FXML
   private TableColumn<Ledger, Long> colLedgerId;
   @FXML
   private TableColumn<Ledger, String> colLedgerCode;
@@ -45,11 +48,14 @@ public class LedgerController implements Initializable {
   @FXML
   private TableColumn<Ledger, String> colSubLedgerName;
   private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
+  private ObservableList<Ledger> subLedgerList = FXCollections.observableArrayList();
   @Autowired
   private MasterValidationAlert masterValidationAlert;
   @Autowired
   public LedgerServiceImpl ledgerServiceImpl;
-
+  @Autowired
+  public LedgerRepository ledgerRepository;
+  
   public LedgerController(@Autowired LedgerServiceImpl service) {
   }
 
@@ -104,6 +110,13 @@ public class LedgerController implements Initializable {
     ledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     ledgerTable.setEditable(false);
     setColumnProperties();
+    ledgerTable.setOnMouseClicked(event -> {
+      Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
+      subLedgerList.clear();
+      subLedgerList.addAll(ledgerRepository.findByLedgerCode(selectedLedger.getLedgerCode()));
+      subLedgerTable.setItems(subLedgerList);
+      subLedgerTable.setVisible(true);
+    });
     loadDetails();
   }
 

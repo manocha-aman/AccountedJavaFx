@@ -16,7 +16,7 @@
     <left>
         <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
             <children>
-				<Label contentDisplay="CENTER" text="Recepient"
+				<Label contentDisplay="CENTER" text="Recipient"
 					textAlignment="CENTER" textFill="WHITE">
 					<font>
 						<Font size="20.0" />
