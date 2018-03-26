@@ -84,11 +84,11 @@ public abstract class AbstractController<T extends Master, S extends GenericServ
     table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     table.setEditable(false);
     setColumnProperties();
-//    table.setOnMouseClicked(event -> {
-//      T selectedItem = table.getSelectionModel().getSelectedItem();
-//      code.setText(selectedItem.getCode());
-//      name.setText(selectedItem.getName());
-//    });
+    table.setOnMouseClicked(event -> {
+      T selectedItem = table.getSelectionModel().getSelectedItem();
+      code.setText(selectedItem.getCode());
+      name.setText(selectedItem.getName());
+    });
     loadDetails();
   }
 
