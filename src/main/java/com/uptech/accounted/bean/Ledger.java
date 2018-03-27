@@ -35,31 +35,20 @@ public class Ledger {
   @Column(name = "ledgerName", updatable = true, nullable = false)
   @NonNull
   private String ledgerName;
-  @Column(name = "subLedgerCode", updatable = false, nullable = false)
-  @NonNull
-  private String subLedgerCode;
-  @Column(name = "subLedgerName", updatable = true, nullable = false)
-  @NonNull
-  private String subLedgerName;
 
-  public Ledger(long ledgerId, String ledgerCode, String ledgerName, String subLedgerCode, String subLedgerName) {
+  public Ledger(long ledgerId, String ledgerCode, String ledgerName) {
     this.ledgerId = ledgerId;
     this.ledgerCode = ledgerCode;
     this.ledgerName = ledgerName;
-    this.subLedgerCode = subLedgerCode;
-    this.subLedgerName = subLedgerName;
   }
   
-  public static Ledger generateNewLedger(String ledgerCode, String ledgerName, String subLedgerCode, String subLedgerName) {
-    if (StringUtils.isEmpty(ledgerName) || StringUtils.isEmpty(ledgerCode) || StringUtils.isEmpty(subLedgerName)
-        || StringUtils.isEmpty(subLedgerCode)) {
+  public static Ledger generateNewLedger(String ledgerCode, String ledgerName) {
+    if (StringUtils.isEmpty(ledgerName) || StringUtils.isEmpty(ledgerCode)) {
       throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
     }
     Ledger ledger = new Ledger();
     ledger.setLedgerCode(ledgerCode);
     ledger.setLedgerName(ledgerName);
-    ledger.setSubLedgerCode(subLedgerCode);
-    ledger.setSubLedgerName(subLedgerName);
     return ledger;
   }
 

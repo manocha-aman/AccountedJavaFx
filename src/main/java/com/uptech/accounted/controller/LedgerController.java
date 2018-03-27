@@ -29,10 +29,6 @@ public class LedgerController implements Initializable {
   @FXML
   TextField ledgerName;
   @FXML
-  TextField subLedgerName;
-  @FXML
-  TextField subLedgerCode;
-  @FXML
   private TableView<Ledger> ledgerTable;
   @FXML
   private TableColumn<Ledger, Long> colLedgerId;
@@ -40,10 +36,6 @@ public class LedgerController implements Initializable {
   private TableColumn<Ledger, String> colLedgerCode;
   @FXML
   private TableColumn<Ledger, String> colLedgerName;
-  @FXML
-  private TableColumn<Ledger, String> colSubLedgerCode;
-  @FXML
-  private TableColumn<Ledger, String> colSubLedgerName;
   private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
   @Autowired
   private MasterValidationAlert masterValidationAlert;
@@ -54,7 +46,7 @@ public class LedgerController implements Initializable {
   }
 
   private Ledger createNewLedger() {
-    return Ledger.generateNewLedger(ledgerCode.getText(), ledgerName.getText(), subLedgerCode.getText(), subLedgerName.getText());
+    return Ledger.generateNewLedger(ledgerCode.getText(), ledgerName.getText());
   }
 
   public void reset(ActionEvent actionEvent) {
@@ -64,8 +56,6 @@ public class LedgerController implements Initializable {
   private void clearFields() {
     ledgerCode.clear();
     ledgerName.clear();
-    subLedgerName.clear();
-    subLedgerCode.clear();
   }
 
   public void save(ActionEvent actionEvent) {
@@ -106,8 +96,6 @@ public class LedgerController implements Initializable {
     colLedgerId.setCellValueFactory(new PropertyValueFactory<>("ledgerId"));
     colLedgerName.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colLedgerCode.setCellValueFactory(new PropertyValueFactory<>("ledgerCode"));
-    colSubLedgerName.setCellValueFactory(new PropertyValueFactory<>("subLedgerName"));
-    colSubLedgerCode.setCellValueFactory(new PropertyValueFactory<>("subLedgerCode"));
   }
 
 }
