@@ -1,5 +1,7 @@
 package com.uptech.accounted.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,11 @@ public class UserServiceImpl {
   }
 
   public boolean authenticate(String email, String password) {
-    return repository.findByEmailAndPassword(email, password) != null;
+    return true; // No authentication for now
+  }
+
+  public List<User> findAll() {
+    return repository.findAll();
   }
 
   public User save(User user) {

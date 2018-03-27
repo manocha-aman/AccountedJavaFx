@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 
-import com.uptech.accounted.Main;
 import com.uptech.accounted.view.FxmlView;
 
 import javafx.application.Platform;
@@ -16,9 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-/**
- * Manages switching Scenes on the Primary Stage
- */
 public class StageManager {
 
   private static final Logger LOG = getLogger(StageManager.class);
@@ -32,16 +28,11 @@ public class StageManager {
 
   public void switchScene(final FxmlView view) {
     Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
-    // springFXMLLoader.loader.getNamespace().put("controllerName",
-    // view.getController());
     show(viewRootNodeHierarchy, view.getTitle());
   }
 
   private void show(final Parent rootnode, String title) {
     Scene scene = prepareScene(rootnode);
-    // scene.getStylesheets().add("/styles/Styles.css");
-
-    // primaryStage.initStyle(StageStyle.TRANSPARENT);
     primaryStage.setTitle(title);
     primaryStage.setScene(scene);
     primaryStage.sizeToScene();
@@ -53,9 +44,6 @@ public class StageManager {
     imageView.setSmooth(true);
     imageView.setCache(true);
     primaryStage.getIcons().add(imgLogo);
-    // primaryStage.getIcons().add(new
-    // Image(StageManager.class.getResourceAsStream("ledger.png")));
-
     try {
       primaryStage.show();
     } catch (Exception exception) {

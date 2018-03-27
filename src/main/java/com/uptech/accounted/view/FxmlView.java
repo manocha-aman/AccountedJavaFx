@@ -4,27 +4,14 @@ import java.util.ResourceBundle;
 
 import com.uptech.accounted.controller.DepartmentController;
 import com.uptech.accounted.controller.InitiatorController;
+import com.uptech.accounted.controller.LedgerController;
 import com.uptech.accounted.controller.LoginController;
 import com.uptech.accounted.controller.MenuBarController;
+import com.uptech.accounted.controller.RecipientController;
+import com.uptech.accounted.controller.TransactionController;
 import com.uptech.accounted.controller.UserController;
 
 public enum FxmlView {
-  MENUBAR {
-    @Override
-    public String getTitle() {
-      return getStringFromResourceBundle("Menubar");
-    }
-
-    @Override
-    public String getFxmlFile() {
-      return "/fxml/MenuBar.fxml";
-    }
-
-    @Override
-    public Class getController() {
-      return MenuBarController.class;
-    }
-  },
   DEPARTMENT {
     @Override
     public String getTitle() {
@@ -58,6 +45,22 @@ public enum FxmlView {
       return InitiatorController.class;
     }
   },
+  LEDGER {
+    @Override
+    public String getTitle() {
+      return getStringFromResourceBundle("ledger.title");
+    }
+
+    @Override
+    public String getFxmlFile() {
+      return "/fxml/Ledger.fxml";
+    }
+
+    @Override
+    public Class getController() {
+      return LedgerController.class;
+    }
+  },
   LOGIN {
     @Override
     public String getTitle() {
@@ -72,6 +75,54 @@ public enum FxmlView {
     @Override
     public Class getController() {
       return LoginController.class;
+    }
+  },
+  MENUBAR {
+    @Override
+    public String getTitle() {
+      return getStringFromResourceBundle("menubar.title");
+    }
+
+    @Override
+    public String getFxmlFile() {
+      return "/fxml/MenuBar.fxml";
+    }
+
+    @Override
+    public Class getController() {
+      return MenuBarController.class;
+    }
+  },
+  RECIPIENT {
+    @Override
+    public String getTitle() {
+      return getStringFromResourceBundle("recipient.title");
+    }
+
+    @Override
+    public String getFxmlFile() {
+      return "/fxml/Recipient.fxml";
+    }
+
+    @Override
+    public Class getController() {
+      return RecipientController.class;
+    }
+  },
+  TRANSACTION {
+    @Override
+    public String getTitle() {
+      return getStringFromResourceBundle("transaction.title");
+    }
+
+    @Override
+    public String getFxmlFile() {
+      return "/fxml/Transaction.fxml";
+    }
+
+    @Override
+    public Class getController() {
+      return TransactionController.class;
     }
   },
   USER {

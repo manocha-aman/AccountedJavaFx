@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import java.lang.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
@@ -12,7 +11,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="1000.0"
 	stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.InitiatorController">
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
 	<top>
 		<fx:include source="MenuBar.fxml" />
 	</top>
@@ -21,23 +20,35 @@
 			styleClass="background" stylesheets="@../styles/Styles.css"
 			BorderPane.alignment="CENTER">
 			<children>
-				<Label alignment="CENTER" text="Initiator"
+				<Label contentDisplay="CENTER" text="Ledger"
 					textAlignment="CENTER" textFill="WHITE">
 					<font>
 						<Font size="20.0" />
 					</font>
 					<VBox.margin>
-						<Insets left="60.0" top="30.0" />
+						<Insets bottom="10.0" left="70.0" top="30.0" />
 					</VBox.margin>
 				</Label>
-				<TextField fx:id="code" prefHeight="30.0" prefWidth="246.0"
-					promptText="Code">
+				<TextField fx:id="ledgerCode" prefHeight="30.0" prefWidth="246.0"
+					promptText="Ledger Code">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
 				</TextField>
-				<TextField fx:id="name" prefHeight="30.0" prefWidth="246.0"
-					promptText="Name">
+				<TextField fx:id="ledgerName" prefHeight="30.0" prefWidth="246.0"
+					promptText="Ledger Name">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<TextField fx:id="subLedgerCode" prefHeight="30.0"
+					prefWidth="246.0" promptText="SubLedger Code">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<TextField fx:id="subLedgerName" prefHeight="30.0"
+					prefWidth="246.0" promptText="SubLedger Name">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
@@ -79,23 +90,30 @@
 		</VBox>
 	</left>
 	<center>
+
 		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0"
-			stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
-			<Button fx:id="delete" mnemonicParsing="false" onAction="#delete"
-				prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
-				text="Delete">
-				<effect>
-					<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
-				</effect>
-			</Button>
+			BorderPane.alignment="CENTER">
 			<children>
-				<TableView fx:id="table" prefHeight="300.0" prefWidth="679.0"
-					tableMenuButtonVisible="true">
+				<Button fx:id="delete" mnemonicParsing="false" onAction="#delete"
+					prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
+					text="Delete">
+					<effect>
+						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+					</effect>
+				</Button>
+				<TableView fx:id="ledgerTable" prefHeight="300.0"
+					prefWidth="679.0" tableMenuButtonVisible="true">
 					<columns>
-						<TableColumn fx:id="colCode" maxWidth="4000.0"
-							prefWidth="75.0" text="Code" />
-						<TableColumn fx:id="colName" maxWidth="4000.0"
-							prefWidth="75.0" text="Initiator" />
+						<TableColumn fx:id="colLedgerId" maxWidth="4000.0"
+							prefWidth="75.0" text="Ledger Id" />
+						<TableColumn fx:id="colLedgerCode" maxWidth="4000.0"
+							prefWidth="75.0" text="Ledger Code" />
+						<TableColumn fx:id="colLedgerName" maxWidth="4000.0"
+							prefWidth="75.0" text="Ledger Name" />
+						<TableColumn fx:id="colSubLedgerCode" maxWidth="4000.0"
+							prefWidth="75.0" text="Sub Ledger Code" />
+						<TableColumn fx:id="colSubLedgerName" maxWidth="4000.0"
+							prefWidth="75.0" text="Sub Ledger Name" />
 					</columns>
 					<VBox.margin>
 						<Insets left="10.0" right="5.0" />
@@ -103,14 +121,6 @@
 					<columnResizePolicy>
 						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 					</columnResizePolicy>
-					<contextMenu>
-						<ContextMenu>
-							<items>
-								<MenuItem fx:id="delete" mnemonicParsing="false"
-									onAction="#delete" text="Delete" />
-							</items>
-						</ContextMenu>
-					</contextMenu>
 				</TableView>
 			</children>
 		</VBox>

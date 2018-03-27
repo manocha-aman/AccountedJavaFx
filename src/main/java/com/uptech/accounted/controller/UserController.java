@@ -242,7 +242,6 @@ public class UserController implements Initializable {
 
   private void loadUserDetails() {
     userList.clear();
-
     userTable.setItems(userList);
   }
 
