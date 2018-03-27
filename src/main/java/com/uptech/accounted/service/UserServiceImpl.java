@@ -18,14 +18,13 @@ public class UserServiceImpl {
   }
 
   public boolean authenticate(String email, String password) {
-//    return repository.findByEmailAndPassword(email, password) != null;
-	  return true;
+    return true; // No authentication for now
   }
 
   public List<User> findAll() {
-	  return repository.findAll();
+    return repository.findAll();
   }
-  
+
   public User save(User user) {
     return repository.save(user);
   }

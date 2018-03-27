@@ -40,19 +40,19 @@ public class MenuBarController implements Initializable {
   }
 
   public void showLedgerForm(ActionEvent actionEvent) {
-	    stageManager.switchScene(FxmlView.LEDGER);
-	  }
+    stageManager.switchScene(FxmlView.LEDGER);
+  }
 
   public void showRecipientForm(ActionEvent actionEvent) {
-	    stageManager.switchScene(FxmlView.RECIPIENT);
-	  }
+    stageManager.switchScene(FxmlView.RECIPIENT);
+  }
 
   public void showTransactionForm(ActionEvent actionEvent) {
-	    stageManager.switchScene(FxmlView.TRANSACTION);
-	  }
+    stageManager.switchScene(FxmlView.TRANSACTION);
+  }
 
   public void showUserForm(ActionEvent actionEvent) {
-	    stageManager.switchScene(FxmlView.USER);
-	  }
+    stageManager.switchScene(FxmlView.USER);
+  }
 
 }

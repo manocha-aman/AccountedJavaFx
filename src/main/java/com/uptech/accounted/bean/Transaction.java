@@ -11,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -35,12 +32,10 @@ public class Transaction {
 
   @NonNull
   @OneToOne
-  @OnDelete(action = OnDeleteAction.CASCADE)
   private Initiator initiator;
 
   @NonNull
   @OneToOne
-  @OnDelete(action = OnDeleteAction.CASCADE)
   private Department department;
 
   @NonNull
@@ -48,12 +43,10 @@ public class Transaction {
 
   @NonNull
   @OneToOne
-  @OnDelete(action = OnDeleteAction.CASCADE)
   private Recipient recipient;
 
   @NonNull
   @OneToOne
-  @OnDelete(action = OnDeleteAction.CASCADE)
   private Ledger LedgerType;
 
   @NonNull

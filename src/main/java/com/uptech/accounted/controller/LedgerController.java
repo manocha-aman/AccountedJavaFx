@@ -54,12 +54,7 @@ public class LedgerController implements Initializable {
   }
 
   private Ledger createNewLedger() {
-    Ledger ledger = new Ledger();
-    ledger.setLedgerCode(ledgerCode.getText());
-    ledger.setLedgerName(ledgerName.getText());
-    ledger.setSubLedgerCode(subLedgerCode.getText());
-    ledger.setSubLedgerName(subLedgerName.getText());
-    return ledger;
+    return Ledger.generateNewLedger(ledgerCode.getText(), ledgerName.getText(), subLedgerCode.getText(), subLedgerName.getText());
   }
 
   public void reset(ActionEvent actionEvent) {

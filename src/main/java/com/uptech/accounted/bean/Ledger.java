@@ -9,8 +9,6 @@ import javax.persistence.Table;
 
 import org.springframework.util.StringUtils;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,23 +43,24 @@ public class Ledger {
   private String subLedgerName;
 
   public Ledger(long ledgerId, String ledgerCode, String ledgerName, String subLedgerCode, String subLedgerName) {
-    if (StringUtils.isEmpty(ledgerName) || StringUtils.isEmpty(ledgerCode) || StringUtils.isEmpty(subLedgerName)
-        || StringUtils.isEmpty(subLedgerCode)) {
-      validationAlert();
-      throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
-    }
     this.ledgerId = ledgerId;
     this.ledgerCode = ledgerCode;
     this.ledgerName = ledgerName;
     this.subLedgerCode = subLedgerCode;
     this.subLedgerName = subLedgerName;
   }
-
-  private void validationAlert() {
-    Alert alert = new Alert(AlertType.WARNING);
-    alert.setTitle("Validation Error");
-    alert.setHeaderText(null);
-    alert.setContentText("Please Enter Valid name/code");
-    alert.showAndWait();
+  
+  public static Ledger generateNewLedger(String ledgerCode, String ledgerName, String subLedgerCode, String subLedgerName) {
+    if (StringUtils.isEmpty(ledgerName) || StringUtils.isEmpty(ledgerCode) || StringUtils.isEmpty(subLedgerName)
+        || StringUtils.isEmpty(subLedgerCode)) {
+      throw new IllegalArgumentException("Name and Code can't be blank/empty/null");
+    }
+    Ledger ledger = new Ledger();
+    ledger.setLedgerCode(ledgerCode);
+    ledger.setLedgerName(ledgerName);
+    ledger.setSubLedgerCode(subLedgerCode);
+    ledger.setSubLedgerName(subLedgerName);
+    return ledger;
   }
+
 }

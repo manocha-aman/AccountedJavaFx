@@ -4,36 +4,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<MenuBar BorderPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.MenuBarController">
-    <menus>
-        <Menu mnemonicParsing="false" text="File">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="Logout" />
-            </items>
-        </Menu>
-        <!--<Menu mnemonicParsing="false" text="Edit">-->
-            <!--<items>-->
-                <!--<MenuItem mnemonicParsing="false" onAction="#delete" text="Delete" />-->
-            <!--</items>-->
-        <!--</Menu>-->
-        <Menu mnemonicParsing="false" text="Forms">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#showDepartmentForm" text="Department" />
-            <MenuItem mnemonicParsing="false" onAction="#showInitiatorForm" text="Initiator" />
-            <MenuItem mnemonicParsing="false" onAction="#showTransactionForm" text="Transaction" />
-            <MenuItem mnemonicParsing="false" onAction="#showRecipientForm" text="Recepient" />
-            <MenuItem mnemonicParsing="false" onAction="#showLedgerForm" text="Ledger" />
-            </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-            <items>
-                <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-        </Menu>
-      <Menu mnemonicParsing="false" text="">
-         <graphic>
-            <Button mnemonicParsing="false" onAction="#showTransactionForm" text="Transaction" />
-         </graphic>
-      </Menu>
-    </menus>
+<MenuBar BorderPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.MenuBarController">
+	<menus>
+		<Menu mnemonicParsing="false" text="File">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#exit" text="Logout" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="Forms">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#showDepartmentForm"
+					text="Department" />
+				<MenuItem mnemonicParsing="false" onAction="#showInitiatorForm"
+					text="Initiator" />
+				<MenuItem mnemonicParsing="false" onAction="#showTransactionForm"
+					text="Transaction" />
+				<MenuItem mnemonicParsing="false" onAction="#showRecipientForm"
+					text="Recepient" />
+				<MenuItem mnemonicParsing="false" onAction="#showLedgerForm"
+					text="Ledger" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="Help">
+			<items>
+				<MenuItem mnemonicParsing="false" text="About" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="">
+			<graphic>
+				<Button mnemonicParsing="false" onAction="#showTransactionForm"
+					text="Transaction" />
+			</graphic>
+		</Menu>
+	</menus>
 </MenuBar>
