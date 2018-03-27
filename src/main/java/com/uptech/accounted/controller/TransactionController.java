@@ -28,21 +28,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Callback;
 
 @Controller
 public class TransactionController implements Initializable {
@@ -73,53 +68,6 @@ public class TransactionController implements Initializable {
 
   @FXML
   private Button saveTransaction;
-
-  Callback<TableColumn<Transaction, Boolean>, TableCell<Transaction, Boolean>> cellFactory = new Callback<TableColumn<Transaction, Boolean>, TableCell<Transaction, Boolean>>() {
-    @Override
-    public TableCell<Transaction, Boolean> call(final TableColumn<Transaction, Boolean> param) {
-      final TableCell<Transaction, Boolean> cell = new TableCell<Transaction, Boolean>() {
-        final Button btnEdit = new Button();
-        Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
-
-        @Override
-        public void updateItem(Boolean check, boolean empty) {
-          super.updateItem(check, empty);
-          if (empty) {
-            setGraphic(null);
-            setText(null);
-          } else {
-            btnEdit.setOnAction(e -> {
-              Transaction transaction = getTableView().getItems().get(getIndex());
-              updateTransaction(transaction);
-            });
-
-            btnEdit.setStyle("-fx-background-color: transparent;");
-            ImageView iv = new ImageView();
-            iv.setImage(imgEdit);
-            iv.setPreserveRatio(true);
-            iv.setSmooth(true);
-            iv.setCache(true);
-            btnEdit.setGraphic(iv);
-
-            setGraphic(btnEdit);
-            setAlignment(Pos.CENTER);
-            setText(null);
-          }
-        }
-
-        private void updateTransaction(Transaction transaction) {
-          cbInitiator.getSelectionModel().select(transaction.getInitiator().getName());
-          cbDepartment.getSelectionModel().select(transaction.getDepartment().getName());
-          cbRecipient.getSelectionModel().select(transaction.getRecipient().getName());
-          cbLedgerType.getSelectionModel().select(transaction.getLedgerType().getLedgerName());
-          dateOfTransaction.setValue(transaction.getDateOfTransaction());
-          amount.setText(transaction.getAmount().toString());
-          subjectMatter.setText(transaction.getSubjectMatter());
-        }
-      };
-      return cell;
-    }
-  };
 
   @FXML
   private TableView<Transaction> transactionTable;
@@ -275,6 +223,16 @@ public class TransactionController implements Initializable {
     loadDepartments();
     loadLedgers();
     loadRecipients();
+    transactionTable.setOnMouseClicked(event -> {
+      Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
+      cbInitiator.getSelectionModel().select(selectedItem.getInitiator().getCode() + "-" + selectedItem.getInitiator().getName());
+      cbDepartment.getSelectionModel().select(selectedItem.getDepartment().getCode() + "-" + selectedItem.getDepartment().getName());
+      cbRecipient.getSelectionModel().select(selectedItem.getRecipient().getCode() + "-" + selectedItem.getRecipient().getName());
+      cbLedgerType.getSelectionModel().select(selectedItem.getLedgerType().getLedgerCode() + "-" + selectedItem.getLedgerType().getLedgerName());
+      dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
+      amount.setText(selectedItem.getAmount().toString());
+      subjectMatter.setText(selectedItem.getSubjectMatter());
+    });
     transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     setColumnProperties();
     // Add all transactions into table
@@ -322,6 +280,5 @@ public class TransactionController implements Initializable {
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatter"));
-    colEdit.setCellFactory(cellFactory);
   }
 }
