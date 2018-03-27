@@ -240,6 +240,7 @@ public class TransactionController implements Initializable {
   }
 
   private void loadInitiators() {
+    intiatorComboList.clear();
     List<Initiator> initiatorList = initiatorRepository.findAll();
     for (Initiator initiator : initiatorList) {
       intiatorComboList.add(initiator.getCode() + "-" + initiator.getName());
@@ -248,6 +249,7 @@ public class TransactionController implements Initializable {
   }
 
   private void loadDepartments() {
+    departmentComboList.clear();
     List<Department> departmentList = departmentRepository.findAll();
     for (Department department : departmentList) {
       departmentComboList.add(department.getCode() + "-" + department.getName());
@@ -256,6 +258,7 @@ public class TransactionController implements Initializable {
   }
 
   private void loadLedgers() {
+    ledgerComboList.clear();
     List<Ledger> ledgerList = ledgerRepository.findAll();
     for (Ledger ledger : ledgerList) {
       ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
@@ -264,6 +267,7 @@ public class TransactionController implements Initializable {
   }
 
   private void loadRecipients() {
+    recipientComboList.clear();
     List<Recipient> recipientList = recipientRepository.findAll();
     for (Recipient recipient : recipientList) {
       recipientComboList.add(recipient.getCode() + "-" + recipient.getName());
