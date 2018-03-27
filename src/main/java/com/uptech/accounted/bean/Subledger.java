@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Subsubledger")
+@Table(name = "Subledger")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,18 +26,14 @@ import lombok.ToString;
 public class Subledger {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "subledgerId", updatable = false, nullable = false)
-  private long subledgerId;
+  @NonNull
   @Column(name = "subledgerCode", updatable = false, nullable = false)
-  @NonNull
   private String subledgerCode;
-  @Column(name = "subledgerName", updatable = true, nullable = false)
   @NonNull
+  @Column(name = "subledgerName", updatable = true, nullable = false)
   private String subledgerName;
 
-  public Subledger(long subledgerId, String subledgerCode, String subledgerName) {
-    this.subledgerId = subledgerId;
+  public Subledger(String subledgerCode, String subledgerName) {
     this.subledgerCode = subledgerCode;
     this.subledgerName = subledgerName;
   }

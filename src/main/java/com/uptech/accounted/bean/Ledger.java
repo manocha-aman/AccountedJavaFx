@@ -26,9 +26,6 @@ import lombok.ToString;
 public class Ledger {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ledgerId", updatable = false, nullable = false)
-  private long ledgerId;
   @Column(name = "ledgerCode", updatable = false, nullable = false)
   @NonNull
   private String ledgerCode;
@@ -36,8 +33,7 @@ public class Ledger {
   @NonNull
   private String ledgerName;
 
-  public Ledger(long ledgerId, String ledgerCode, String ledgerName) {
-    this.ledgerId = ledgerId;
+  public Ledger(String ledgerCode, String ledgerName) {
     this.ledgerCode = ledgerCode;
     this.ledgerName = ledgerName;
   }

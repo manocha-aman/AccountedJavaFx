@@ -9,10 +9,12 @@ import org.slf4j.Logger;
 import com.uptech.accounted.view.FxmlView;
 
 import javafx.application.Platform;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class StageManager {
@@ -35,7 +37,8 @@ public class StageManager {
     Scene scene = prepareScene(rootnode);
     primaryStage.setTitle(title);
     primaryStage.setScene(scene);
-    primaryStage.sizeToScene();
+    if (!title.equalsIgnoreCase("login"))
+      primaryStage.setMaximized(true);
     primaryStage.centerOnScreen();
     ImageView imageView = new ImageView();
     Image imgLogo = new Image(getClass().getResourceAsStream("/images/a-logo.png"));

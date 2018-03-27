@@ -34,12 +34,12 @@
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
 				</TextField>
-				<TextField fx:id="subLedgerCode" prefHeight="30.0" prefWidth="246.0" promptText="SubLedger Code">
+				<TextField fx:id="subledgerCode" prefHeight="30.0" prefWidth="246.0" promptText="Subledger Code">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
 				</TextField>
-				<TextField fx:id="subLedgerName" prefHeight="30.0" prefWidth="246.0" promptText="SubLedger Name">
+				<TextField fx:id="subledgerName" prefHeight="30.0" prefWidth="246.0" promptText="Subledger Name">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
@@ -80,11 +80,11 @@
 
 		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button fx:id="delete" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
+				<!--Button fx:id="delete" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
 					<effect>
 						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
 					</effect>
-				</Button>
+				</Button-->
 				<TableView fx:id="ledgerTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
 					<columns>
 						<TableColumn fx:id="colLedgerId" maxWidth="4000.0" prefWidth="75.0" text="Ledger Id" />
@@ -103,9 +103,9 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                <columns>
-                  <TableColumn fx:id="colLedgerId1" maxWidth="4000.0" prefWidth="75.0" text="Subledger Id" />
-                  <TableColumn fx:id="colSubLedgerCode1" maxWidth="4000.0" prefWidth="75.0" text="Subledger Code" />
-                  <TableColumn fx:id="colSubLedgerName1" maxWidth="4000.0" prefWidth="75.0" text="Subledger Name" />
+                  <TableColumn fx:id="colSubledgerId" maxWidth="4000.0" prefWidth="75.0" text="Subledger Id" />
+                  <TableColumn fx:id="colSubledgerCode" maxWidth="4000.0" prefWidth="75.0" text="Subledger Code" />
+                  <TableColumn fx:id="colSubledgerName" maxWidth="4000.0" prefWidth="75.0" text="Subledger Name" />
                </columns>
             </TableView>
 			</children>
