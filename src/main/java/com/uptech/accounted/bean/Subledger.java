@@ -7,7 +7,6 @@ import javax.persistence.Table;
 
 import org.springframework.util.StringUtils;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -20,7 +19,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Builder
 public class Subledger {
 
   @Id
@@ -30,11 +28,6 @@ public class Subledger {
   @NonNull
   @Column(name = "subledgerName", updatable = true, nullable = false)
   private String subledgerName;
-
-  public Subledger(String subledgerCode, String subledgerName) {
-    this.subledgerCode = subledgerCode;
-    this.subledgerName = subledgerName;
-  }
 
   public static Subledger generateNewSubledger(String subledgerCode, String subledgerName) {
     if (StringUtils.isEmpty(subledgerName) || StringUtils.isEmpty(subledgerCode)) {

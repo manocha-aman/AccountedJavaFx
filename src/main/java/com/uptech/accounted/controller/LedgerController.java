@@ -1,7 +1,9 @@
 package com.uptech.accounted.controller;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.validations.MasterValidationAlert;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +47,8 @@ public class LedgerController implements Initializable {
   private TableColumn<Ledger, String> colLedgerName;
   private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
   @FXML
+  private TableColumn<Subledger, String> colLedgerCodeReference;
+  @FXML
   private TableColumn<Subledger, String> colSubledgerCode;
   @FXML
   private TableColumn<Subledger, String> colSubledgerName;
@@ -59,11 +64,13 @@ public class LedgerController implements Initializable {
   }
 
   private Ledger createNewLedger() {
-    return Ledger.generateNewLedger(ledgerCode.getText(), ledgerName.getText());
+    Set<Subledger> subLedgerSet = new HashSet<>();
+    subLedgerSet.add(createNewSubledger());
+    return Ledger.generateNewLedger(ledgerCode.getText(), ledgerName.getText(), subLedgerSet);
   }
 
   private Subledger createNewSubledger() {
-    return Subledger.generateNewSubledger(subledgerCode.getText(), subledgerName.getText());
+    return Subledger.generateNewSubledger( subledgerCode.getText(), subledgerName.getText());
   }
 
   public void reset(ActionEvent actionEvent) {
@@ -78,16 +85,16 @@ public class LedgerController implements Initializable {
   }
 
   public void save(ActionEvent actionEvent) {
-    Ledger ledger = null;
+//    Ledger ledger = null;
     Subledger subledger = null;
     try {
-      ledger = createNewLedger();
+//      ledger = createNewLedger();
       subledger = createNewSubledger();
     } catch (IllegalArgumentException illegalArgumentException) {
       masterValidationAlert.validationAlert(illegalArgumentException.getMessage());
     }
 
-    ledgerServiceImpl.save(ledger);
+//    ledgerServiceImpl.save(ledger);
     subledgerServiceImpl.save(subledger);
     clearFields();
     loadDetails();
@@ -114,8 +121,19 @@ public class LedgerController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    subledgerTable.getItems().clear();
     ledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     subledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    ledgerTable.setOnMouseClicked(event -> {
+      Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
+      System.out.println("subledger list for ledger " + selectedLedger.getLedgerName() + " is ");
+      selectedLedger.getSubledgerList().forEach(System.out::println);
+      subledgerTable.getItems().clear();
+      subledgerTable.getItems().addAll(selectedLedger.getSubledgerList());
+      colSubledgerName.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSubledgerName()));
+      colSubledgerCode.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSubledgerCode()));
+    });
+
     ledgerTable.setEditable(false);
     subledgerTable.setEditable(false);
     setColumnProperties();
