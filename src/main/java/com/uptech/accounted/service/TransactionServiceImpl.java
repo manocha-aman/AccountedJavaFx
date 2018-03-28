@@ -24,4 +24,8 @@ public class TransactionServiceImpl {
   public Transaction save(Transaction user) {
     return repository.save(user);
   }
+  
+  public void delete(Transaction transaction) {
+    repository.delete(transaction);
+  }
 }

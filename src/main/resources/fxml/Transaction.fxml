@@ -38,7 +38,7 @@
 			styleClass="background" stylesheets="@../styles/Styles.css"
 			BorderPane.alignment="CENTER">
 			<children>
-				<Label contentDisplay="CENTER" text="New Transaction"
+				<Label contentDisplay="CENTER" text="Transaction"
 					textAlignment="CENTER" textFill="WHITE">
 					<font>
 						<Font size="20.0" />
@@ -59,8 +59,8 @@
 						<Insets left="25.0" />
 					</VBox.margin>
 				</ComboBox>
-				<ComboBox fx:id="cbReceiver" prefHeight="30.0" prefWidth="246.0"
-					promptText="Select Receiver">
+				<ComboBox fx:id="cbRecipient" prefHeight="30.0" prefWidth="246.0"
+					promptText="Select Recipient">
 					<VBox.margin>
 						<Insets left="25.0" />
 					</VBox.margin>
@@ -134,6 +134,13 @@
 		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0"
 			BorderPane.alignment="CENTER">
 			<children>
+				<Button fx:id="deleteTransactions" mnemonicParsing="false" onAction="#deleteTransactions"
+					prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;"
+					text="Delete">
+					<effect>
+						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+					</effect>
+				</Button>
 				<TableView fx:id="transactionTable" prefHeight="300.0"
 					prefWidth="679.0" tableMenuButtonVisible="true">
 					<columns>
@@ -145,8 +152,8 @@
 							prefWidth="75.0" text="Department" />
 						<TableColumn fx:id="colDateOfTransaction" maxWidth="4000.0"
 							prefWidth="75.0" text="Date of Transaction" />
-						<TableColumn fx:id="colReceiver" maxWidth="4000.0"
-							prefWidth="60.0" text="Receiver" />
+						<TableColumn fx:id="colRecipient" maxWidth="4000.0"
+							prefWidth="60.0" text="Recipient" />
 						<TableColumn fx:id="colLedgerType" maxWidth="4000.0"
 							prefWidth="60.0" text="LedgerType" />
 						<TableColumn fx:id="colAmount" maxWidth="4000.0"

@@ -12,4 +12,5 @@ import java.util.List;
 @Repository("TransactionRepository")
 public interface TransactionRepository extends JpaRepository<Transaction, String> {
   List<Transaction> findAll(Specification<Transaction> spec);
+  public Transaction findByTransactionId(long transactionId);
 }

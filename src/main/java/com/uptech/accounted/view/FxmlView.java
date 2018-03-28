@@ -7,7 +7,7 @@ import com.uptech.accounted.controller.InitiatorController;
 import com.uptech.accounted.controller.LedgerController;
 import com.uptech.accounted.controller.LoginController;
 import com.uptech.accounted.controller.MenuBarController;
-import com.uptech.accounted.controller.ReceiverController;
+import com.uptech.accounted.controller.RecipientController;
 import com.uptech.accounted.controller.ReportsController;
 import com.uptech.accounted.controller.TransactionController;
 import com.uptech.accounted.controller.UserController;
@@ -94,7 +94,7 @@ public enum FxmlView {
 			return MenuBarController.class;
 		}
 	},
-	RECEIVER {
+  RECIPIENT {
 		@Override
 		public String getTitle() {
 			return getStringFromResourceBundle("receiver.title");
@@ -102,12 +102,12 @@ public enum FxmlView {
 
 		@Override
 		public String getFxmlFile() {
-			return "/fxml/Receiver.fxml";
+			return "/fxml/Recipient.fxml";
 		}
 
 		@Override
 		public Class getController() {
-			return ReceiverController.class;
+			return RecipientController.class;
 		}
 	},
 	TRANSACTION {
@@ -142,22 +142,22 @@ public enum FxmlView {
 			return UserController.class;
 		}
 	},
-	REPORTS {
-		@Override
-		public String getTitle() {
-			return "Reports";
-		}
+  REPORTS {
+    @Override
+    public String getTitle() {
+      return "Reports";
+    }
 
-		@Override
-		public String getFxmlFile() {
-			return "/fxml/Reports.fxml";
-		}
+    @Override
+    public String getFxmlFile() {
+      return "/fxml/Reports.fxml";
+    }
 
-		@Override
-		public Class getController() {
-			return ReportsController.class;
-		}
-	};
+    @Override
+    public Class getController() {
+      return ReportsController.class;
+    }
+  };
 
 	public abstract String getTitle();
 

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("LedgerRepository")
-public interface LedgerRepository extends JpaRepository<Ledger, String> {
+public interface LedgerRepository extends JpaRepository<Ledger, Long> {
   List<Department> findAll(Specification<Ledger> spec);
 }
