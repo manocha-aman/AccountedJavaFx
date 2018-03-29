@@ -24,6 +24,7 @@
 					text="Recepient" />
 				<MenuItem mnemonicParsing="false" onAction="#showLedgerForm"
 					text="Ledger" />
+				<MenuItem mnemonicParsing="false" onAction="#showReportsForm" text="Reports" />
 			</items>
 		</Menu>
 		<Menu mnemonicParsing="false" text="Help">
