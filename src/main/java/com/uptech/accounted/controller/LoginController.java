@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.uptech.accounted.config.StageManager;
-import com.uptech.accounted.service.UserServiceImpl;
+import com.uptech.accounted.validations.MasterValidationAlert;
 import com.uptech.accounted.view.FxmlView;
 
 import javafx.event.ActionEvent;
@@ -34,22 +34,21 @@ public class LoginController implements Initializable {
   @FXML
   private Label lblLogin;
 
-  @Autowired
-  private UserServiceImpl userService;
-
   @Lazy
   @Autowired
   private StageManager stageManager;
 
+  @Autowired
+  private MasterValidationAlert masterValidationAlert;
+
   @FXML
   private void login(ActionEvent event) {
-    if (userService.authenticate(getUsername(), getPassword())) {
-
+    if ((getUsername().equalsIgnoreCase("admin") && getPassword().equalsIgnoreCase("admin123"))) {
       stageManager.switchScene(FxmlView.TRANSACTION);
 
     } else {
       lblLogin.setText("Login Failed.");
-      stageManager.switchScene(FxmlView.TRANSACTION);
+      masterValidationAlert.validationAlert("Enter valid username/password");
     }
   }
 

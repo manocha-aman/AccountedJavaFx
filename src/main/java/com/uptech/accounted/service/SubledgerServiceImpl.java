@@ -24,7 +24,7 @@ public class SubledgerServiceImpl {
     subledgerRepository.delete(subledger);
   }
 
-  public Subledger findByCode(long id) {
+  public Subledger findById(long id) {
     return subledgerRepository.findOne(id);
   }
 
