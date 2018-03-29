@@ -108,9 +108,7 @@ public class LedgerController implements Initializable {
 
   public void delete(ActionEvent actionEvent) {
     Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
-    Subledger selectedSubledger = subledgerTable.getSelectionModel().getSelectedItem();
     ledgerServiceImpl.delete(selectedLedger);
-    subledgerServiceImpl.delete(selectedSubledger);
     loadDetails();
   }
 

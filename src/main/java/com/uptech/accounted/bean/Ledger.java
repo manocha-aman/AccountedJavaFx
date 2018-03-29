@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -31,7 +34,8 @@ public class Ledger {
   @NonNull
   private String ledgerName;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "ledger", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "ledger")
+  @OnDelete(action = OnDeleteAction.CASCADE)
   private Set<Subledger> subledgerList = new HashSet<>();
 
   public Ledger(long ledgerCode, String ledgerName) {
