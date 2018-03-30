@@ -128,7 +128,7 @@ public class LedgerController implements Initializable {
       subledgerTable.getItems().clear();
       subledgerTable.getItems().addAll(subledgerServiceImpl.findByLedgerCode(selectedLedger.getLedgerCode()));
       colSubledgerName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerName()));
-      colSubledgerCode.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerId().toString()));
+      colSubledgerCode.setCellValueFactory(c -> new SimpleStringProperty(Long.toString(c.getValue().getSubledgerId().getSubledgerCode())));
     });
 
     ledgerTable.setEditable(false);
