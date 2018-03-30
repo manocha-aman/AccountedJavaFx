@@ -18,8 +18,8 @@
 					text="Department" />
 				<MenuItem mnemonicParsing="false" onAction="#showInitiatorForm"
 					text="Initiator" />
-				<MenuItem mnemonicParsing="false" onAction="#showTransactionForm"
-					text="Transaction" />
+				<MenuItem mnemonicParsing="false" onAction="#showSubjectMatterForm"
+					text="SubjectMatter" />
 				<MenuItem mnemonicParsing="false" onAction="#showRecipientForm"
 					text="Recepient" />
 				<MenuItem mnemonicParsing="false" onAction="#showLedgerForm"

@@ -57,6 +57,10 @@ public class Transaction {
   private BigDecimal amount;
 
   @NonNull
-  private String subjectMatter;
+  private String narration;
+
+  @NonNull
+  @OneToOne
+  private SubjectMatter subjectMatter;
 
 }
