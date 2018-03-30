@@ -127,10 +127,7 @@ public class TransactionController implements Initializable {
   private TransactionServiceImpl transactionService;
 
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
-  private ObservableList<String> intiatorComboList = FXCollections.observableArrayList();
-  private ObservableList<String> departmentComboList = FXCollections.observableArrayList();
   private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
-  private ObservableList<String> recipientComboList = FXCollections.observableArrayList();
 
   @FXML
   private void exit(ActionEvent event) {
@@ -273,8 +270,6 @@ public class TransactionController implements Initializable {
       ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
     }
     cbLedgerType.setItems(ledgerComboList);
-//    cbLedgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<Ledger>(
-//        cbInitiator, ledgerList));
   }
 
   private void setColumnProperties() {
