@@ -1,13 +1,13 @@
 package com.uptech.accounted.bean;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -22,25 +22,26 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Subledger {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "subledgerId", updatable = false, nullable = false)
-  private long subledgerId;
-
-  @Column(name = "subledgerCode", updatable = false, nullable = false)
-  private long subledgerCode;
+  @EmbeddedId
+  @AttributeOverrides({ 
+      @AttributeOverride(name = "ledgerCode", column = @Column(name = "ledgerCode")),
+      @AttributeOverride(name = "subledgerCode", column = @Column(name = "subledgerCode")) 
+      })
+  @Column(name = "subledgerId")
+  private SubledgerId subledgerId;
 
   @NonNull
   @Column(name = "subledgerName", updatable = true, nullable = false)
   private String subledgerName;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "ledger")
+  @ManyToOne
+  @MapsId("ledgerCode")
+  @JoinColumn(name = "ledgerCode")
   private Ledger ledger;
 
-  public Subledger(long subledgerCode, String subledgerName) {
+  public Subledger(SubledgerId subledgerId, String subledgerName) {
     super();
-    this.subledgerCode = subledgerCode;
+    this.subledgerId = subledgerId;
     this.subledgerName = subledgerName;
   }
 

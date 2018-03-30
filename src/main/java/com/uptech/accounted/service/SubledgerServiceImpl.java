@@ -1,18 +1,22 @@
 package com.uptech.accounted.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uptech.accounted.bean.Subledger;
+import com.uptech.accounted.bean.SubledgerId;
+import com.uptech.accounted.repository.SubledgerRepository;
 
 @Service
 public class SubledgerServiceImpl {
 
-  final JpaRepository<Subledger, Long> subledgerRepository;
+  @Autowired
+  final SubledgerRepository subledgerRepository;
 
-  public SubledgerServiceImpl(JpaRepository<Subledger, Long> subledgerRepository) {
+  public SubledgerServiceImpl(SubledgerRepository subledgerRepository) {
     this.subledgerRepository = subledgerRepository;
   }
 
@@ -24,8 +28,19 @@ public class SubledgerServiceImpl {
     subledgerRepository.delete(subledger);
   }
 
-  public Subledger findById(long id) {
-    return subledgerRepository.findOne(id);
+  public List<Subledger> findByLedgerCode(long ledgerCode) {
+    List<Subledger> allSubledgers = subledgerRepository.findAll();
+    List<Subledger> subledgersByLedgerCode = new ArrayList<>();
+    for (Subledger subledger : allSubledgers) {
+      if (subledger.getSubledgerId().getLedgerCode() == ledgerCode) {
+        subledgersByLedgerCode.add(subledger);
+      }
+    }
+    return subledgersByLedgerCode;
+  }
+
+  public Subledger findByLedgerAndSubledgerCode(long ledgerCode, long subledgerCode) {
+    return subledgerRepository.findOne(new SubledgerId(ledgerCode, subledgerCode));
   }
 
   public List<Subledger> findAll() {
