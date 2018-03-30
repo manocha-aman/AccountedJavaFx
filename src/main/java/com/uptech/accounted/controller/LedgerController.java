@@ -45,7 +45,6 @@ public class LedgerController implements Initializable {
   @FXML
   private TableColumn<Ledger, String> colLedgerName;
   private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
-  private ObservableList<Subledger> subledgerList = FXCollections.observableArrayList();
   @FXML
   private TableColumn<Subledger, String> colLedgerCodeReference;
   @FXML
@@ -105,10 +104,6 @@ public class LedgerController implements Initializable {
     ledgerList.addAll(ledgerServiceImpl.findAll());
     ledgerTable.setItems(ledgerList);
     ledgerTable.setVisible(true);
-//    subledgerList.clear();
-//    subledgerList.addAll(subledgerServiceImpl.findAll());
-////    subledgerTable.setItems(subledgerList);
-//    subledgerTable.setVisible(true);
   }
 
   public void deleteledger(ActionEvent actionEvent) {
