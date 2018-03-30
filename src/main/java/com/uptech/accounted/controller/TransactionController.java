@@ -6,8 +6,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.uptech.accounted.bean.Master;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 
 import com.uptech.accounted.bean.Department;
@@ -122,10 +127,7 @@ public class TransactionController implements Initializable {
   private TransactionServiceImpl transactionService;
 
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
-  private ObservableList<String> intiatorComboList = FXCollections.observableArrayList();
-  private ObservableList<String> departmentComboList = FXCollections.observableArrayList();
   private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
-  private ObservableList<String> recipientComboList = FXCollections.observableArrayList();
 
   @FXML
   private void exit(ActionEvent event) {
@@ -240,21 +242,25 @@ public class TransactionController implements Initializable {
   }
 
   private void loadInitiators() {
-    intiatorComboList.clear();
-    List<Initiator> initiatorList = initiatorRepository.findAll();
-    for (Initiator initiator : initiatorList) {
-      intiatorComboList.add(initiator.getCode() + "-" + initiator.getName());
-    }
-    cbInitiator.setItems(intiatorComboList);
+    loadMaster(initiatorRepository, cbInitiator);
   }
 
   private void loadDepartments() {
-    departmentComboList.clear();
-    List<Department> departmentList = departmentRepository.findAll();
-    for (Department department : departmentList) {
-      departmentComboList.add(department.getCode() + "-" + department.getName());
+    loadMaster(departmentRepository, cbDepartment);
+  }
+
+  private void loadRecipients() {
+    loadMaster(recipientRepository, cbRecipient);
+  }
+
+  private <T extends Master> void  loadMaster(JpaRepository<T, String> repository, ComboBox<String> comboBox) {
+    List<T> list = repository.findAll();
+    ObservableList<String> comboList = FXCollections.observableArrayList();
+    for (T item : list) {
+      comboList.add(item.getCode() + "-" + item.getName());
     }
-    cbDepartment.setItems(departmentComboList);
+    comboBox.setItems(comboList);
+    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
   }
 
   private void loadLedgers() {
@@ -264,15 +270,6 @@ public class TransactionController implements Initializable {
       ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
     }
     cbLedgerType.setItems(ledgerComboList);
-  }
-
-  private void loadRecipients() {
-    recipientComboList.clear();
-    List<Recipient> recipientList = recipientRepository.findAll();
-    for (Recipient recipient : recipientList) {
-      recipientComboList.add(recipient.getCode() + "-" + recipient.getName());
-    }
-    cbRecipient.setItems(recipientComboList);
   }
 
   private void setColumnProperties() {
