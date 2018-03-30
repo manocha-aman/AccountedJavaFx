@@ -13,9 +13,9 @@ import com.uptech.accounted.repository.SubledgerRepository;
 @Service
 public class SubledgerServiceImpl {
 
-  @Autowired
   final SubledgerRepository subledgerRepository;
 
+  @Autowired
   public SubledgerServiceImpl(SubledgerRepository subledgerRepository) {
     this.subledgerRepository = subledgerRepository;
   }
@@ -28,18 +28,18 @@ public class SubledgerServiceImpl {
     subledgerRepository.delete(subledger);
   }
 
-  public List<Subledger> findByLedgerCode(long ledgerCode) {
+  public List<Subledger> findByLedgerCode(String ledgerCode) {
     List<Subledger> allSubledgers = subledgerRepository.findAll();
     List<Subledger> subledgersByLedgerCode = new ArrayList<>();
     for (Subledger subledger : allSubledgers) {
-      if (subledger.getSubledgerId().getLedgerCode() == ledgerCode) {
+      if (subledger.getSubledgerId().getLedgerCode().equals(ledgerCode)) {
         subledgersByLedgerCode.add(subledger);
       }
     }
     return subledgersByLedgerCode;
   }
 
-  public Subledger findByLedgerAndSubledgerCode(long ledgerCode, long subledgerCode) {
+  public Subledger findByLedgerAndSubledgerCode(String ledgerCode, String subledgerCode) {
     return subledgerRepository.findOne(new SubledgerId(ledgerCode, subledgerCode));
   }
 

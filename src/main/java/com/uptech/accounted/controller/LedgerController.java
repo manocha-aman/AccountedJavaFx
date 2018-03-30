@@ -3,12 +3,13 @@ package com.uptech.accounted.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.uptech.accounted.bean.SubledgerId;
+import com.uptech.accounted.bean.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Subledger;
-import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.validations.MasterValidationAlert;
@@ -61,61 +62,55 @@ public class LedgerController implements Initializable {
 
   private Ledger createNewLedger() {
     Ledger ledger = new Ledger();
-    ledger.setLedgerCode(Long.parseLong(ledgerCode.getText()));
+    ledger.setLedgerCode(ledgerCode.getText());
     ledger.setLedgerName(ledgerName.getText());
     ledgerServiceImpl.save(ledger);
-    loadDetails();
+    loadLedgerDetails();
     return ledger;
   }
 
-  public void reset(ActionEvent actionEvent) {
-    clearFields();
+  public void resetLedger(ActionEvent actionEvent) {
+    clearLedgerFields();
   }
 
-  private void clearFields() {
+  public void resetSubLedger(ActionEvent actionEvent) {
+    clearSubLedgerFields();
+  }
+
+  private void clearLedgerFields() {
     ledgerCode.clear();
     ledgerName.clear();
+  }
+
+  private void clearSubLedgerFields() {
     subledgerCode.clear();
     subledgerName.clear();
   }
 
-  public void save(ActionEvent actionEvent) {
-    Ledger ledgerByCode = ledgerServiceImpl.findByCode(Long.parseLong(ledgerCode.getText()));
-    Subledger subledger = null;
-    try {
-      if (ledgerByCode == null)
-        ledgerByCode = createNewLedger();
-      subledger = new Subledger(new SubledgerId(ledgerByCode.getLedgerCode(), Long.parseLong(subledgerCode.getText())),
-          subledgerName.getText());
-      subledger.setLedger(ledgerByCode);
-    } catch (IllegalArgumentException illegalArgumentException) {
-      masterValidationAlert.validationAlert(illegalArgumentException.getMessage());
-    }
-
-    subledgerServiceImpl.save(subledger);
-    clearFields();
-    loadDetails();
+  public void saveLedger(ActionEvent actionEvent) {
+    createNewLedger();
+    loadLedgerDetails();
   }
 
-  private void loadDetails() {
+  private void loadLedgerDetails() {
     ledgerList.clear();
     ledgerList.addAll(ledgerServiceImpl.findAll());
     ledgerTable.setItems(ledgerList);
     ledgerTable.setVisible(true);
   }
 
-  public void deleteledger(ActionEvent actionEvent) {
+  public void deleteLedger(ActionEvent actionEvent) {
     Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
     if (selectedLedger != null)
       ledgerServiceImpl.delete(selectedLedger);
-    loadDetails();
+    loadLedgerDetails();
   }
 
-  public void deletesubledger(ActionEvent actionEvent) {
+  public void deleteSubledger(ActionEvent actionEvent) {
     Subledger selectedSubledger = subledgerTable.getSelectionModel().getSelectedItem();
     if (selectedSubledger != null)
       subledgerServiceImpl.delete(selectedSubledger);
-    loadDetails();
+    loadSubledgersForLedger();
   }
 
   @Override
@@ -124,17 +119,29 @@ public class LedgerController implements Initializable {
     ledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     subledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     ledgerTable.setOnMouseClicked(event -> {
-      Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
-      subledgerTable.getItems().clear();
-      subledgerTable.getItems().addAll(subledgerServiceImpl.findByLedgerCode(selectedLedger.getLedgerCode()));
-      colSubledgerName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerName()));
-      colSubledgerCode.setCellValueFactory(c -> new SimpleStringProperty(Long.toString(c.getValue().getSubledgerId().getSubledgerCode())));
+      loadSubledgersForLedger();
+      Ledger selectedItem = ledgerTable.getSelectionModel().getSelectedItem();
+      ledgerCode.setText(selectedItem.getLedgerCode());
+      ledgerName.setText(selectedItem.getLedgerName());
+    });
+    subledgerTable.setOnMouseClicked(event -> {
+      Subledger selectedItem = subledgerTable.getSelectionModel().getSelectedItem();
+      subledgerCode.setText(selectedItem.getSubledgerId().getSubledgerCode());
+      subledgerName.setText(selectedItem.getSubledgerName());
     });
 
     ledgerTable.setEditable(false);
     subledgerTable.setEditable(false);
     setColumnProperties();
-    loadDetails();
+    loadLedgerDetails();
+  }
+
+  private void loadSubledgersForLedger() {
+    Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
+    subledgerTable.getItems().clear();
+    subledgerTable.getItems().addAll(subledgerServiceImpl.findByLedgerCode(selectedLedger.getLedgerCode()));
+    colSubledgerName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerName()));
+    colSubledgerCode.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerId().getSubledgerCode()));
   }
 
   private void setColumnProperties() {
@@ -144,4 +151,19 @@ public class LedgerController implements Initializable {
     colSubledgerCode.setCellValueFactory(new PropertyValueFactory<>("subledgerCode"));
   }
 
+  public void saveSubLedger(ActionEvent actionEvent) {
+    try {
+      Ledger ledgerByCode = ledgerServiceImpl.findByCode(ledgerCode.getText());
+
+      if (ledgerByCode == null)
+        throw new IllegalArgumentException("Ledger by code " + ledgerCode.getText() + " not found");
+      Subledger subledger  = new Subledger(new SubledgerId(ledgerByCode.getLedgerCode(), subledgerCode.getText()),
+                                subledgerName.getText());
+      subledger.setLedger(ledgerByCode);
+      subledgerServiceImpl.save(subledger);
+      loadSubledgersForLedger();
+    } catch (Exception exception) {
+      masterValidationAlert.validationAlert(exception.getMessage());
+    }
+  }
 }

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
 	<top>
 		<fx:include source="MenuBar.fxml" />
 	</top>
@@ -34,6 +37,29 @@
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
 				</TextField>
+				<HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
+					<children>
+						<Button fx:id="resetLedger" mnemonicParsing="false" onAction="#resetLedger" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
+							<effect>
+								<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+							</effect>
+						</Button>
+						<Button fx:id="saveLedger" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveLedger" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<effect>
+								<DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
+							</effect>
+						</Button>
+					</children>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<VBox.margin>
+						<Insets left="110.0" />
+					</VBox.margin>
+				</HBox>
 				<TextField fx:id="subledgerCode" prefHeight="30.0" prefWidth="246.0" promptText="Subledger Code">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
@@ -46,12 +72,12 @@
 				</TextField>
 				<HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
 					<children>
-						<Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
+						<Button fx:id="reset" mnemonicParsing="false" onAction="#resetSubLedger" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
 							<effect>
 								<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
 							</effect>
 						</Button>
-						<Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+						<Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveSubLedger" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
 							<font>
 								<Font size="15.0" />
 							</font>
@@ -80,7 +106,7 @@
 
 		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button fx:id="deleteledger" mnemonicParsing="false" onAction="#deleteledger" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
+				<Button fx:id="deleteledger" mnemonicParsing="false" onAction="#deleteLedger" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
 					<effect>
 						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
 					</effect>
@@ -97,7 +123,7 @@
 						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 					</columnResizePolicy>
 				</TableView>
-				<Button fx:id="deletesubledger" mnemonicParsing="false" onAction="#deletesubledger" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
+				<Button fx:id="deletesubledger" mnemonicParsing="false" onAction="#deleteSubledger" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
 					<effect>
 						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
 					</effect>

@@ -43,6 +43,8 @@ public class Subledger {
 
   public Subledger(SubledgerId subledgerId, String subledgerName) {
     super();
+    if(subledgerName.isEmpty())
+      throw new IllegalArgumentException("Fields can't be left blank");
     this.subledgerId = subledgerId;
     this.subledgerName = subledgerName;
   }
