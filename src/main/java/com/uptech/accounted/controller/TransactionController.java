@@ -11,14 +11,15 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 
-import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Master;
+import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.Transaction;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
-import com.uptech.accounted.repository.LedgerRepository;
 import com.uptech.accounted.repository.RecipientRepository;
+import com.uptech.accounted.repository.SubledgerRepository;
+import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
 
 import javafx.application.Platform;
@@ -113,7 +114,10 @@ public class TransactionController implements Initializable {
   private DepartmentRepository departmentRepository;
 
   @Autowired
-  private LedgerRepository ledgerRepository;
+  private SubledgerRepository subledgerRepository;
+
+  @Autowired
+  private SubledgerServiceImpl subledgerServiceImpl;
 
   @Autowired
   private RecipientRepository recipientRepository;
@@ -122,7 +126,7 @@ public class TransactionController implements Initializable {
   private TransactionServiceImpl transactionService;
 
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
-  private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
+  private ObservableList<String> subledgerComboList = FXCollections.observableArrayList();
 
   @FXML
   private void exit(ActionEvent event) {
@@ -151,7 +155,8 @@ public class TransactionController implements Initializable {
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
     transaction.setDateOfTransaction(getDateOfTransaction());
     transaction.setRecipient(recipientRepository.findOne(getRecipient()));
-    transaction.setLedgerType(ledgerRepository.findOne(getLedgerId()));
+    transaction.setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode(Long.parseLong(getLedgerCode()),
+        Long.parseLong(getSubledgerCode())));
     transaction.setAmount(new BigDecimal(getAmount()));
     transaction.setSubjectMatter(getSubjectMatter());
 
@@ -190,8 +195,12 @@ public class TransactionController implements Initializable {
     return cbRecipient.getSelectionModel().getSelectedItem().split("-")[0];
   }
 
-  public long getLedgerId() {
-    return Long.parseLong(cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0]);
+  public String getLedgerCode() {
+    return cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
+  }
+
+  public String getSubledgerCode() {
+    return cbLedgerType.getSelectionModel().getSelectedItem().split("-")[1];
   }
 
   public LocalDate getDateOfTransaction() {
@@ -222,10 +231,16 @@ public class TransactionController implements Initializable {
     loadRecipients();
     transactionTable.setOnMouseClicked(event -> {
       Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
-      cbInitiator.getSelectionModel().select(selectedItem.getInitiator().getCode() + "-" + selectedItem.getInitiator().getName());
-      cbDepartment.getSelectionModel().select(selectedItem.getDepartment().getCode() + "-" + selectedItem.getDepartment().getName());
-      cbRecipient.getSelectionModel().select(selectedItem.getRecipient().getCode() + "-" + selectedItem.getRecipient().getName());
-      cbLedgerType.getSelectionModel().select(selectedItem.getLedgerType().getLedgerCode() + "-" + selectedItem.getLedgerType().getLedgerName());
+      cbInitiator.getSelectionModel()
+          .select(selectedItem.getInitiator().getCode() + "-" + selectedItem.getInitiator().getName());
+      cbDepartment.getSelectionModel()
+          .select(selectedItem.getDepartment().getCode() + "-" + selectedItem.getDepartment().getName());
+      cbRecipient.getSelectionModel()
+          .select(selectedItem.getRecipient().getCode() + "-" + selectedItem.getRecipient().getName());
+      cbLedgerType.getSelectionModel()
+          .select(selectedItem.getSubledgerType().getSubledgerId().getLedgerCode() + "-"
+              + selectedItem.getSubledgerType().getSubledgerId().getSubledgerCode() + "-"
+              + selectedItem.getSubledgerType().getSubledgerName());
       dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
       amount.setText(selectedItem.getAmount().toString());
       subjectMatter.setText(selectedItem.getSubjectMatter());
@@ -248,7 +263,7 @@ public class TransactionController implements Initializable {
     loadMaster(recipientRepository, cbRecipient);
   }
 
-  private <T extends Master> void  loadMaster(JpaRepository<T, String> repository, ComboBox<String> comboBox) {
+  private <T extends Master> void loadMaster(JpaRepository<T, String> repository, ComboBox<String> comboBox) {
     List<T> list = repository.findAll();
     ObservableList<String> comboList = FXCollections.observableArrayList();
     for (T item : list) {
@@ -259,12 +274,13 @@ public class TransactionController implements Initializable {
   }
 
   private void loadLedgers() {
-    ledgerComboList.clear();
-    List<Ledger> ledgerList = ledgerRepository.findAll();
-    for (Ledger ledger : ledgerList) {
-      ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
+    subledgerComboList.clear();
+    List<Subledger> subledgerList = subledgerRepository.findAll();
+    for (Subledger subledger : subledgerList) {
+      subledgerComboList.add(subledger.getSubledgerId().getLedgerCode() + "-"
+          + subledger.getSubledgerId().getSubledgerCode() + "-" + subledger.getSubledgerName());
     }
-    cbLedgerType.setItems(ledgerComboList);
+    cbLedgerType.setItems(subledgerComboList);
   }
 
   private void setColumnProperties() {
@@ -273,7 +289,7 @@ public class TransactionController implements Initializable {
     colDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
-    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
+    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatter"));
   }

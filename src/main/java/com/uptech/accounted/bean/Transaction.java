@@ -47,7 +47,7 @@ public class Transaction {
 
   @NonNull
   @OneToOne
-  private Ledger LedgerType;
+  private Subledger subledgerType;
 
   @NonNull
   private BigDecimal amount;

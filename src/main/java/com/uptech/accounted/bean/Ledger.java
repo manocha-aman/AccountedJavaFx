@@ -9,12 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Ledger")
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Ledger {
 
   @Id
