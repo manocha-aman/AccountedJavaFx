@@ -1,5 +1,7 @@
 package com.uptech.accounted.view;
 
+import java.util.ResourceBundle;
+
 import com.uptech.accounted.controller.DepartmentController;
 import com.uptech.accounted.controller.InitiatorController;
 import com.uptech.accounted.controller.LedgerController;
@@ -8,8 +10,7 @@ import com.uptech.accounted.controller.MenuBarController;
 import com.uptech.accounted.controller.RecipientController;
 import com.uptech.accounted.controller.TransactionController;
 
-import java.util.ResourceBundle;
-
+@SuppressWarnings("rawtypes")
 public enum FxmlView {
   DEPARTMENT {
     @Override

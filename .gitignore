@@ -4,7 +4,11 @@ data
 
 */target/**
 */data/**
+bin/*
+.classpath
 .idea
+.project
+.settings/*
 *.iml
 # Compiled class file
 *.class

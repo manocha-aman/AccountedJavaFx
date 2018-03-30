@@ -35,7 +35,8 @@ public class StageManager {
     Scene scene = prepareScene(rootnode);
     primaryStage.setTitle(title);
     primaryStage.setScene(scene);
-    primaryStage.sizeToScene();
+    if (!title.equalsIgnoreCase("login"))
+      primaryStage.setMaximized(true);
     primaryStage.centerOnScreen();
     ImageView imageView = new ImageView();
     Image imgLogo = new Image(getClass().getResourceAsStream("/images/a-logo.png"));
