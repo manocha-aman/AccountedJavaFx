@@ -10,6 +10,7 @@ import com.uptech.accounted.controller.MenuBarController;
 import com.uptech.accounted.controller.RecipientController;
 import com.uptech.accounted.controller.TransactionController;
 
+@SuppressWarnings("rawtypes")
 public enum FxmlView {
   DEPARTMENT {
     @Override

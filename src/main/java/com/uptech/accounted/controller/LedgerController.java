@@ -86,9 +86,10 @@ public class LedgerController implements Initializable {
     Ledger ledgerByCode = ledgerServiceImpl.findByCode(Long.parseLong(ledgerCode.getText()));
     Subledger subledger = null;
     try {
-      if(ledgerByCode==null)
+      if (ledgerByCode == null)
         ledgerByCode = createNewLedger();
-      subledger = new Subledger(new SubledgerId(ledgerByCode.getLedgerCode(), Long.parseLong(subledgerCode.getText())), subledgerName.getText());
+      subledger = new Subledger(new SubledgerId(ledgerByCode.getLedgerCode(), Long.parseLong(subledgerCode.getText())),
+          subledgerName.getText());
       subledger.setLedger(ledgerByCode);
     } catch (IllegalArgumentException illegalArgumentException) {
       masterValidationAlert.validationAlert(illegalArgumentException.getMessage());
@@ -104,20 +105,23 @@ public class LedgerController implements Initializable {
     ledgerList.addAll(ledgerServiceImpl.findAll());
     ledgerTable.setItems(ledgerList);
     ledgerTable.setVisible(true);
-    subledgerList.clear();
-    subledgerList.addAll(subledgerServiceImpl.findAll());
-    subledgerTable.setItems(subledgerList);
-    subledgerTable.setVisible(true);
+//    subledgerList.clear();
+//    subledgerList.addAll(subledgerServiceImpl.findAll());
+////    subledgerTable.setItems(subledgerList);
+//    subledgerTable.setVisible(true);
   }
 
-  public void delete(ActionEvent actionEvent) {
+  public void deleteledger(ActionEvent actionEvent) {
     Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
-    Subledger selectedSubledger = subledgerTable.getSelectionModel().getSelectedItem();
-    if (selectedLedger != null) {
+    if (selectedLedger != null)
       ledgerServiceImpl.delete(selectedLedger);
-    } else if (selectedSubledger != null) {
+    loadDetails();
+  }
+
+  public void deletesubledger(ActionEvent actionEvent) {
+    Subledger selectedSubledger = subledgerTable.getSelectionModel().getSelectedItem();
+    if (selectedSubledger != null)
       subledgerServiceImpl.delete(selectedSubledger);
-    }
     loadDetails();
   }
 
@@ -131,8 +135,7 @@ public class LedgerController implements Initializable {
       subledgerTable.getItems().clear();
       subledgerTable.getItems().addAll(subledgerServiceImpl.findByLedgerCode(selectedLedger.getLedgerCode()));
       colSubledgerName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerName()));
-      colSubledgerCode
-          .setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerId().toString()));
+      colSubledgerCode.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerId().toString()));
     });
 
     ledgerTable.setEditable(false);

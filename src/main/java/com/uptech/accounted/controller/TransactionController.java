@@ -37,6 +37,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 @Controller
 public class TransactionController implements Initializable {
@@ -254,7 +255,7 @@ public class TransactionController implements Initializable {
       comboList.add(item.getCode() + "-" + item.getName());
     }
     comboBox.setItems(comboList);
-//    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
+    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
   }
 
   private void loadLedgers() {
