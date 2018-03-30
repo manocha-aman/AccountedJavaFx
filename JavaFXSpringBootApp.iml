@@ -54,7 +54,6 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.7.RELEASE" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: mysql:mysql-connector-java:5.1.41" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:1.5.2.RELEASE" level="project" />
@@ -73,5 +72,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.h2database:h2:1.4.193" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.14" level="project" />
   </component>
 </module>
