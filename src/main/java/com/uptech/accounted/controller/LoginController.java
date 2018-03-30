@@ -44,12 +44,10 @@ public class LoginController implements Initializable {
   @FXML
   private void login(ActionEvent event) {
     if (userService.authenticate(getUsername(), getPassword())) {
-
       stageManager.switchScene(FxmlView.TRANSACTION);
 
     } else {
       lblLogin.setText("Login Failed.");
-      stageManager.switchScene(FxmlView.TRANSACTION);
     }
   }
 
