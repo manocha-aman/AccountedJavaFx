@@ -46,8 +46,6 @@ public class LedgerController implements Initializable {
   private TableColumn<Ledger, String> colLedgerName;
   private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
   @FXML
-  private TableColumn<Subledger, String> colLedgerCodeReference;
-  @FXML
   private TableColumn<Subledger, String> colSubledgerCode;
   @FXML
   private TableColumn<Subledger, String> colSubledgerName;
