@@ -19,13 +19,15 @@ public class SubledgerId implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Column(name = "ledgerCode")
-  public long ledgerCode;
+  public String ledgerCode;
 
   @Column(name = "subledgerCode")
-  public long subledgerCode;
+  public String  subledgerCode;
 
-  public SubledgerId(long ledgerCode, long subledgerCode) {
+  public SubledgerId(String ledgerCode, String subledgerCode) {
     super();
+    if(ledgerCode.isEmpty() || subledgerCode.isEmpty())
+      throw new IllegalArgumentException("Fields can't be left blank");
     this.ledgerCode = ledgerCode;
     this.subledgerCode = subledgerCode;
   }

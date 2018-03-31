@@ -164,9 +164,9 @@ public class TransactionController implements Initializable {
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
     transaction.setDateOfTransaction(getDateOfTransaction());
     transaction.setRecipient(recipientRepository.findOne(getRecipient()));
-    transaction.setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode(Long.parseLong(getLedgerCode()),
-        Long.parseLong(getSubledgerCode())));
-    transaction.setLedgerType(ledgerServiceImpl.findByCode(Long.parseLong(getLedgerCode())));
+    transaction.setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()),
+        getSubledgerCode()));
+    transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
     transaction.setAmount(new BigDecimal(getAmount()));
     transaction.setSubjectMatter(getSubjectMatter());
 
@@ -294,12 +294,13 @@ public class TransactionController implements Initializable {
       ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
     }
     cbLedgerType.setItems(ledgerComboList);
+    cbLedgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbLedgerType, ledgerList));
   }
 
   @FXML
   public void loadSubledgers(ActionEvent event) {
     subledgerComboList.clear();
-    List<Subledger> subledgerList = subledgerServiceImpl.findByLedgerCode(Long.parseLong(getLedgerCode()));
+    List<Subledger> subledgerList = subledgerServiceImpl.findByLedgerCode(getLedgerCode());
     for (Subledger subledger : subledgerList) {
       subledgerComboList.add(subledger.getSubledgerId().getSubledgerCode() + "-" + subledger.getSubledgerName());
     }

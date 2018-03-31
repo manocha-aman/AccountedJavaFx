@@ -21,14 +21,17 @@ public class Ledger {
 
   @Id
   @Column(name = "ledgerCode", updatable = false, nullable = false)
-  private long ledgerCode;
+  private String ledgerCode;
 
   @Column(name = "ledgerName", updatable = true, nullable = false)
   @NonNull
   private String ledgerName;
 
-  public Ledger(long ledgerCode, String ledgerName) {
+  public Ledger(String ledgerCode, String ledgerName) {
     super();
+    if(ledgerCode.isEmpty() || ledgerName.isEmpty())
+      throw new IllegalArgumentException("Fields can't be left blank");
+
     this.ledgerCode = ledgerCode;
     this.ledgerName = ledgerName;
   }
