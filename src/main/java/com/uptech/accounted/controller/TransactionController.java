@@ -260,7 +260,7 @@ public class TransactionController implements Initializable {
   }
 
   public String getNarration() {
-    return amount.getText();
+    return narration.getText();
   }
 
   private void loadTransactionDetails() {
@@ -341,6 +341,7 @@ public class TransactionController implements Initializable {
     comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
   }
 
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   private void loadLedgers() {
     ledgerComboList.clear();
     List<Ledger> ledgerList = ledgerServiceImpl.findAll();
@@ -363,16 +364,16 @@ public class TransactionController implements Initializable {
 
   private void setColumnProperties() {
     colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
-    colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiator"));
-    colDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
+    colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiatorName"));
+    colDepartment.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
-    colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
+    colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
-    colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatter"));
-    colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerType"));
+    colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatterName"));
+    colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
   }
 
 }

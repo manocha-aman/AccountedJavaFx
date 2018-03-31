@@ -2,12 +2,11 @@ package com.uptech.accounted.service;
 
 import java.util.List;
 
-import com.uptech.accounted.repository.LedgerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.uptech.accounted.bean.Ledger;
+import com.uptech.accounted.repository.LedgerRepository;
 
 @Service
 public class LedgerServiceImpl {

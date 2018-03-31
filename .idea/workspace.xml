@@ -3,19 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1627d979-570c-48dd-8fc5-badaaae331d4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/accountDb/acc_data_h2.mv.db" afterPath="$PROJECT_DIR$/accountDb/acc_data_h2.mv.db" />
-      <change beforePath="$PROJECT_DIR$/accountDb/acc_data_h2.trace.db" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Ledger.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Ledger.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Subledger.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Subledger.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/LedgerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/LedgerController.java" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/repository/LedgerRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/repository/LedgerRepository.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/repository/SubledgerRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/repository/SubledgerRepository.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/LedgerServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/LedgerServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/SubledgerServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/SubledgerServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Ledger.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Ledger.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MasterGrid.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MasterGrid.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MenuBar.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MenuBar.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Styles.css" afterPath="$PROJECT_DIR$/src/main/resources/styles/Styles.css" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,30 +22,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SubledgerServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/SubledgerServiceImpl.java">
+      <file leaf-file-name="LedgerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/LedgerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+            <state relative-caret-position="972">
+              <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
               <folding>
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#781#782#0" expanded="true" />
+                <marker date="1522514283211" expanded="true" signature="6378:6646" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LedgerController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/LedgerController.java">
+      <file leaf-file-name="AbstractController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AbstractController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="159" column="72" lean-forward="false" selection-start-line="159" selection-start-column="72" selection-end-line="159" selection-end-column="72" />
-              <folding>
-                <element signature="e#2223#2224#0" expanded="true" />
-                <element signature="e#2252#2253#0" expanded="true" />
-                <element signature="e#2309#2310#0" expanded="true" />
-                <element signature="e#2341#2342#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1484">
+              <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AutoCompleteComboBoxListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="34" column="3" lean-forward="false" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -58,9 +57,11 @@
       <file leaf-file-name="Ledger.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Ledger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="32" column="71" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="71" />
-              <folding />
+            <state relative-caret-position="849">
+              <caret line="36" column="71" lean-forward="false" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+              <folding>
+                <marker date="1522514270880" expanded="true" signature="1072:1078" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,17 +80,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="324">
-              <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Master.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Master.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="23" />
+              <caret line="20" column="30" lean-forward="false" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -105,33 +96,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Transaction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="30" column="10" lean-forward="false" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TransactionController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="297" column="39" lean-forward="false" selection-start-line="297" selection-start-column="39" selection-end-line="297" selection-end-column="39" />
+            <state relative-caret-position="417">
+              <caret line="370" column="65" lean-forward="false" selection-start-line="370" selection-start-column="65" selection-end-line="370" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/repository/TransactionRepository.java">
+      <file leaf-file-name="Transaction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="40" lean-forward="true" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+            <state relative-caret-position="390">
+              <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+              <folding>
+                <element signature="e#1706#1707#0" expanded="true" />
+                <element signature="e#1742#1743#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Transaction.fxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="729">
+              <caret line="193" column="23" lean-forward="true" selection-start-line="193" selection-start-column="23" selection-end-line="193" selection-end-column="23" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
           </provider>
         </entry>
       </file>
@@ -147,9 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>obser</find>
-      <find>selected</find>
-      <find>getSelected</find>
       <find>setColumnProperties</find>
       <find>fx:</find>
       <find>table</find>
@@ -177,6 +171,9 @@
       <find>not f</find>
       <find>Autoc</find>
       <find>aler</find>
+      <find>recepientName</find>
+      <find>recipientName</find>
+      <find>SubledgerT</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,7 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/Bundle.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/codetreatise/bean/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/codetreatise/service/InitiatorService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/codetreatise/service/InitiatorServiceImpl.java" />
@@ -241,6 +237,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Subledger.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
       </list>
     </option>
   </component>
@@ -356,7 +353,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
-    <property name="SearchEverywhereHistoryKey" value="TranC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;Sub&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Subledger.java&#10;Mas&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Master.java&#10;Led&#9;PSI&#9;JAVA://com.uptech.accounted.bean.Ledger&#10;LedC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LedgerController.java&#10;Abs&#9;PSI&#9;JAVA://com.uptech.accounted.controller.AbstractController&#10;Tran&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;SubledgerServiceImpl&#9;PSI&#9;JAVA://com.uptech.accounted.service.SubledgerServiceImpl&#10;pom&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/pom.xml&#10;Mai&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;pom.xm&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/pom.xml&#10;Res&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Reset.java&#10;User&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/User.java&#10;app&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/application.properties&#10;Use&#9;PSI&#9;JAVA://com.uptech.accounted.bean.User&#10;Lo&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LoginController.java&#10;UseRe&#9;PSI&#9;JAVA://com.uptech.accounted.repository.UserRepository&#10;UserS&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/service/UserServiceImpl.java&#10;Ma&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;LogC&#9;PSI&#9;JAVA://com.uptech.accounted.controller.LoginController&#10;Dep&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml&#10;Men&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/MenuBar.fxml&#10;DepC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;Ini&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/InitiatorController.java&#10;Us&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/User.fxml&#10;Main&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/Main.java&#10;UseCon&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/UserController.java&#10;Depa&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;De&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml" />
+    <property name="SearchEverywhereHistoryKey" value="Tra&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Transaction.fxml&#10;TranC&#9;PSI&#9;JAVA://com.uptech.accounted.controller.TransactionController&#10;Sub&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Subledger.java&#10;Mas&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Master.java&#10;Led&#9;PSI&#9;JAVA://com.uptech.accounted.bean.Ledger&#10;LedC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LedgerController.java&#10;Abs&#9;PSI&#9;JAVA://com.uptech.accounted.controller.AbstractController&#10;Tran&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;SubledgerServiceImpl&#9;PSI&#9;JAVA://com.uptech.accounted.service.SubledgerServiceImpl&#10;pom&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/pom.xml&#10;Mai&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;pom.xm&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/pom.xml&#10;Res&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Reset.java&#10;User&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/User.java&#10;app&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/application.properties&#10;Use&#9;PSI&#9;JAVA://com.uptech.accounted.bean.User&#10;Lo&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LoginController.java&#10;UseRe&#9;PSI&#9;JAVA://com.uptech.accounted.repository.UserRepository&#10;UserS&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/service/UserServiceImpl.java&#10;Ma&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;LogC&#9;PSI&#9;JAVA://com.uptech.accounted.controller.LoginController&#10;Dep&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml&#10;Men&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/MenuBar.fxml&#10;DepC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;Ini&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/InitiatorController.java&#10;Us&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/User.fxml&#10;Main&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/Main.java&#10;UseCon&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/UserController.java&#10;Depa&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;De&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml" />
     <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
@@ -555,7 +552,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -566,7 +562,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38958097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38958097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -578,7 +574,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -589,6 +585,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -603,6 +600,7 @@
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38958097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24758324" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
     </layout>
@@ -616,7 +614,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -666,12 +664,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/LedgerController.java</url>
-          <line>165</line>
+          <line>192</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java</url>
+          <line>370</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -685,14 +689,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/collections/ObservableList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="45" column="17" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/codetreatise/bean/Initiator.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/codetreatise/bean/User.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Initiator.fxml">
       <provider selected="true" editor-type-id="text-editor">
@@ -724,13 +720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="8224" column="40" lean-forward="false" selection-start-line="8224" selection-start-column="40" selection-end-line="8224" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -843,14 +832,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AbstractController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="86" column="23" lean-forward="false" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MasterGrid.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -923,10 +904,7 @@
         <state relative-caret-position="45">
           <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="20" />
           <folding>
-            <element signature="e#586#587#0" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#753#754#0" expanded="true" />
-            <element signature="e#798#799#0" expanded="true" />
+            <element signature="e#586#587#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -939,18 +917,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="30" column="10" lean-forward="false" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/repository/TransactionRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="40" lean-forward="true" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+          <caret line="0" column="40" lean-forward="false" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -992,39 +962,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Ledger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="32" column="71" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="71" />
-          <folding />
+        <state relative-caret-position="849">
+          <caret line="36" column="71" lean-forward="false" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+          <folding>
+            <marker date="1522514270880" expanded="true" signature="1072:1078" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="297" column="39" lean-forward="false" selection-start-line="297" selection-start-column="39" selection-end-line="297" selection-end-column="39" />
+          <caret line="20" column="30" lean-forward="false" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/LedgerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="159" column="72" lean-forward="false" selection-start-line="159" selection-start-column="72" selection-end-line="159" selection-end-column="72" />
+        <state relative-caret-position="972">
+          <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
           <folding>
-            <element signature="e#2223#2224#0" expanded="true" />
-            <element signature="e#2252#2253#0" expanded="true" />
-            <element signature="e#2309#2310#0" expanded="true" />
-            <element signature="e#2341#2342#0" expanded="true" />
+            <marker date="1522514283211" expanded="true" signature="6378:6646" ph="{...}" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/validations/MasterValidationAlert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AbstractController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1484">
+          <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="34" column="3" lean-forward="false" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="370" column="65" lean-forward="false" selection-start-line="370" selection-start-column="65" selection-end-line="370" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+          <folding>
+            <element signature="e#1706#1707#0" expanded="true" />
+            <element signature="e#1742#1743#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="193" column="23" lean-forward="true" selection-start-line="193" selection-start-column="23" selection-end-line="193" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
   </component>
