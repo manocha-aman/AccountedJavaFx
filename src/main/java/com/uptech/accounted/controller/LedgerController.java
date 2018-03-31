@@ -3,13 +3,12 @@ package com.uptech.accounted.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.uptech.accounted.bean.SubledgerId;
-import com.uptech.accounted.bean.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Subledger;
+import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.validations.MasterValidationAlert;

@@ -313,7 +313,7 @@ public class TransactionController implements Initializable {
     comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   private void loadLedgers() {
     ledgerComboList.clear();
     List<Ledger> ledgerList = ledgerServiceImpl.findAll();
