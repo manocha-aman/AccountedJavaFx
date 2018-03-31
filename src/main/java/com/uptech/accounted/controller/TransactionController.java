@@ -39,6 +39,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -71,7 +72,7 @@ public class TransactionController implements Initializable {
   private TextField amount;
 
   @FXML
-  private TextField narration;
+  private TextArea narration;
 
   @FXML
   private Button reset;
