@@ -153,7 +153,6 @@ public class LedgerController implements Initializable {
   }
 
   private void loadLedgerType() {
-    System.out.println("loadLedgerType");
     List<LedgerType> ledgerTypes = new ArrayList<>();
     ledgerTypes = Arrays.asList(LedgerType.values());
 

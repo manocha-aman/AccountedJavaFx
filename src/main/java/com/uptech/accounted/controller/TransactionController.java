@@ -3,6 +3,8 @@ package com.uptech.accounted.controller;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -15,6 +17,7 @@ import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Master;
 import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.Transaction;
+import com.uptech.accounted.bean.TransactionType;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
@@ -65,6 +68,9 @@ public class TransactionController implements Initializable {
   private ComboBox<String> cbSubjectMatter;
 
   @FXML
+  private ComboBox<TransactionType> cbTransactionType;
+
+  @FXML
   private DatePicker dateOfTransaction;
 
   @FXML
@@ -111,6 +117,9 @@ public class TransactionController implements Initializable {
 
   @FXML
   private TableColumn<Transaction, String> colSubjectMatter;
+
+  @FXML
+  private TableColumn<Transaction, String> colTransactionType;
 
   @FXML
   private TableColumn<Transaction, Boolean> colEdit;
@@ -168,6 +177,7 @@ public class TransactionController implements Initializable {
     cbLedgerType.getSelectionModel().clearSelection();
     cbSubledgerType.getSelectionModel().clearSelection();
     cbSubjectMatter.getSelectionModel().clearSelection();
+    cbTransactionType.getSelectionModel().clearSelection();
     amount.clear();
     narration.clear();
   }
@@ -179,11 +189,15 @@ public class TransactionController implements Initializable {
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
     transaction.setDateOfTransaction(getDateOfTransaction());
     transaction.setRecipient(recipientRepository.findOne(getRecipient()));
-    transaction.setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()),
-        getSubledgerCode()));
+    transaction
+        .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
-    transaction.setAmount(new BigDecimal(getAmount()));
+    BigDecimal transactionAmount = new BigDecimal(getAmount());
+    if (getTransactionType().name().equalsIgnoreCase("EXPENSE"))
+      transactionAmount = transactionAmount.negate();
+    transaction.setAmount(transactionAmount);
     transaction.setNarration(getNarration());
+    transaction.setTransactionType(getTransactionType());
     transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
 
     Transaction newTransaction = transactionService.save(transaction);
@@ -215,6 +229,10 @@ public class TransactionController implements Initializable {
 
   public String getDepartment() {
     return cbDepartment.getSelectionModel().getSelectedItem().split("-")[0];
+  }
+
+  public TransactionType getTransactionType() {
+    return cbTransactionType.getSelectionModel().getSelectedItem();
   }
 
   public String getSubjectMatter() {
@@ -254,7 +272,7 @@ public class TransactionController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    loadTransactionTypes();
     loadInitiators();
     loadDepartments();
     loadLedgers();
@@ -273,7 +291,9 @@ public class TransactionController implements Initializable {
             .select(selectedItem.getLedgerType().getLedgerCode() + "-" + selectedItem.getLedgerType().getLedgerName());
         cbSubledgerType.getSelectionModel().select(selectedItem.getSubledgerType().getSubledgerId().getSubledgerCode()
             + "-" + selectedItem.getSubledgerType().getSubledgerName());
-        cbSubjectMatter.getSelectionModel().select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
+        cbTransactionType.getSelectionModel().select(selectedItem.getTransactionType());
+        cbSubjectMatter.getSelectionModel()
+            .select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
         dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
         amount.setText(selectedItem.getAmount().toString());
         narration.setText(selectedItem.getNarration().toString());
@@ -293,6 +313,14 @@ public class TransactionController implements Initializable {
 
   private void loadDepartments() {
     loadMaster(departmentRepository, cbDepartment);
+  }
+
+  private void loadTransactionTypes() {
+    List<TransactionType> transactionTypes = new ArrayList<>();
+    transactionTypes = Arrays.asList(TransactionType.values());
+
+    ObservableList<TransactionType> comboList = FXCollections.observableArrayList(transactionTypes);
+    cbTransactionType.setItems(comboList);
   }
 
   private void loadSubjectMatters() {
@@ -340,6 +368,7 @@ public class TransactionController implements Initializable {
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
+    colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatter"));
