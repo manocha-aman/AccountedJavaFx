@@ -193,9 +193,7 @@ public class TransactionController implements Initializable {
         .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
     BigDecimal transactionAmount = new BigDecimal(getAmount());
-    if (getTransactionType().name().equalsIgnoreCase("EXPENSE"))
-      transactionAmount = transactionAmount.negate();
-    transaction.setAmount(transactionAmount);
+    transaction.setAmount(transactionAmount.multiply(TransactionType.getMultiplier(getTransactionType())));
     transaction.setNarration(getNarration());
     transaction.setTransactionType(getTransactionType());
     transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
