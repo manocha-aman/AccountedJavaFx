@@ -2,6 +2,8 @@ package com.uptech.accounted.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -27,13 +29,16 @@ public class Ledger {
   @NonNull
   private String ledgerName;
 
-  public Ledger(String ledgerCode, String ledgerName) {
-    super();
-    if(ledgerCode.isEmpty() || ledgerName.isEmpty())
+  @Enumerated(EnumType.STRING)
+  private LedgerType ledgerType;
+
+  public Ledger(String ledgerCode, String ledgerName, LedgerType ledgerType) {
+    if (ledgerCode.isEmpty() || ledgerName.isEmpty() || ledgerType.name() == null)
       throw new IllegalArgumentException("Fields can't be left blank");
 
     this.ledgerCode = ledgerCode;
     this.ledgerName = ledgerName;
+    this.ledgerType = ledgerType;
   }
 
 }
