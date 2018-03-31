@@ -184,7 +184,7 @@ public class TransactionController implements Initializable {
     transaction.setLedgerType(ledgerServiceImpl.findByCode(Long.parseLong(getLedgerCode())));
     transaction.setAmount(new BigDecimal(getAmount()));
     transaction.setNarration(getNarration());
-    transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatterCode()));
+    transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
 
     Transaction newTransaction = transactionService.save(transaction);
     loadTransactionDetails();
@@ -243,10 +243,6 @@ public class TransactionController implements Initializable {
 
   public String getNarration() {
     return amount.getText();
-  }
-
-  public String getSubjectMatterCode() {
-    return cbSubjectMatter.getSelectionModel().getSelectedItem().split("-")[0];
   }
 
   private void loadTransactionDetails() {
