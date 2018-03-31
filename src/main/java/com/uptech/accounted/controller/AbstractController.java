@@ -14,11 +14,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
 
 public abstract class AbstractController<T extends Master, S extends GenericService<T>> implements Initializable {
 
@@ -81,6 +83,8 @@ public abstract class AbstractController<T extends Master, S extends GenericServ
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+    table.setPrefHeight(visualBounds.getHeight());
     table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     table.setEditable(false);
     setColumnProperties();

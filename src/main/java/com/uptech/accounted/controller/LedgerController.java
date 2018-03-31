@@ -19,11 +19,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
 
 @Controller
 public class LedgerController implements Initializable {
@@ -114,20 +116,28 @@ public class LedgerController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+    ledgerTable.setPrefHeight(visualBounds.getHeight()/2);
+    subledgerTable.setPrefHeight(visualBounds.getHeight()/2);
     subledgerTable.getItems().clear();
     ledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     subledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    ledgerTable.setOnMouseClicked(event -> {
-      loadSubledgersForLedger();
-      Ledger selectedItem = ledgerTable.getSelectionModel().getSelectedItem();
-      ledgerCode.setText(selectedItem.getLedgerCode());
-      ledgerName.setText(selectedItem.getLedgerName());
-    });
-    subledgerTable.setOnMouseClicked(event -> {
-      Subledger selectedItem = subledgerTable.getSelectionModel().getSelectedItem();
-      subledgerCode.setText(selectedItem.getSubledgerId().getSubledgerCode());
-      subledgerName.setText(selectedItem.getSubledgerName());
-    });
+
+    try {
+      ledgerTable.setOnMouseClicked(event -> {
+        loadSubledgersForLedger();
+        Ledger selectedItem = ledgerTable.getSelectionModel().getSelectedItem();
+        ledgerCode.setText(selectedItem.getLedgerCode());
+        ledgerName.setText(selectedItem.getLedgerName());
+      });
+      subledgerTable.setOnMouseClicked(event -> {
+        Subledger selectedItem = subledgerTable.getSelectionModel().getSelectedItem();
+        subledgerCode.setText(selectedItem.getSubledgerId().getSubledgerCode());
+        subledgerName.setText(selectedItem.getSubledgerName());
+      });
+    } catch(NullPointerException nullPointerException) {
+      nullPointerException.getMessage();
+    }
 
     ledgerTable.setEditable(false);
     subledgerTable.setEditable(false);
