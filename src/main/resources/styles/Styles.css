@@ -8,3 +8,6 @@
 	-fx-background-color: DODGERBLUE;
 }
 
+.table-column {
+  -fx-alignment: CENTER;
+}
