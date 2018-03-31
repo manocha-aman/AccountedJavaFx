@@ -19,7 +19,9 @@ import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
 import com.uptech.accounted.repository.RecipientRepository;
+import com.uptech.accounted.repository.SubjectMatterRepository;
 import com.uptech.accounted.service.LedgerServiceImpl;
+import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
 
@@ -60,13 +62,16 @@ public class TransactionController implements Initializable {
   private ComboBox<String> cbSubledgerType;
 
   @FXML
+  private ComboBox<String> cbSubjectMatter;
+
+  @FXML
   private DatePicker dateOfTransaction;
 
   @FXML
   private TextField amount;
 
   @FXML
-  private TextField subjectMatter;
+  private TextField narration;
 
   @FXML
   private Button reset;
@@ -102,6 +107,9 @@ public class TransactionController implements Initializable {
   private TableColumn<Transaction, BigDecimal> colAmount;
 
   @FXML
+  private TableColumn<Transaction, String> colNarration;
+
+  @FXML
   private TableColumn<Transaction, String> colSubjectMatter;
 
   @FXML
@@ -121,6 +129,9 @@ public class TransactionController implements Initializable {
   private DepartmentRepository departmentRepository;
 
   @Autowired
+  private SubjectMatterServiceImpl subjectMatterServiceImpl;
+
+  @Autowired
   private LedgerServiceImpl ledgerServiceImpl;
 
   @Autowired
@@ -128,6 +139,9 @@ public class TransactionController implements Initializable {
 
   @Autowired
   private RecipientRepository recipientRepository;
+
+  @Autowired
+  private SubjectMatterRepository subjectMatterRepository;
 
   @Autowired
   private TransactionServiceImpl transactionService;
@@ -153,8 +167,9 @@ public class TransactionController implements Initializable {
     cbRecipient.getSelectionModel().clearSelection();
     cbLedgerType.getSelectionModel().clearSelection();
     cbSubledgerType.getSelectionModel().clearSelection();
+    cbSubjectMatter.getSelectionModel().clearSelection();
     amount.clear();
-    subjectMatter.clear();
+    narration.clear();
   }
 
   @FXML
@@ -168,7 +183,8 @@ public class TransactionController implements Initializable {
         getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
     transaction.setAmount(new BigDecimal(getAmount()));
-    transaction.setSubjectMatter(getSubjectMatter());
+    transaction.setNarration(getNarration());
+    transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
 
     Transaction newTransaction = transactionService.save(transaction);
     loadTransactionDetails();
@@ -201,6 +217,10 @@ public class TransactionController implements Initializable {
     return cbDepartment.getSelectionModel().getSelectedItem().split("-")[0];
   }
 
+  public String getSubjectMatter() {
+    return cbSubjectMatter.getSelectionModel().getSelectedItem().split("-")[0];
+  }
+
   public String getRecipient() {
     return cbRecipient.getSelectionModel().getSelectedItem().split("-")[0];
   }
@@ -221,8 +241,8 @@ public class TransactionController implements Initializable {
     return amount.getText();
   }
 
-  public String getSubjectMatter() {
-    return subjectMatter.getText();
+  public String getNarration() {
+    return amount.getText();
   }
 
   private void loadTransactionDetails() {
@@ -239,6 +259,7 @@ public class TransactionController implements Initializable {
     loadDepartments();
     loadLedgers();
     loadRecipients();
+    loadSubjectMatters();
     transactionTable.setOnMouseClicked(event -> {
       try {
         Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
@@ -252,9 +273,10 @@ public class TransactionController implements Initializable {
             .select(selectedItem.getLedgerType().getLedgerCode() + "-" + selectedItem.getLedgerType().getLedgerName());
         cbSubledgerType.getSelectionModel().select(selectedItem.getSubledgerType().getSubledgerId().getSubledgerCode()
             + "-" + selectedItem.getSubledgerType().getSubledgerName());
+        cbSubjectMatter.getSelectionModel().select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
         dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
         amount.setText(selectedItem.getAmount().toString());
-        subjectMatter.setText(selectedItem.getSubjectMatter());
+        narration.setText(selectedItem.getNarration().toString());
       } catch (NullPointerException nullPointerException) {
         nullPointerException.getMessage();
       }
@@ -271,6 +293,10 @@ public class TransactionController implements Initializable {
 
   private void loadDepartments() {
     loadMaster(departmentRepository, cbDepartment);
+  }
+
+  private void loadSubjectMatters() {
+    loadMaster(subjectMatterRepository, cbSubjectMatter);
   }
 
   private void loadRecipients() {
@@ -315,6 +341,7 @@ public class TransactionController implements Initializable {
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipient"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatter"));
     colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerType"));
   }

@@ -76,6 +76,12 @@
 						<Insets left="25.0" />
 					</VBox.margin>
 				</ComboBox>
+				<ComboBox fx:id="cbSubjectMatter" prefHeight="30.0"
+					prefWidth="246.0" promptText="Select Subject Matter">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</ComboBox>
 				<HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="255.0"
 					spacing="15.0">
 					<VBox.margin>
@@ -92,8 +98,8 @@
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
 				</TextField>
-				<TextField fx:id="subjectMatter" prefHeight="30.0"
-					prefWidth="246.0" promptText="Subject Matter">
+				<TextField fx:id="narration" prefHeight="30.0" prefWidth="246.0"
+					promptText="Narration">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
@@ -163,10 +169,12 @@
 							prefWidth="60.0" text="LedgerType" />
 						<TableColumn fx:id="colSubledgerType" maxWidth="4000.0"
 							prefWidth="60.0" text="SubledgerType" />
-						<TableColumn fx:id="colAmount" maxWidth="4000.0"
-							prefWidth="75.0" text="Amount" />
 						<TableColumn fx:id="colSubjectMatter" maxWidth="6000.0"
 							prefWidth="130.0" text="Subject" />
+						<TableColumn fx:id="colAmount" maxWidth="4000.0"
+							prefWidth="75.0" text="Amount" />
+						<TableColumn fx:id="colNarration" maxWidth="4000.0"
+							prefWidth="75.0" text="Narration" />
 					</columns>
 					<VBox.margin>
 						<Insets left="10.0" right="5.0" />
