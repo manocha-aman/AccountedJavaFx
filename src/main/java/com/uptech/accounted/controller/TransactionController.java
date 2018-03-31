@@ -205,7 +205,7 @@ public class TransactionController implements Initializable {
     alert.setTitle("Transaction saved successfully.");
     alert.setHeaderText(null);
     alert.setContentText(
-        "New entry created by " + transaction.getInitiator() + ". Id - " + transaction.getTransactionId());
+        "New entry created by " + transaction.getInitiator().getName() + ". Id - " + transaction.getTransactionId());
     alert.showAndWait();
   }
 
