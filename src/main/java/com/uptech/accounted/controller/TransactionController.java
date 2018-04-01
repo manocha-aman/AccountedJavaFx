@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,6 +30,8 @@ import com.uptech.accounted.service.TransactionServiceImpl;
 import com.uptech.accounted.validations.MasterValidationAlert;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -162,9 +162,6 @@ public class TransactionController implements Initializable {
   @Autowired
   private TransactionServiceImpl transactionService;
 
-  @Autowired
-  private MasterValidationAlert masterValidationAlert;
-  
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
   private ObservableList<String> subledgerComboList = FXCollections.observableArrayList();
   private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
@@ -200,7 +197,7 @@ public class TransactionController implements Initializable {
   @FXML
   private void saveTransaction(ActionEvent event) {
     Transaction transaction = new Transaction();
-    if(getId() > 0)
+    if (getId() > 0)
       transaction = transactionServiceImpl.findById(getId());
     transaction.setInitiator(initiatorRepository.findOne(getInitiator()));
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
@@ -281,12 +278,12 @@ public class TransactionController implements Initializable {
   public long getId() {
     try {
       return Long.parseLong(id.getText());
-    } catch(Exception exception) {
-      //Do nothing. This will be a new entry case
+    } catch (Exception exception) {
+      // Do nothing. This will be a new entry case
     }
     return 0;
   }
-  
+
   private void loadTransactionDetails() {
     transactionList.clear();
     transactionList.addAll(transactionService.findAll());
@@ -342,8 +339,7 @@ public class TransactionController implements Initializable {
     // force the field to be numeric only
     amount.textProperty().addListener(new ChangeListener<String>() {
       @Override
-      public void changed(ObservableValue<? extends String> observable, String oldValue,
-                          String newValue) {
+      public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
         if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
           amount.setText(oldValue);
         }
@@ -412,7 +408,7 @@ public class TransactionController implements Initializable {
     colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiatorName"));
     colDepartment.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
-    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
+    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
