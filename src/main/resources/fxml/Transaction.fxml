@@ -160,7 +160,7 @@
 						<TableColumn fx:id="colSubledgerType" maxWidth="4000.0"
 							prefWidth="60.0" text="Subledger" />
 						<TableColumn fx:id="colTransactionType" maxWidth="6000.0"
-							prefWidth="130.0" text="Subject" />
+							prefWidth="130.0" text="TransactionType" />
 						<TableColumn fx:id="colSubjectMatter" maxWidth="6000.0"
 							prefWidth="130.0" text="Subject/Umoor" />
 						<TableColumn fx:id="colAmount" maxWidth="4000.0"
