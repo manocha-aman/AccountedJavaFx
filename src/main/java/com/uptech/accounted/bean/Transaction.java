@@ -64,28 +64,32 @@ public class Transaction {
   @NonNull
   @OneToOne
   private SubjectMatter subjectMatter;
-  
+
   @Enumerated(EnumType.STRING)
   private TransactionType transactionType;
-
 
   public String getDepartmentName() {
     return department.getName();
   }
+
   public String getInitiatorName() {
     return initiator.getName();
   }
+
   public String getLedgerName() {
     return ledgerType.getLedgerName();
   }
+
   public String getSubledgerName() {
     return subledgerType.getSubledgerName();
   }
+
   public String getRecipientName() {
     return recipient.getName();
   }
+
   public String getSubjectMatterName() {
     return subjectMatter.getName();
   }
-  
+
 }
