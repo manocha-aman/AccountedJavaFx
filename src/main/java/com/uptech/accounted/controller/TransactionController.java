@@ -138,6 +138,9 @@ public class TransactionController implements Initializable {
   private SubledgerServiceImpl subledgerServiceImpl;
 
   @Autowired
+  private TransactionServiceImpl transactionServiceImpl;
+
+  @Autowired
   private RecipientRepository recipientRepository;
 
   @Autowired
@@ -149,6 +152,9 @@ public class TransactionController implements Initializable {
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
   private ObservableList<String> subledgerComboList = FXCollections.observableArrayList();
   private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
+
+  @FXML
+  TextField id;
 
   @FXML
   private void exit(ActionEvent event) {
@@ -175,12 +181,14 @@ public class TransactionController implements Initializable {
   @FXML
   private void saveTransaction(ActionEvent event) {
     Transaction transaction = new Transaction();
+    if(getId() != null)
+      transaction = transactionServiceImpl.findById(getId());
     transaction.setInitiator(initiatorRepository.findOne(getInitiator()));
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
     transaction.setDateOfTransaction(getDateOfTransaction());
     transaction.setRecipient(recipientRepository.findOne(getRecipient()));
-    transaction.setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()),
-        getSubledgerCode()));
+    transaction
+        .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
     transaction.setAmount(new BigDecimal(getAmount()));
     transaction.setNarration(getNarration());
@@ -188,7 +196,7 @@ public class TransactionController implements Initializable {
 
     Transaction newTransaction = transactionService.save(transaction);
     loadTransactionDetails();
-
+    saveTransaction.setText("Save");
     saveAlert(newTransaction);
   }
 
@@ -245,6 +253,15 @@ public class TransactionController implements Initializable {
     return narration.getText();
   }
 
+  public Long getId() {
+    try {
+      return Long.parseLong(id.getText());
+    } catch(Exception exception) {
+      exception.getMessage();
+    }
+    return null;
+  }
+  
   private void loadTransactionDetails() {
     transactionList.clear();
     transactionList.addAll(transactionService.findAll());
@@ -254,7 +271,7 @@ public class TransactionController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    id.setDisable(true);
     loadInitiators();
     loadDepartments();
     loadLedgers();
@@ -263,6 +280,7 @@ public class TransactionController implements Initializable {
     transactionTable.setOnMouseClicked(event -> {
       try {
         Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
+        id.setText(String.valueOf(selectedItem.getTransactionId()));
         cbInitiator.getSelectionModel()
             .select(selectedItem.getInitiator().getCode() + "-" + selectedItem.getInitiator().getName());
         cbDepartment.getSelectionModel()
@@ -273,10 +291,12 @@ public class TransactionController implements Initializable {
             .select(selectedItem.getLedgerType().getLedgerCode() + "-" + selectedItem.getLedgerType().getLedgerName());
         cbSubledgerType.getSelectionModel().select(selectedItem.getSubledgerType().getSubledgerId().getSubledgerCode()
             + "-" + selectedItem.getSubledgerType().getSubledgerName());
-        cbSubjectMatter.getSelectionModel().select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
+        cbSubjectMatter.getSelectionModel()
+            .select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
         dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
         amount.setText(selectedItem.getAmount().toString());
         narration.setText(selectedItem.getNarration().toString());
+        saveTransaction.setText("Update");
       } catch (NullPointerException nullPointerException) {
         nullPointerException.getMessage();
       }

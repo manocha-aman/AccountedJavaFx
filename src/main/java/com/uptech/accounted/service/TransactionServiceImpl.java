@@ -28,4 +28,8 @@ public class TransactionServiceImpl {
   public void delete(Transaction transaction) {
     repository.delete(transaction);
   }
+
+  public Transaction findById(Long id) {
+    return repository.findByTransactionId(id);
+  }
 }
