@@ -19,14 +19,14 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="600.0" prefWidth="1000.0"
-	stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
+            stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.LedgerController">
 	<top>
 		<fx:include source="MenuBar.fxml" />
 	</top>
 	<left>
 		<VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0"
-			styleClass="background" stylesheets="@../styles/Styles.css"
+			styleClass="background" stylesheets="@Styles.css"
 			BorderPane.alignment="CENTER">
 			<children>
 				<Label contentDisplay="CENTER" text="Ledger" textAlignment="CENTER"
