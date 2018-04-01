@@ -7,8 +7,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public enum TransactionType {
   INCOME, EXPENSE;
-  public static BigDecimal getMultiplier(TransactionType transactionType) {
-    BigDecimal multiplier = transactionType.equals(TransactionType.EXPENSE) ? new BigDecimal(1) : new BigDecimal(-1);
+
+  private BigDecimal multiplier;
+
+  static {
+    INCOME.multiplier = new BigDecimal(1);
+    EXPENSE.multiplier = new BigDecimal(-1);
+  }
+
+  public BigDecimal getMultiplier() {
     return multiplier;
+
   }
 }
