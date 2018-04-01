@@ -27,6 +27,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
+import com.uptech.accounted.validations.MasterValidationAlert;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -159,6 +160,9 @@ public class TransactionController implements Initializable {
   @Autowired
   private TransactionServiceImpl transactionService;
 
+  @Autowired
+  private MasterValidationAlert masterValidationAlert;
+  
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
   private ObservableList<String> subledgerComboList = FXCollections.observableArrayList();
   private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
@@ -194,7 +198,7 @@ public class TransactionController implements Initializable {
   @FXML
   private void saveTransaction(ActionEvent event) {
     Transaction transaction = new Transaction();
-    if(getId() != null)
+    if(getId() > 0)
       transaction = transactionServiceImpl.findById(getId());
     transaction.setInitiator(initiatorRepository.findOne(getInitiator()));
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
@@ -204,7 +208,7 @@ public class TransactionController implements Initializable {
         .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
     BigDecimal transactionAmount = new BigDecimal(getAmount());
-    transaction.setAmount(transactionAmount.multiply(TransactionType.getMultiplier(getTransactionType())));
+    transaction.setAmount(transactionAmount);
     transaction.setNarration(getNarration());
     transaction.setTransactionType(getTransactionType());
     transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
@@ -272,13 +276,13 @@ public class TransactionController implements Initializable {
     return narration.getText();
   }
 
-  public Long getId() {
+  public long getId() {
     try {
       return Long.parseLong(id.getText());
     } catch(Exception exception) {
-      exception.getMessage();
+      //Do nothing. This will be a new entry case
     }
-    return null;
+    return 0;
   }
   
   private void loadTransactionDetails() {
@@ -319,7 +323,7 @@ public class TransactionController implements Initializable {
         narration.setText(selectedItem.getNarration().toString());
         saveTransaction.setText("Update");
       } catch (NullPointerException nullPointerException) {
-        nullPointerException.getMessage();
+        masterValidationAlert.validationAlert("Fields missing");;
       }
     });
     transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
