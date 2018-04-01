@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1627d979-570c-48dd-8fc5-badaaae331d4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/TransactionType.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/TransactionType.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/TransactionServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/TransactionServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,14 +37,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AutoCompleteComboBoxListener.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AutoCompleteComboBoxListener.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2160">
-              <caret line="88" column="5" lean-forward="false" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+            <state relative-caret-position="408">
+              <caret line="68" column="7" lean-forward="true" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
               <folding>
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#912#913#0" expanded="true" />
+                <element signature="e#878#879#0" expanded="true" />
+                <element signature="e#911#912#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,8 +63,8 @@
       <file leaf-file-name="TransactionController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4293">
-              <caret line="188" column="4" lean-forward="false" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="4" />
+            <state relative-caret-position="4779">
+              <caret line="185" column="4" lean-forward="false" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -83,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Transaction.fxml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Transaction.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
-              <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+              <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -144,7 +141,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ObservableList</find>
       <find>findAll</find>
       <find>cli</find>
       <find>setTe</find>
@@ -174,6 +170,7 @@
       <find>javaf</find>
       <find>styles.css</find>
       <find>so</find>
+      <find>star</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -233,11 +230,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Ledger.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Subledger.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/Department.fxml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java" />
       </list>
     </option>
   </component>
@@ -318,7 +315,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
-    <property name="SearchEverywhereHistoryKey" value="pom&#9;null&#9;null&#10;TranC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;Auto&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java&#10;Tra&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Transaction.fxml&#10;Sub&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Subledger.java&#10;Mas&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Master.java&#10;Led&#9;PSI&#9;JAVA://com.uptech.accounted.bean.Ledger&#10;LedC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LedgerController.java&#10;Abs&#9;PSI&#9;JAVA://com.uptech.accounted.controller.AbstractController&#10;Tran&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;SubledgerServiceImpl&#9;PSI&#9;JAVA://com.uptech.accounted.service.SubledgerServiceImpl&#10;Mai&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;pom.xm&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/pom.xml&#10;Res&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Reset.java&#10;User&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/User.java&#10;app&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/application.properties&#10;Use&#9;PSI&#9;JAVA://com.uptech.accounted.bean.User&#10;Lo&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LoginController.java&#10;UseRe&#9;PSI&#9;JAVA://com.uptech.accounted.repository.UserRepository&#10;UserS&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/service/UserServiceImpl.java&#10;Ma&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;LogC&#9;PSI&#9;JAVA://com.uptech.accounted.controller.LoginController&#10;Dep&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml&#10;Men&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/MenuBar.fxml&#10;DepC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;Ini&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/InitiatorController.java&#10;Us&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/User.fxml&#10;Main&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/Main.java&#10;UseCon&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/UserController.java&#10;Depa&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;De&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml" />
+    <property name="SearchEverywhereHistoryKey" value="Aut&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java&#10;pom&#9;null&#9;null&#10;TranC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;Auto&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java&#10;Tra&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Transaction.fxml&#10;Sub&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Subledger.java&#10;Mas&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/Master.java&#10;Led&#9;PSI&#9;JAVA://com.uptech.accounted.bean.Ledger&#10;LedC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LedgerController.java&#10;Abs&#9;PSI&#9;JAVA://com.uptech.accounted.controller.AbstractController&#10;Tran&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/TransactionController.java&#10;SubledgerServiceImpl&#9;PSI&#9;JAVA://com.uptech.accounted.service.SubledgerServiceImpl&#10;Mai&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;pom.xm&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/pom.xml&#10;Res&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Reset.java&#10;User&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/bean/User.java&#10;app&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/application.properties&#10;Use&#9;PSI&#9;JAVA://com.uptech.accounted.bean.User&#10;Lo&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/controller/LoginController.java&#10;UseRe&#9;PSI&#9;JAVA://com.uptech.accounted.repository.UserRepository&#10;UserS&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/service/UserServiceImpl.java&#10;Ma&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/uptech/accounted/Main.java&#10;LogC&#9;PSI&#9;JAVA://com.uptech.accounted.controller.LoginController&#10;Dep&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml&#10;Men&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/MenuBar.fxml&#10;DepC&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;Ini&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/InitiatorController.java&#10;Us&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/User.fxml&#10;Main&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/Main.java&#10;UseCon&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/UserController.java&#10;Depa&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/java/com/codetreatise/controller/DepartmentController.java&#10;De&#9;FILE&#9;file://D:/Aman/Accounted/FX/AccountedJavaFx/src/main/resources/fxml/Department.fxml" />
     <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
@@ -523,12 +520,13 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38958097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38958097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -545,7 +543,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -614,7 +611,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java</url>
-          <line>415</line>
+          <line>411</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -908,17 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2160">
-          <caret line="88" column="5" lean-forward="false" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
-          <folding>
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#912#913#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
@@ -929,8 +915,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4293">
-          <caret line="188" column="4" lean-forward="false" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="4" />
+        <state relative-caret-position="4779">
+          <caret line="185" column="4" lean-forward="false" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -968,12 +954,23 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
-          <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
           <folding />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="68" column="7" lean-forward="true" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
+          <folding>
+            <element signature="e#878#879#0" expanded="true" />
+            <element signature="e#911#912#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
