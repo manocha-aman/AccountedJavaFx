@@ -322,8 +322,8 @@ public class TransactionController implements Initializable {
         amount.setText(selectedItem.getAmount().toString());
         narration.setText(selectedItem.getNarration().toString());
         saveTransaction.setText("Update");
-      } catch (NullPointerException nullPointerException) {
-        masterValidationAlert.validationAlert("Fields missing");;
+      } catch (Exception exception) {
+        //No rows selected in the table
       }
     });
     transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
