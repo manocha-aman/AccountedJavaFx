@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8"
-			xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.TransactionController">
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.TransactionController">
 	<top>
 		<fx:include source="MenuBar.fxml" />
 	</top>
@@ -24,6 +24,12 @@
 						<Insets bottom="10.0" left="70.0" top="30.0" />
 					</VBox.margin>
 				</Label>
+				<TextField fx:id="id" editable="false" opacity="0.37"
+					prefHeight="30.0" prefWidth="246.0" promptText="transactionID">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
 				<ComboBox fx:id="cbInitiator" prefHeight="30.0" prefWidth="246.0"
 					promptText="Select Initiator">
 					<VBox.margin>

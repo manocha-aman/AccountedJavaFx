@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1627d979-570c-48dd-8fc5-badaaae331d4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Department.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Department.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Initiator.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Initiator.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Ledger.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Ledger.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MasterForm.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MasterForm.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Recipient.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Recipient.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SubjectMatter.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/SubjectMatter.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Transaction.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/TransactionType.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/TransactionType.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/TransactionServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/uptech/accounted/service/TransactionServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Styles.css" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Styles.css" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/Department.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/Department.fxml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/Initiator.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/Initiator.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,12 +66,9 @@
       <file leaf-file-name="TransactionController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3402">
-              <caret line="177" column="4" lean-forward="false" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="4" />
-              <folding>
-                <element signature="e#7808#7809#0" expanded="true" />
-                <element signature="e#7844#7845#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="4293">
+              <caret line="188" column="4" lean-forward="false" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,19 +78,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1350">
               <caret line="67" column="30" lean-forward="false" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
-              <folding>
-                <element signature="e#1706#1707#0" expanded="true" />
-                <element signature="e#1742#1743#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Transaction.fxml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Transaction.fxml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="14" />
+            <state relative-caret-position="162">
+              <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -110,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="98" column="21" lean-forward="false" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
+            <state relative-caret-position="108">
+              <caret line="84" column="20" lean-forward="false" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -248,10 +234,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/Subledger.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/bean/SubledgerId.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/AutoCompleteComboBoxListener.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/Department.fxml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml" />
       </list>
     </option>
   </component>
@@ -628,7 +614,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java</url>
-          <line>389</line>
+          <line>415</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -937,21 +923,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
           <caret line="67" column="30" lean-forward="false" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
-          <folding>
-            <element signature="e#1706#1707#0" expanded="true" />
-            <element signature="e#1742#1743#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/uptech/accounted/controller/TransactionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3402">
-          <caret line="177" column="4" lean-forward="false" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="4" />
-          <folding>
-            <element signature="e#7808#7809#0" expanded="true" />
-            <element signature="e#7844#7845#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="4293">
+          <caret line="188" column="4" lean-forward="false" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -959,17 +939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
           <caret line="17" column="29" lean-forward="false" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -990,10 +959,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="98" column="21" lean-forward="false" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
+        <state relative-caret-position="108">
+          <caret line="84" column="20" lean-forward="false" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Transaction.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
   </component>

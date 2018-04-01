@@ -29,6 +29,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
+import com.uptech.accounted.validations.MasterValidationAlert;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -150,6 +151,9 @@ public class TransactionController implements Initializable {
   private SubledgerServiceImpl subledgerServiceImpl;
 
   @Autowired
+  private TransactionServiceImpl transactionServiceImpl;
+
+  @Autowired
   private RecipientRepository recipientRepository;
 
   @Autowired
@@ -158,9 +162,15 @@ public class TransactionController implements Initializable {
   @Autowired
   private TransactionServiceImpl transactionService;
 
+  @Autowired
+  private MasterValidationAlert masterValidationAlert;
+  
   private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
   private ObservableList<String> subledgerComboList = FXCollections.observableArrayList();
   private ObservableList<String> ledgerComboList = FXCollections.observableArrayList();
+
+  @FXML
+  TextField id;
 
   @FXML
   private void exit(ActionEvent event) {
@@ -173,6 +183,7 @@ public class TransactionController implements Initializable {
   }
 
   private void clearFields() {
+    id.clear();
     cbInitiator.getSelectionModel().clearSelection();
     cbDepartment.getSelectionModel().clearSelection();
     dateOfTransaction.getEditor().clear();
@@ -183,11 +194,14 @@ public class TransactionController implements Initializable {
     cbTransactionType.getSelectionModel().clearSelection();
     amount.clear();
     narration.clear();
+    saveTransaction.setText("Save");
   }
 
   @FXML
   private void saveTransaction(ActionEvent event) {
     Transaction transaction = new Transaction();
+    if(getId() > 0)
+      transaction = transactionServiceImpl.findById(getId());
     transaction.setInitiator(initiatorRepository.findOne(getInitiator()));
     transaction.setDepartment(departmentRepository.findOne(getDepartment()));
     transaction.setDateOfTransaction(getDateOfTransaction());
@@ -196,14 +210,14 @@ public class TransactionController implements Initializable {
         .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
     BigDecimal transactionAmount = new BigDecimal(getAmount());
-    transaction.setAmount(transactionAmount.multiply(TransactionType.getMultiplier(getTransactionType())));
+    transaction.setAmount(transactionAmount);
     transaction.setNarration(getNarration());
     transaction.setTransactionType(getTransactionType());
     transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
 
     Transaction newTransaction = transactionService.save(transaction);
     loadTransactionDetails();
-
+    saveTransaction.setText("Save");
     saveAlert(newTransaction);
   }
 
@@ -264,6 +278,15 @@ public class TransactionController implements Initializable {
     return narration.getText();
   }
 
+  public long getId() {
+    try {
+      return Long.parseLong(id.getText());
+    } catch(Exception exception) {
+      //Do nothing. This will be a new entry case
+    }
+    return 0;
+  }
+  
   private void loadTransactionDetails() {
     transactionList.clear();
     transactionList.addAll(transactionService.findAll());
@@ -273,6 +296,7 @@ public class TransactionController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    id.setDisable(true);
     loadTransactionTypes();
     loadInitiators();
     loadDepartments();
@@ -286,6 +310,7 @@ public class TransactionController implements Initializable {
     transactionTable.setOnMouseClicked(event -> {
       try {
         Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
+        id.setText(String.valueOf(selectedItem.getTransactionId()));
         cbInitiator.getSelectionModel()
             .select(selectedItem.getInitiator().getCode() + "-" + selectedItem.getInitiator().getName());
         cbDepartment.getSelectionModel()
@@ -302,8 +327,9 @@ public class TransactionController implements Initializable {
         dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
         amount.setText(selectedItem.getAmount().toString());
         narration.setText(selectedItem.getNarration().toString());
-      } catch (NullPointerException nullPointerException) {
-        nullPointerException.getMessage();
+        saveTransaction.setText("Update");
+      } catch (Exception exception) {
+        //No rows selected in the table
       }
     });
     transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
