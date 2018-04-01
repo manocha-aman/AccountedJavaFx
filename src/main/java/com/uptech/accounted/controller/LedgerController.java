@@ -1,12 +1,16 @@
 package com.uptech.accounted.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.uptech.accounted.bean.Ledger;
+import com.uptech.accounted.bean.LedgerType;
 import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.service.LedgerServiceImpl;
@@ -19,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,6 +38,8 @@ public class LedgerController implements Initializable {
   @FXML
   TextField ledgerName;
   @FXML
+  ComboBox<LedgerType> cbLedgerType;
+  @FXML
   TextField subledgerCode;
   @FXML
   TextField subledgerName;
@@ -44,15 +51,21 @@ public class LedgerController implements Initializable {
   private TableColumn<Ledger, String> colLedgerCode;
   @FXML
   private TableColumn<Ledger, String> colLedgerName;
-  private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
+  @FXML
+  private TableColumn<Ledger, String> colLedgerType;
   @FXML
   private TableColumn<Subledger, String> colSubledgerCode;
   @FXML
   private TableColumn<Subledger, String> colSubledgerName;
+
+  private ObservableList<Ledger> ledgerList = FXCollections.observableArrayList();
+
   @Autowired
   private MasterValidationAlert masterValidationAlert;
+
   @Autowired
   public LedgerServiceImpl ledgerServiceImpl;
+
   @Autowired
   public SubledgerServiceImpl subledgerServiceImpl;
 
@@ -63,6 +76,7 @@ public class LedgerController implements Initializable {
     Ledger ledger = new Ledger();
     ledger.setLedgerCode(ledgerCode.getText());
     ledger.setLedgerName(ledgerName.getText());
+    ledger.setLedgerType(cbLedgerType.getValue());
     ledgerServiceImpl.save(ledger);
     loadLedgerDetails();
     return ledger;
@@ -79,6 +93,7 @@ public class LedgerController implements Initializable {
   private void clearLedgerFields() {
     ledgerCode.clear();
     ledgerName.clear();
+    cbLedgerType.getSelectionModel().clearSelection();
   }
 
   private void clearSubLedgerFields() {
@@ -114,6 +129,7 @@ public class LedgerController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    loadLedgerType();
     subledgerTable.getItems().clear();
     ledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     subledgerTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -122,6 +138,7 @@ public class LedgerController implements Initializable {
       Ledger selectedItem = ledgerTable.getSelectionModel().getSelectedItem();
       ledgerCode.setText(selectedItem.getLedgerCode());
       ledgerName.setText(selectedItem.getLedgerName());
+      cbLedgerType.getSelectionModel().select(selectedItem.getLedgerType());
     });
     subledgerTable.setOnMouseClicked(event -> {
       Subledger selectedItem = subledgerTable.getSelectionModel().getSelectedItem();
@@ -135,17 +152,27 @@ public class LedgerController implements Initializable {
     loadLedgerDetails();
   }
 
+  private void loadLedgerType() {
+    List<LedgerType> ledgerTypes = new ArrayList<>();
+    ledgerTypes = Arrays.asList(LedgerType.values());
+
+    ObservableList<LedgerType> comboList = FXCollections.observableArrayList(ledgerTypes);
+    cbLedgerType.setItems(comboList);
+  }
+
   private void loadSubledgersForLedger() {
     Ledger selectedLedger = ledgerTable.getSelectionModel().getSelectedItem();
     subledgerTable.getItems().clear();
     subledgerTable.getItems().addAll(subledgerServiceImpl.findByLedgerCode(selectedLedger.getLedgerCode()));
     colSubledgerName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerName()));
-    colSubledgerCode.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerId().getSubledgerCode()));
+    colSubledgerCode
+        .setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSubledgerId().getSubledgerCode()));
   }
 
   private void setColumnProperties() {
     colLedgerName.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colLedgerCode.setCellValueFactory(new PropertyValueFactory<>("ledgerCode"));
+    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
     colSubledgerName.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
     colSubledgerCode.setCellValueFactory(new PropertyValueFactory<>("subledgerCode"));
   }
@@ -156,8 +183,8 @@ public class LedgerController implements Initializable {
 
       if (ledgerByCode == null)
         throw new IllegalArgumentException("Ledger by code " + ledgerCode.getText() + " not found");
-      Subledger subledger  = new Subledger(new SubledgerId(ledgerByCode.getLedgerCode(), subledgerCode.getText()),
-                                subledgerName.getText());
+      Subledger subledger = new Subledger(new SubledgerId(ledgerByCode.getLedgerCode(), subledgerCode.getText()),
+          subledgerName.getText());
       subledger.setLedger(ledgerByCode);
       subledgerServiceImpl.save(subledger);
       loadSubledgersForLedger();

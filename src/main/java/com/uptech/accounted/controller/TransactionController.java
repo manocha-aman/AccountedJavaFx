@@ -3,6 +3,8 @@ package com.uptech.accounted.controller;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -15,6 +17,7 @@ import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Master;
 import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.Transaction;
+import com.uptech.accounted.bean.TransactionType;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
@@ -39,6 +42,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -65,13 +69,16 @@ public class TransactionController implements Initializable {
   private ComboBox<String> cbSubjectMatter;
 
   @FXML
+  private ComboBox<TransactionType> cbTransactionType;
+
+  @FXML
   private DatePicker dateOfTransaction;
 
   @FXML
   private TextField amount;
 
   @FXML
-  private TextField narration;
+  private TextArea narration;
 
   @FXML
   private Button reset;
@@ -111,6 +118,9 @@ public class TransactionController implements Initializable {
 
   @FXML
   private TableColumn<Transaction, String> colSubjectMatter;
+
+  @FXML
+  private TableColumn<Transaction, String> colTransactionType;
 
   @FXML
   private TableColumn<Transaction, Boolean> colEdit;
@@ -167,6 +177,7 @@ public class TransactionController implements Initializable {
   }
 
   private void clearFields() {
+    id.clear();
     cbInitiator.getSelectionModel().clearSelection();
     cbDepartment.getSelectionModel().clearSelection();
     dateOfTransaction.getEditor().clear();
@@ -174,8 +185,10 @@ public class TransactionController implements Initializable {
     cbLedgerType.getSelectionModel().clearSelection();
     cbSubledgerType.getSelectionModel().clearSelection();
     cbSubjectMatter.getSelectionModel().clearSelection();
+    cbTransactionType.getSelectionModel().clearSelection();
     amount.clear();
     narration.clear();
+    saveTransaction.setText("Save");
   }
 
   @FXML
@@ -190,8 +203,10 @@ public class TransactionController implements Initializable {
     transaction
         .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
-    transaction.setAmount(new BigDecimal(getAmount()));
+    BigDecimal transactionAmount = new BigDecimal(getAmount());
+    transaction.setAmount(transactionAmount.multiply(TransactionType.getMultiplier(getTransactionType())));
     transaction.setNarration(getNarration());
+    transaction.setTransactionType(getTransactionType());
     transaction.setSubjectMatter(subjectMatterServiceImpl.findByCode(getSubjectMatter()));
 
     Transaction newTransaction = transactionService.save(transaction);
@@ -213,7 +228,7 @@ public class TransactionController implements Initializable {
     alert.setTitle("Transaction saved successfully.");
     alert.setHeaderText(null);
     alert.setContentText(
-        "New entry created by " + transaction.getInitiator() + ". Id - " + transaction.getTransactionId());
+        "New entry created by " + transaction.getInitiator().getName() + ". Id - " + transaction.getTransactionId());
     alert.showAndWait();
   }
 
@@ -223,6 +238,10 @@ public class TransactionController implements Initializable {
 
   public String getDepartment() {
     return cbDepartment.getSelectionModel().getSelectedItem().split("-")[0];
+  }
+
+  public TransactionType getTransactionType() {
+    return cbTransactionType.getSelectionModel().getSelectedItem();
   }
 
   public String getSubjectMatter() {
@@ -272,6 +291,7 @@ public class TransactionController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     id.setDisable(true);
+    loadTransactionTypes();
     loadInitiators();
     loadDepartments();
     loadLedgers();
@@ -291,6 +311,7 @@ public class TransactionController implements Initializable {
             .select(selectedItem.getLedgerType().getLedgerCode() + "-" + selectedItem.getLedgerType().getLedgerName());
         cbSubledgerType.getSelectionModel().select(selectedItem.getSubledgerType().getSubledgerId().getSubledgerCode()
             + "-" + selectedItem.getSubledgerType().getSubledgerName());
+        cbTransactionType.getSelectionModel().select(selectedItem.getTransactionType());
         cbSubjectMatter.getSelectionModel()
             .select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
         dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
@@ -313,6 +334,14 @@ public class TransactionController implements Initializable {
 
   private void loadDepartments() {
     loadMaster(departmentRepository, cbDepartment);
+  }
+
+  private void loadTransactionTypes() {
+    List<TransactionType> transactionTypes = new ArrayList<>();
+    transactionTypes = Arrays.asList(TransactionType.values());
+
+    ObservableList<TransactionType> comboList = FXCollections.observableArrayList(transactionTypes);
+    cbTransactionType.setItems(comboList);
   }
 
   private void loadSubjectMatters() {
@@ -359,8 +388,9 @@ public class TransactionController implements Initializable {
     colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiatorName"));
     colDepartment.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
-    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
+    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
+    colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatterName"));

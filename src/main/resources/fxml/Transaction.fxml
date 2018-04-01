@@ -72,7 +72,14 @@
 						<Insets left="25.0" />
 					</VBox.margin>
 				</ComboBox>
-				<ComboBox fx:id="cbSubjectMatter" prefHeight="30.0" prefWidth="246.0" promptText="Select Subject/Umoor">
+				<ComboBox fx:id="cbTransactionType" prefHeight="30.0"
+					prefWidth="246.0" promptText="Select Transaction Type">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</ComboBox>
+				<ComboBox fx:id="cbSubjectMatter" prefHeight="30.0"
+					prefWidth="246.0" promptText="Select Subject/Umoor">
 					<VBox.margin>
 						<Insets left="25.0" />
 					</VBox.margin>
@@ -90,11 +97,12 @@
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
 				</TextField>
-				<TextField fx:id="narration" prefHeight="30.0" prefWidth="246.0" promptText="Narration">
+				<TextArea fx:id="narration" prefHeight="60.0" prefWidth="246.0"
+					promptText="Narration">
 					<VBox.margin>
 						<Insets left="25.0" right="25.0" />
 					</VBox.margin>
-				</TextField>
+				</TextArea>
 				<HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
 					<children>
 						<Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
@@ -137,16 +145,28 @@
 				</Button>
 				<TableView fx:id="transactionTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
 					<columns>
-						<TableColumn fx:id="colTransactionId" maxWidth="700.0" prefWidth="20.0" text="ID" />
-						<TableColumn fx:id="colInitiator" maxWidth="4000.0" prefWidth="75.0" text="Initiator" />
-						<TableColumn fx:id="colDepartment" maxWidth="4000.0" prefWidth="75.0" text="Department" />
-						<TableColumn fx:id="colDateOfTransaction" maxWidth="4000.0" prefWidth="75.0" text="Date" />
-						<TableColumn fx:id="colRecipient" maxWidth="4000.0" prefWidth="60.0" text="Recipient" />
-						<TableColumn fx:id="colLedgerType" maxWidth="4000.0" prefWidth="60.0" text="Ledger" />
-						<TableColumn fx:id="colSubledgerType" maxWidth="4000.0" prefWidth="60.0" text="Subledger" />
-						<TableColumn fx:id="colSubjectMatter" maxWidth="6000.0" prefWidth="130.0" text="Subject/Umoor" />
-						<TableColumn fx:id="colAmount" maxWidth="4000.0" prefWidth="75.0" text="Amount" />
-						<TableColumn fx:id="colNarration" maxWidth="4000.0" prefWidth="75.0" text="Narration" />
+						<TableColumn fx:id="colTransactionId" maxWidth="700.0"
+							prefWidth="20.0" text="ID" />
+						<TableColumn fx:id="colInitiator" maxWidth="4000.0"
+							prefWidth="75.0" text="Initiator" />
+						<TableColumn fx:id="colDepartment" maxWidth="4000.0"
+							prefWidth="75.0" text="Department" />
+						<TableColumn fx:id="colDateOfTransaction" maxWidth="4000.0"
+							prefWidth="75.0" text="Date" />
+						<TableColumn fx:id="colRecipient" maxWidth="4000.0"
+							prefWidth="60.0" text="Recipient" />
+						<TableColumn fx:id="colLedgerType" maxWidth="4000.0"
+							prefWidth="60.0" text="Ledger" />
+						<TableColumn fx:id="colSubledgerType" maxWidth="4000.0"
+							prefWidth="60.0" text="Subledger" />
+						<TableColumn fx:id="colTransactionType" maxWidth="6000.0"
+							prefWidth="130.0" text="Subject" />
+						<TableColumn fx:id="colSubjectMatter" maxWidth="6000.0"
+							prefWidth="130.0" text="Subject/Umoor" />
+						<TableColumn fx:id="colAmount" maxWidth="4000.0"
+							prefWidth="75.0" text="Amount" />
+						<TableColumn fx:id="colNarration" maxWidth="4000.0"
+							prefWidth="75.0" text="Narration" />
 					</columns>
 					<VBox.margin>
 						<Insets left="10.0" right="5.0" />
