@@ -1,12 +1,12 @@
 target
-data
+accountDb
 .idea
 
 */target/**
-*/data/**
+*/accountDb/**
 bin/*
 .classpath
-.idea
+.idea/**
 .project
 .settings/*
 *.iml

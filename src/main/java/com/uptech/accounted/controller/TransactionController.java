@@ -277,6 +277,8 @@ public class TransactionController implements Initializable {
     loadLedgers();
     loadRecipients();
     loadSubjectMatters();
+    cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
+
     transactionTable.setOnMouseClicked(event -> {
       try {
         Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
@@ -337,7 +339,7 @@ public class TransactionController implements Initializable {
       comboList.add(item.getCode() + "-" + item.getName());
     }
     comboBox.setItems(comboList);
-    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
+    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox));
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -348,7 +350,7 @@ public class TransactionController implements Initializable {
       ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
     }
     cbLedgerType.setItems(ledgerComboList);
-    cbLedgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbLedgerType, ledgerList));
+    cbLedgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbLedgerType));
   }
 
   @FXML
@@ -359,6 +361,7 @@ public class TransactionController implements Initializable {
       subledgerComboList.add(subledger.getSubledgerId().getSubledgerCode() + "-" + subledger.getSubledgerName());
     }
     cbSubledgerType.setItems(subledgerComboList);
+    cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
   }
 
   private void setColumnProperties() {
