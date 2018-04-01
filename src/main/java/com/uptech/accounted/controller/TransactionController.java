@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -301,6 +303,10 @@ public class TransactionController implements Initializable {
     loadLedgers();
     loadRecipients();
     loadSubjectMatters();
+    makeAmountFieldNumericOnly();
+
+    cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
+
     transactionTable.setOnMouseClicked(event -> {
       try {
         Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
@@ -330,6 +336,19 @@ public class TransactionController implements Initializable {
     setColumnProperties();
     // Add all transactions into table
     loadTransactionDetails();
+  }
+
+  private void makeAmountFieldNumericOnly() {
+    // force the field to be numeric only
+    amount.textProperty().addListener(new ChangeListener<String>() {
+      @Override
+      public void changed(ObservableValue<? extends String> observable, String oldValue,
+                          String newValue) {
+        if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
+          amount.setText(oldValue);
+        }
+      }
+    });
   }
 
   private void loadInitiators() {
@@ -363,7 +382,7 @@ public class TransactionController implements Initializable {
       comboList.add(item.getCode() + "-" + item.getName());
     }
     comboBox.setItems(comboList);
-    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox, list));
+    comboBox.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener<T>(comboBox));
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -374,7 +393,7 @@ public class TransactionController implements Initializable {
       ledgerComboList.add(ledger.getLedgerCode() + "-" + ledger.getLedgerName());
     }
     cbLedgerType.setItems(ledgerComboList);
-    cbLedgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbLedgerType, ledgerList));
+    cbLedgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbLedgerType));
   }
 
   @FXML
@@ -385,6 +404,7 @@ public class TransactionController implements Initializable {
       subledgerComboList.add(subledger.getSubledgerId().getSubledgerCode() + "-" + subledger.getSubledgerName());
     }
     cbSubledgerType.setItems(subledgerComboList);
+    cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
   }
 
   private void setColumnProperties() {
