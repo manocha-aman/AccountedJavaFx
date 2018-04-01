@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,6 +64,10 @@ public class Transaction {
   @NonNull
   @OneToOne
   private SubjectMatter subjectMatter;
+  
+  @Enumerated(EnumType.STRING)
+  private TransactionType transactionType;
+
 
   public String getDepartmentName() {
     return department.getName();
