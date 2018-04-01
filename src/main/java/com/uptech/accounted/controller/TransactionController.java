@@ -386,7 +386,7 @@ public class TransactionController implements Initializable {
     colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiatorName"));
     colDepartment.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
-    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerType"));
+    colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
