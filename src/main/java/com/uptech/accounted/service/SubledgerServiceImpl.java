@@ -10,6 +10,8 @@ import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.repository.SubledgerRepository;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class SubledgerServiceImpl {
 
@@ -37,6 +39,10 @@ public class SubledgerServiceImpl {
       }
     }
     return subledgersByLedgerCode;
+  }
+
+  public List<Subledger> findAllByLedgerCode(List<String> ledgerCodes) {
+    return ledgerCodes.stream().map(code -> findByLedgerCode(code)).flatMap(l -> l.stream()).distinct().collect(toList());
   }
 
   public Subledger findByLedgerAndSubledgerCode(String ledgerCode, String subledgerCode) {

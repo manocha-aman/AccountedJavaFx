@@ -24,7 +24,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Transaction {
 
   @Id
@@ -92,4 +91,17 @@ public class Transaction {
     return subjectMatter.getName();
   }
 
+  @Override
+  public String toString() {
+    return transactionId +
+        "," + initiator.getName() +
+        "," + department.getName() +
+        "," + dateOfTransaction +
+        "," + recipient.getName() +
+        "," + ledgerType.getLedgerName() +
+        "," + subledgerType.getSubledgerName() +
+        "," + amount +
+        "," + subjectMatter.getName() +
+        "," + transactionType;
+  }
 }
