@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
+<BorderPane stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.ReportsController">
+	<top>
+		<fx:include source="MenuBar.fxml" />
+	</top>
+	<left>
+		<VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@Styles.css" BorderPane.alignment="CENTER">
+			<children>
+				<Label contentDisplay="CENTER" text="Generate Report" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="20.0" />
+					</font>
+					<VBox.margin>
+						<Insets bottom="2.0" left="70.0" top="2.0" />
+					</VBox.margin>
+				</Label>
+				<HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="255.0" spacing="15.0">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+					<children>
+						<DatePicker fx:id="fromDate" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="From" />
+					</children>
+				</HBox>
+
+				<HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="255.0" spacing="15.0">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+					<children>
+						<DatePicker fx:id="toDate" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="To" />
+					</children>
+				</HBox>
+				<Label contentDisplay="CENTER" text="Initiators" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbInitiators" prefHeight="30.0" prefWidth="246.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<Label contentDisplay="CENTER" text="Departments" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbDepartments" prefHeight="30.0" prefWidth="246.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<Label contentDisplay="CENTER" text="Recipients" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbRecipients" prefHeight="30.0" prefWidth="246.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<Label contentDisplay="CENTER" text="Ledgers" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbLedgerType" prefHeight="30.0" prefWidth="246.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<Label contentDisplay="CENTER" text="SubLedgers" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbSubledgerType" prefHeight="30.0" prefWidth="246.0" >
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<Label contentDisplay="CENTER" text="Transaction" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbTransactions" prefHeight="30.0" prefWidth="246.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<Label contentDisplay="CENTER" text="Subjects" textAlignment="CENTER" textFill="WHITE">
+					<font>
+						<Font size="12.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</Label>
+				<CheckComboBox fx:id="cbSubjects" prefHeight="30.0" prefWidth="246.0">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</CheckComboBox>
+				<TextField fx:id="tbFromAmount" prefHeight="30.0" prefWidth="246.0" promptText="From Amount">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<TextField fx:id="tbToAmount" prefHeight="30.0" prefWidth="246.0" promptText="To Amount">
+					<VBox.margin>
+						<Insets left="25.0" right="25.0" />
+					</VBox.margin>
+				</TextField>
+				<HBox prefHeight="30.0" prefWidth="350.0" spacing="10.0">
+					<children>
+						<Button fx:id="reset" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
+							<effect>
+								<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+							</effect>
+						</Button>
+						<Button fx:id="saveTransaction" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generateReports" prefHeight="30.0" prefWidth="85.0" styleClass="btnGreen" text="Generate" textFill="WHITE">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<effect>
+								<DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
+							</effect>
+						</Button>
+					</children>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<VBox.margin>
+						<Insets left="110.0" />
+					</VBox.margin>
+				</HBox>
+			</children>
+			<padding>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</padding>
+			<BorderPane.margin>
+				<Insets />
+			</BorderPane.margin>
+		</VBox>
+	</left>
+</BorderPane>
