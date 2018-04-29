@@ -216,6 +216,7 @@ public class TransactionController implements Initializable {
     loadTransactionDetails();
     saveTransaction.setText("Save");
     saveAlert(newTransaction);
+    clearFields();
   }
 
   @FXML
