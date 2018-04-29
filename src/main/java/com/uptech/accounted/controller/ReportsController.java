@@ -1,7 +1,33 @@
 package com.uptech.accounted.controller;
 
+import static java.util.stream.Collectors.toList;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.controlsfx.control.CheckComboBox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Controller;
+
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.uptech.accounted.bean.*;
+import com.uptech.accounted.bean.Department;
+import com.uptech.accounted.bean.Initiator;
+import com.uptech.accounted.bean.Ledger;
+import com.uptech.accounted.bean.Master;
+import com.uptech.accounted.bean.QTransaction;
+import com.uptech.accounted.bean.Recipient;
+import com.uptech.accounted.bean.Subledger;
+import com.uptech.accounted.bean.SubledgerId;
+import com.uptech.accounted.bean.Transaction;
+import com.uptech.accounted.bean.TransactionType;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
@@ -12,6 +38,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,22 +53,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import org.controlsfx.control.CheckComboBox;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Controller;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import static java.util.stream.Collectors.toList;
 
 @Controller
 public class ReportsController implements Initializable {
