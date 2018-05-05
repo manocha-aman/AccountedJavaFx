@@ -7,9 +7,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 
@@ -27,7 +33,6 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
-import com.uptech.accounted.validations.MasterValidationAlert;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -37,16 +42,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
@@ -91,6 +87,9 @@ public class TransactionController implements Initializable {
 
   @FXML
   private TableView<Transaction> transactionTable;
+
+  @FXML
+  private Pagination transactionPagination;
 
   @FXML
   private TableColumn<Transaction, Long> colTransactionId;
@@ -168,6 +167,8 @@ public class TransactionController implements Initializable {
 
   @FXML
   TextField id;
+
+  private int itemsPerPage = 25;
 
   @FXML
   private void exit(ActionEvent event) {
@@ -287,9 +288,23 @@ public class TransactionController implements Initializable {
 
   private void loadTransactionDetails() {
     transactionList.clear();
-    transactionList.addAll(transactionService.findAll());
+    int count = (int) transactionService.count();
+    transactionPagination.setPageCount(getPageCount(count));
+    transactionPagination.setPageFactory(this::createPage);
+    Iterable<Transaction> all = getTransactionsForPage(0);
+    all.forEach(transaction -> transactionList.add(transaction));
 
     transactionTable.setItems(transactionList);
+  }
+
+  private int getPageCount(int count) {
+    if (count == 0) return 1;
+    return count % itemsPerPage == 0 ? count / itemsPerPage : count / itemsPerPage + 1;
+  }
+
+  private Iterable<Transaction> getTransactionsForPage(int pageNumer) {
+    PageRequest request = new PageRequest(pageNumer, itemsPerPage, new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfTransaction")));
+    return transactionService.findAll(request);
   }
 
   @Override
@@ -418,4 +433,8 @@ public class TransactionController implements Initializable {
     colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
   }
 
+  private Node createPage(int pageIndex) {
+    transactionTable.setItems(FXCollections.observableArrayList(StreamSupport.stream(getTransactionsForPage(pageIndex).spliterator(), false).collect(Collectors.toList())));
+    return transactionTable;
+  }
 }
