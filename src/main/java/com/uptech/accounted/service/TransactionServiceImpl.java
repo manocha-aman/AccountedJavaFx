@@ -1,8 +1,9 @@
 package com.uptech.accounted.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uptech.accounted.bean.Transaction;
@@ -17,8 +18,8 @@ public class TransactionServiceImpl {
     this.repository = repository;
   }
 
-  public List<Transaction> findAll() {
-    return repository.findAll();
+  public Iterable<Transaction> findAll(PageRequest pageRequest) {
+    return repository.findAll(pageRequest);
   }
 
   public Transaction save(Transaction user) {
@@ -31,5 +32,9 @@ public class TransactionServiceImpl {
 
   public Transaction findById(Long id) {
     return repository.findByTransactionId(id);
+  }
+
+  public long count() {
+    return repository.count();
   }
 }
