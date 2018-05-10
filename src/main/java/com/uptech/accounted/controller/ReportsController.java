@@ -321,4 +321,51 @@ public class ReportsController implements Initializable {
     cbSubledgerType.getCheckModel().checkAll();
   }
 
+  public void checkAllInitiators(ActionEvent actionEvent) {
+    cbInitiators.getCheckModel().checkAll();
+  }
+
+  public void uncheckAllInitiators(ActionEvent actionEvent) {
+    cbInitiators.getCheckModel().clearChecks();
+  }
+
+  public void checkAllDepartments(ActionEvent actionEvent) {
+    cbDepartments.getCheckModel().checkAll();
+  }
+
+  public void uncheckAllDepartments(ActionEvent actionEvent) {
+    cbDepartments.getCheckModel().clearChecks();
+  }
+
+  public void checkAllRecipients(ActionEvent actionEvent) {
+    cbRecipients.getCheckModel().checkAll();
+  }
+
+  public void uncheckAllRecipients(ActionEvent actionEvent) {
+    cbRecipients.getCheckModel().clearChecks();
+  }
+
+  public void checkAllLedgerType(ActionEvent actionEvent) {
+    cbLedgerType.getCheckModel().checkAll();
+  }
+
+  public void uncheckAllLedgerType(ActionEvent actionEvent) {
+    cbLedgerType.getCheckModel().clearChecks();
+  }
+
+  public void checkAllSubLedgerType(ActionEvent actionEvent) {
+    cbSubledgerType.getCheckModel().checkAll();
+  }
+
+  public void uncheckAllSubLedgerType(ActionEvent actionEvent) {
+    cbSubledgerType.getCheckModel().clearChecks();
+  }
+
+  public void checkAllSubjects(ActionEvent actionEvent) {
+    cbSubjects.getCheckModel().checkAll();
+  }
+
+  public void uncheckAllSubjects(ActionEvent actionEvent) {
+    cbSubjects.getCheckModel().clearChecks();
+  }
 }
