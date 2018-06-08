@@ -23,6 +23,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +129,10 @@ public class TransactionController implements Initializable {
   @FXML
   private Button deleteTransactions;
 
+  @FXML
+  private TextField searchTextField;
+  @FXML
+  private Button searchTransactions;
   @Lazy
   @Autowired
   private StageManager stageManager;
@@ -298,13 +303,24 @@ public class TransactionController implements Initializable {
 
   private void loadTransactionDetails() {
     transactionList.clear();
-    int count = (int) transactionService.count();
-    transactionPagination.setPageCount(getPageCount(count));
-    transactionPagination.setPageFactory(this::createPage);
-    Iterable<Transaction> all = getTransactionsForPage(0);
-    all.forEach(transaction -> transactionList.add(transaction));
 
-    transactionTable.setItems(transactionList);
+    if (searchTextField.getText().isEmpty()) {
+      int count = (int) transactionService.count();
+      transactionPagination.setPageCount(getPageCount(count));
+      transactionPagination.setPageFactory(this::createPage);
+      Iterable<Transaction> all = getTransactionsForPage(0);
+      all.forEach(transaction -> transactionList.add(transaction));
+
+      transactionTable.setItems(transactionList);
+    } else {
+      int count = 1;
+      transactionPagination.setPageCount(getPageCount(count));
+      transactionPagination.setPageFactory(this::createPage);
+      Transaction searchedTransaction = getSearchTransaction();
+      transactionList.add(searchedTransaction);
+
+      transactionTable.setItems(transactionList);
+    }
   }
 
   private int getPageCount(int count) {
@@ -315,6 +331,10 @@ public class TransactionController implements Initializable {
   private Iterable<Transaction> getTransactionsForPage(int pageNumer) {
     PageRequest request = new PageRequest(pageNumer, itemsPerPage, new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfTransaction")));
     return transactionService.findAll(request);
+  }
+
+  private Transaction getSearchTransaction() {
+    return transactionService.findById(Long.valueOf(searchTextField.getText()));
   }
 
   @Override
@@ -448,5 +468,14 @@ public class TransactionController implements Initializable {
   private Node createPage(int pageIndex) {
     transactionTable.setItems(FXCollections.observableArrayList(StreamSupport.stream(getTransactionsForPage(pageIndex).spliterator(), false).collect(Collectors.toList())));
     return transactionTable;
+  }
+
+  public void searchTransactions(ActionEvent actionEvent) {
+    loadTransactionDetails();
+  }
+
+  public void searchTransactionsOnEnter(KeyEvent keyEvent) {
+    if (keyEvent.getCode() == KeyCode.ENTER)
+      loadTransactionDetails();
   }
 }

@@ -93,15 +93,16 @@ public class Transaction {
 
   @Override
   public String toString() {
-    return transactionId +
-        "," + initiator.getName() +
-        "," + department.getName() +
-        "," + dateOfTransaction +
-        "," + recipient.getName() +
-        "," + ledgerType.getLedgerName() +
-        "," + subledgerType.getSubledgerName() +
-        "," + amount +
-        "," + subjectMatter.getName() +
-        "," + transactionType;
+    return "\""+transactionId +"\""+
+        ",\"" + initiator.getName() +"\""+
+        ",\"" + department.getName() +"\""+
+        ",\"" + dateOfTransaction +"\""+
+        ",\"" + recipient.getName() +"\""+
+        ",\"" + ledgerType.getLedgerName() +"\""+
+        ",\"" + subledgerType.getSubledgerName() +"\""+
+        ",\"" + amount +"\""+
+        ",\"" + subjectMatter.getName() +"\""+
+        ",\"" + transactionType+"\""+
+        ",\"" + narration+"\"";
   }
 }

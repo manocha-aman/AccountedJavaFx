@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -124,11 +125,25 @@
 	<center>
 		<VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button fx:id="deleteTransactions" mnemonicParsing="false" onAction="#deleteTransactions" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
-					<effect>
-						<DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
-					</effect>
-				</Button>
+            <FlowPane hgap="10">
+				<padding>
+					<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+				</padding>
+               <children>
+				   <TextField fx:id="searchTextField" prefHeight="30.0" prefWidth="246.0" promptText="Search by id" onKeyPressed="#searchTransactionsOnEnter" />
+				   <Button fx:id="searchTransactions" mnemonicParsing="false" onAction="#searchTransactions" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Search">
+					   <effect>
+						   <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+					   </effect>
+				   </Button>
+				   <Button fx:id="deleteTransactions" mnemonicParsing="false" onAction="#deleteTransactions" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Delete">
+					   <effect>
+						   <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+					   </effect>
+				   </Button>
+			   </children>
+            </FlowPane>
+
 				<TableView fx:id="transactionTable" prefHeight="594.0" prefWidth="677.0" tableMenuButtonVisible="true">
 					<columns>
 						<TableColumn fx:id="colTransactionId" maxWidth="700.0" prefWidth="20.0" text="ID" />
