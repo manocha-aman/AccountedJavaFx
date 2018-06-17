@@ -1,30 +1,6 @@
 package com.uptech.accounted.controller;
 
-import java.math.BigDecimal;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Controller;
-
-import com.uptech.accounted.bean.Ledger;
-import com.uptech.accounted.bean.Master;
-import com.uptech.accounted.bean.Subledger;
-import com.uptech.accounted.bean.Transaction;
-import com.uptech.accounted.bean.TransactionType;
+import com.uptech.accounted.bean.*;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
@@ -34,7 +10,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
-
+import com.uptech.accounted.utils.ColumnFormatter;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,11 +19,33 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Controller;
+
+import java.math.BigDecimal;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
+@Log4j
 public class TransactionController implements Initializable {
 
   @FXML
@@ -263,11 +261,23 @@ public class TransactionController implements Initializable {
   }
 
   public String getLedgerCode() {
-    return cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    String ledgerCode = "";
+    try {
+      ledgerCode = cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    } catch(NullPointerException npe) {
+      log.error("Ledger Type Selection is empty");
+    }
+    return ledgerCode;
   }
 
   public String getSubledgerCode() {
-    return cbSubledgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    String subledgerCode ="";
+    try {
+      subledgerCode = cbSubledgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    } catch(NullPointerException npe) {
+      log.error("Subledger Type Selection is empty");
+    }
+    return subledgerCode;
   }
 
   public LocalDate getDateOfTransaction() {
@@ -443,7 +453,6 @@ public class TransactionController implements Initializable {
     colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
     colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiatorName"));
     colDepartment.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
-    colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
@@ -451,6 +460,9 @@ public class TransactionController implements Initializable {
     colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatterName"));
     colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
+
+    colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
+    colDateOfTransaction.setCellFactory(new ColumnFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
   }
 
   private Node createPage(int pageIndex) {
