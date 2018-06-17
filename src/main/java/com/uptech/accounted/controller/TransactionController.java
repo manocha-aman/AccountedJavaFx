@@ -10,6 +10,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
+import com.uptech.accounted.utils.ColumnFormatter;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,7 +37,11 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -257,11 +262,23 @@ public class TransactionController implements Initializable {
   }
 
   public String getLedgerCode() {
-    return cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    String ledgerCode = "";
+    try {
+      ledgerCode = cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    } catch(NullPointerException npe) {
+      log.error("Ledger Type Selection is empty");
+    }
+    return ledgerCode;
   }
 
   public String getSubledgerCode() {
-    return cbSubledgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    String subledgerCode ="";
+    try {
+      subledgerCode = cbSubledgerType.getSelectionModel().getSelectedItem().split("-")[0];
+    } catch(NullPointerException npe) {
+      log.error("Subledger Type Selection is empty");
+    }
+    return subledgerCode;
   }
 
   public LocalDate getDateOfTransaction() {
@@ -437,7 +454,6 @@ public class TransactionController implements Initializable {
     colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
     colInitiator.setCellValueFactory(new PropertyValueFactory<>("initiatorName"));
     colDepartment.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
-    colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
@@ -456,6 +472,8 @@ public class TransactionController implements Initializable {
           setText(currencyFormat.format(price));
       }
     });
+    colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
+    colDateOfTransaction.setCellFactory(new ColumnFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
   }
 
   private Node createPage(int pageIndex) {
