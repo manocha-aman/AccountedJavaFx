@@ -35,6 +35,7 @@ import org.springframework.stereotype.Controller;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -456,11 +457,21 @@ public class TransactionController implements Initializable {
     colLedgerType.setCellValueFactory(new PropertyValueFactory<>("ledgerName"));
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
-    colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatterName"));
     colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
+    colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+    colAmount.setCellFactory(tc -> new TableCell<Transaction, BigDecimal>() {
 
+      @Override protected void updateItem(BigDecimal price, boolean empty) {
+        super.updateItem(price, empty);
+        if (empty) {
+          setText(null);
+        } else
+          setText(currencyFormat.format(price));
+      }
+    });
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colDateOfTransaction.setCellFactory(new ColumnFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
   }
