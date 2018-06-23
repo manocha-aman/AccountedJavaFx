@@ -57,6 +57,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.StringConverter;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -363,6 +364,31 @@ public class TransactionController implements Initializable {
     loadSubjectMatters();
     makeAmountFieldNumericOnly();
 
+    dateOfTransaction.setConverter(new StringConverter<LocalDate>() {
+      String pattern = "dd-MM-yyyy";
+      DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+      {
+        dateOfTransaction.setPromptText(pattern.toLowerCase());
+      }
+
+      @Override public String toString(LocalDate date) {
+          if (date != null) {
+              return dateFormatter.format(date);
+          } else {
+              return "";
+          }
+      }
+
+      @Override public LocalDate fromString(String string) {
+          if (string != null && !string.isEmpty()) {
+              return LocalDate.parse(string, dateFormatter);
+          } else {
+              return null;
+          }
+      }
+     });
+    
     cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
 
     transactionTable.setOnMouseClicked(event -> {
@@ -493,4 +519,5 @@ public class TransactionController implements Initializable {
     if (keyEvent.getCode() == KeyCode.ENTER)
       loadTransactionDetails();
   }
+
 }
