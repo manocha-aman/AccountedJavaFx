@@ -1,6 +1,7 @@
 package com.uptech.accounted.controller;
 
 import com.uptech.accounted.bean.Master;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;

@@ -1,9 +1,11 @@
 package com.uptech.accounted.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uptech.accounted.bean.Transaction;
@@ -36,5 +38,12 @@ public class TransactionServiceImpl {
 
   public long count() {
     return repository.count();
+  }
+
+  public List<Transaction> fullTextSearch(String text) {
+    return StreamSupport
+        .stream(repository.findAll().spliterator(), false).parallel()
+        .filter(transaction -> transaction.toString().contains(text))
+        .collect(Collectors.toList());
   }
 }

@@ -1,5 +1,7 @@
 package com.uptech.accounted.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.repository.SubledgerRepository;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class SubledgerServiceImpl {

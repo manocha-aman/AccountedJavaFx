@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,7 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "Transaction")
@@ -104,5 +104,19 @@ public class Transaction {
         ",\"" + subjectMatter.getName() +"\""+
         ",\"" + transactionType+"\""+
         ",\"" + narration+"\"";
+  }
+  
+  public String msgWhenSaved() {
+    return "New Id: "+transactionId +
+        "\n Initiator: " + initiator.getName() +
+        "\n Department: " + department.getName() +
+        "\n Date: " + dateOfTransaction +
+        "\n Recipient: " + recipient.getName() +
+        "\n Ledger: " + ledgerType.getLedgerName() +
+        "\n Sub Ledger: " + subledgerType.getSubledgerName() +
+        "\n Amount: " + amount +
+        "\n Umoor: " + subjectMatter.getName() +
+        "\n Type: " + transactionType+
+        "\n Narration: " + narration;
   }
 }

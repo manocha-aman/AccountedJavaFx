@@ -1,12 +1,12 @@
 package com.uptech.accounted.utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
 
