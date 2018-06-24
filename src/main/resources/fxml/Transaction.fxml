@@ -150,6 +150,7 @@
 						<TableColumn fx:id="colInitiator" maxWidth="4000.0" prefWidth="75.0" text="Initiator" />
 						<TableColumn fx:id="colDepartment" maxWidth="4000.0" prefWidth="75.0" text="Department" />
 						<TableColumn fx:id="colDateOfTransaction" maxWidth="4000.0" prefWidth="75.0" text="Date" />
+						<TableColumn fx:id="colHijriDateOfTransaction" maxWidth="4000.0" prefWidth="75.0" text="Hijri Date" />
 						<TableColumn fx:id="colRecipient" maxWidth="4000.0" prefWidth="60.0" text="Recipient" />
 						<TableColumn fx:id="colLedgerType" maxWidth="4000.0" prefWidth="60.0" text="Ledger" />
 						<TableColumn fx:id="colSubledgerType" maxWidth="4000.0" prefWidth="60.0" text="Subledger" />

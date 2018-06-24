@@ -35,6 +35,7 @@ import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
 import com.uptech.accounted.utils.ColumnDateFormatter;
+import com.uptech.accounted.utils.ColumnHijriDateFormatter;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -119,6 +120,9 @@ public class TransactionController implements Initializable {
 
   @FXML
   private TableColumn<Transaction, LocalDate> colDateOfTransaction;
+  
+  @FXML
+  private TableColumn<Transaction, LocalDate> colHijriDateOfTransaction;
 
   @FXML
   private TableColumn<Transaction, String> colRecipient;
@@ -529,6 +533,9 @@ public class TransactionController implements Initializable {
 
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
     colDateOfTransaction.setCellFactory(new ColumnDateFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    
+    colHijriDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
+    colHijriDateOfTransaction.setCellFactory(new ColumnHijriDateFormatter<>(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
   }
 
   private Node createPage(int pageIndex) {
