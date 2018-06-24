@@ -8,11 +8,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-public class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
+public class ColumnDateFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
 
     private final DateTimeFormatter format;
 
-    public ColumnFormatter(DateTimeFormatter format) {
+    public ColumnDateFormatter(DateTimeFormatter format) {
         super();
         this.format = format;
     }

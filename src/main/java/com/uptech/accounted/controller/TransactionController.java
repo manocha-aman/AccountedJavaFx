@@ -2,6 +2,7 @@ package com.uptech.accounted.controller;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
-import com.uptech.accounted.utils.ColumnFormatter;
+import com.uptech.accounted.utils.ColumnDateFormatter;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -391,6 +392,12 @@ public class TransactionController implements Initializable {
     
     cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
 
+    amount.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (!newValue.matches("\\d*")) {
+        String newValueStr = getIndianCurrencyFormat(Double.parseDouble(newValue));
+        amount.setText(newValueStr);
+      }
+    });
     transactionTable.setOnMouseClicked(event -> {
       try {
         Transaction selectedItem = transactionTable.getSelectionModel().getSelectedItem();
@@ -420,6 +427,12 @@ public class TransactionController implements Initializable {
     setColumnProperties();
     // Add all transactions into table
     loadTransactionDetails();
+  }
+
+  private String getIndianCurrencyFormat(double newValue) {
+    DecimalFormat formatter = new DecimalFormat("#,##,##,##,###.00");
+    String newValueStr = formatter.format(newValue);
+    return newValueStr;
   }
 
   private void makeAmountFieldNumericOnly() {
@@ -498,12 +511,18 @@ public class TransactionController implements Initializable {
     colRecipient.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
     colTransactionType.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
     colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    colAmount.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (!newValue.matches("\\d*")) {
+        String newValueStr = getIndianCurrencyFormat(Double.parseDouble(newValue));
+        colAmount.setText(newValueStr);
+      }
+    });
     colNarration.setCellValueFactory(new PropertyValueFactory<>("narration"));
     colSubjectMatter.setCellValueFactory(new PropertyValueFactory<>("subjectMatterName"));
     colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
 
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
-    colDateOfTransaction.setCellFactory(new ColumnFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    colDateOfTransaction.setCellFactory(new ColumnDateFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
   }
 
   private Node createPage(int pageIndex) {
