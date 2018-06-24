@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.chrono.HijrahChronology;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -252,8 +253,7 @@ public class TransactionController implements Initializable {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Transaction saved successfully.");
     alert.setHeaderText(null);
-    alert.setContentText(
-        "New entry created : \n" + transaction.msgWhenSaved());
+    alert.setContentText("New entry created : \n" + transaction.msgWhenSaved());
     alert.showAndWait();
   }
 
@@ -281,17 +281,17 @@ public class TransactionController implements Initializable {
     String ledgerCode = "";
     try {
       ledgerCode = cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
-    } catch(NullPointerException npe) {
+    } catch (NullPointerException npe) {
       log.error("Ledger Type Selection is empty");
     }
     return ledgerCode;
   }
 
   public String getSubledgerCode() {
-    String subledgerCode ="";
+    String subledgerCode = "";
     try {
       subledgerCode = cbSubledgerType.getSelectionModel().getSelectedItem().split("-")[0];
-    } catch(NullPointerException npe) {
+    } catch (NullPointerException npe) {
       log.error("Subledger Type Selection is empty");
     }
     return subledgerCode;
@@ -341,12 +341,14 @@ public class TransactionController implements Initializable {
   }
 
   private int getPageCount(int count) {
-    if (count == 0) return 1;
+    if (count == 0)
+      return 1;
     return count % itemsPerPage == 0 ? count / itemsPerPage : count / itemsPerPage + 1;
   }
 
   private Iterable<Transaction> getTransactionsForPage(int pageNumer) {
-    PageRequest request = new PageRequest(pageNumer, itemsPerPage, new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfTransaction")));
+    PageRequest request = new PageRequest(pageNumer, itemsPerPage,
+        new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfTransaction")));
     return transactionService.findAll(request);
   }
 
@@ -364,7 +366,9 @@ public class TransactionController implements Initializable {
     loadRecipients();
     loadSubjectMatters();
     makeAmountFieldNumericOnly();
-
+    HijrahChronology hijriChronology = HijrahChronology.INSTANCE;
+    dateOfTransaction.setChronology(hijriChronology);
+    
     dateOfTransaction.setConverter(new StringConverter<LocalDate>() {
       String pattern = "dd-MM-yyyy";
       DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
@@ -373,23 +377,25 @@ public class TransactionController implements Initializable {
         dateOfTransaction.setPromptText(pattern.toLowerCase());
       }
 
-      @Override public String toString(LocalDate date) {
-          if (date != null) {
-              return dateFormatter.format(date);
-          } else {
-              return "";
-          }
+      @Override
+      public String toString(LocalDate date) {
+        if (date != null) {
+          return dateFormatter.format(date);
+        } else {
+          return "";
+        }
       }
 
-      @Override public LocalDate fromString(String string) {
-          if (string != null && !string.isEmpty()) {
-              return LocalDate.parse(string, dateFormatter);
-          } else {
-              return null;
-          }
+      @Override
+      public LocalDate fromString(String string) {
+        if (string != null && !string.isEmpty()) {
+          return LocalDate.parse(string, dateFormatter);
+        } else {
+          return null;
+        }
       }
-     });
-    
+    });
+
     cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
 
     amount.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -420,7 +426,7 @@ public class TransactionController implements Initializable {
         narration.setText(selectedItem.getNarration().toString());
         saveTransaction.setText("Update");
       } catch (Exception exception) {
-        //No rows selected in the table
+        // No rows selected in the table
       }
     });
     transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -526,7 +532,8 @@ public class TransactionController implements Initializable {
   }
 
   private Node createPage(int pageIndex) {
-    transactionTable.setItems(FXCollections.observableArrayList(StreamSupport.stream(getTransactionsForPage(pageIndex).spliterator(), false).collect(Collectors.toList())));
+    transactionTable.setItems(FXCollections.observableArrayList(
+        StreamSupport.stream(getTransactionsForPage(pageIndex).spliterator(), false).collect(Collectors.toList())));
     return transactionTable;
   }
 
