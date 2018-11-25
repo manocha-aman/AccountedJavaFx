@@ -187,7 +187,7 @@ public class ReportsController implements Initializable {
     save(event, all);
   }
 
-  private void save(ActionEvent event, Iterable<Transaction> all) {
+  public static void save(ActionEvent event, Iterable<Transaction> all) {
     FileChooser fileChooser = new FileChooser();
     FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
     fileChooser.getExtensionFilters().add(extFilter);

@@ -152,9 +152,14 @@ public class TransactionController implements Initializable {
   private Button deleteTransactions;
 
   @FXML
+  private Button saveResults;
+  
+  @FXML
   private TextField searchTextField;
+  
   @FXML
   private Button searchTransactions;
+  
   @Lazy
   @Autowired
   private StageManager stageManager;
@@ -209,7 +214,7 @@ public class TransactionController implements Initializable {
     id.clear();
     cbInitiator.getSelectionModel().clearSelection();
     cbDepartment.getSelectionModel().clearSelection();
-    dateOfTransaction.getEditor().clear();
+//    dateOfTransaction.getEditor().clear();
     cbRecipient.getSelectionModel().clearSelection();
     cbLedgerType.getSelectionModel().clearSelection();
     cbSubledgerType.getSelectionModel().clearSelection();
@@ -250,6 +255,11 @@ public class TransactionController implements Initializable {
     Transaction transaction = transactionTable.getSelectionModel().getSelectedItem();
     transactionService.delete(transaction);
     loadTransactionDetails();
+  }
+  
+  @FXML
+  private void saveSearchResult(ActionEvent event) {
+    ReportsController.save(event, getSearchTransaction());
   }
 
   private void saveAlert(Transaction transaction) {
