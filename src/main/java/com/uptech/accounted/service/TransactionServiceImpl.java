@@ -43,7 +43,7 @@ public class TransactionServiceImpl {
   public List<Transaction> fullTextSearch(String text) {
     return StreamSupport
         .stream(repository.findAll().spliterator(), false).parallel()
-        .filter(transaction -> transaction.toString().contains(text))
+        .filter(transaction -> transaction.toString().toLowerCase().contains(text.toLowerCase()))
         .collect(Collectors.toList());
   }
 }
