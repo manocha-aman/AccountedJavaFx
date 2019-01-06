@@ -3,6 +3,7 @@ package com.uptech.accounted;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -60,6 +61,36 @@ public class Main extends Application {
 
     return builder.run(args);
   }
+  
+  public static boolean isNumeric(final String input) {
+    //Check for null or blank string
+    if(input == null || input == "") return false;
+
+    //Retrieve the minus sign and decimal separator characters from the current Locale
+    final char localeMinusSign = DecimalFormatSymbols.getInstance().getMinusSign();
+    final char localeDecimalSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
+
+    //Check if first character is a minus sign
+    final boolean isNegative = input.charAt(0) == localeMinusSign;
+    //Check if string is not just a minus sign
+    if (isNegative && input.length() == 1) return false;
+
+    boolean isDecimalSeparatorFound = false;
+
+    //If the string has a minus sign ignore the first character
+    final int startCharIndex = isNegative ? 1 : 0;
+
+    //Check if each character is a number or a decimal separator
+    //and make sure string only has a maximum of one decimal separator
+    for (int i = startCharIndex; i < input.length(); i++) {
+        if(!Character.isDigit(input.charAt(i))) {
+            if(input.charAt(i) == localeDecimalSeparator && !isDecimalSeparatorFound) {
+                isDecimalSeparatorFound = true;
+            } else return false;
+        }
+    }
+    return true;
+}
 
   private static Map<Integer, int[]> getYearMonthsMap() {
     Map<Integer, int[]> yearMonthsMap = new HashMap<Integer, int[]>();
