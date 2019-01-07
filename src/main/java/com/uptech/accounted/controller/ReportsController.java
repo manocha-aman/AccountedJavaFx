@@ -198,7 +198,7 @@ public class ReportsController implements Initializable {
     if (file != null) {
       try (FileWriter fileWriter = new FileWriter(file)) {
         fileWriter.write(
-            "Id,Initiator,Department,Date,Recipient,Ledger,Sub Ledger,Amount,Subject,Transaction Type,Narration");
+            "\"Id\",\"Initiator\",\"Department\",\"Date\",\"Recipient\",\"Ledger\",\"Sub Ledger\",\"Amount\",\"Subject\",\"Transaction Type\",\"Narration\"");
         fileWriter.write("\n");
         for (Transaction transaction : all) {
           fileWriter.write("" + transaction);
