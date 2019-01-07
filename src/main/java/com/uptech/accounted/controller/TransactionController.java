@@ -445,20 +445,20 @@ public class TransactionController implements Initializable {
     // Add all transactions into table
     loadTransactionDetails();
   }
-  
+
   public static String formatLakh(double d) {
     String s = String.format(Locale.UK, "%1.2f", Math.abs(d));
     s = s.replaceAll("(.+)(...\\...)", "$1,$2");
     while (s.matches("\\d{3,},.+")) {
-        s = s.replaceAll("(\\d+)(\\d{2},.+)", "$1,$2");
+      s = s.replaceAll("(\\d+)(\\d{2},.+)", "$1,$2");
     }
     return d < 0 ? ("-" + s) : s;
   }
 
   private String getIndianCurrencyFormat(BigDecimal newValue) {
-//    DecimalFormat formatter = new DecimalFormat("#,##,##,##,##,###.00");
-//    String newValueStr = formatter.format(newValue);
-//    return newValueStr;
+    // DecimalFormat formatter = new DecimalFormat("#,##,##,##,##,###.00");
+    // String newValueStr = formatter.format(newValue);
+    // return newValueStr;
     return formatLakh(newValue.doubleValue());
   }
 
@@ -586,12 +586,11 @@ public class TransactionController implements Initializable {
           @Override
           public void updateItem(final BigDecimal item, boolean empty) {
             if (!empty) {
-              if(item.doubleValue() > 0)
-              setText(getIndianCurrencyFormat(item));
-              else {
-                setText("");
-              }
+              if (item.doubleValue() > 0)
+                setText(getIndianCurrencyFormat(item));
               // setStyle("-fx-text-fill: " + color + ";");
+            } else {
+              setText("");
             }
           }
         };
