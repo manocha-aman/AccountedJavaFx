@@ -30,7 +30,7 @@ public class Main extends Application {
 
   public static void main(final String[] args)
       throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-//    injectCustomHijriVariant(getYearMonthsMap(), 0);
+    injectCustomHijriVariant(getYearMonthsMap(), 1230422400000L);
     Application.launch(args);
   }
 
@@ -94,12 +94,12 @@ public class Main extends Application {
 
   private static Map<Integer, int[]> getYearMonthsMap() {
     Map<Integer, int[]> yearMonthsMap = new HashMap<Integer, int[]>();
-    for (int i = 1390; i < 2000; i++) {
+    for (int i = 1430; i < 1460; i++) {
       if (isIslamicLeapYear(i)) {
-        System.out.println("Leap Year " + i);
         yearMonthsMap.put(new Integer(i), new int[] { 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 30 });
-      } else
+      } else {
         yearMonthsMap.put(new Integer(i), new int[] { 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29 });
+      }
     }
     return yearMonthsMap;
   }
