@@ -1,16 +1,17 @@
 package com.uptech.accounted.controller;
 
+import static com.uptech.accounted.Main.isNumeric;
+import static com.uptech.accounted.controller.TransactionController.formatLakh;
 import static java.util.stream.Collectors.toList;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.chrono.HijrahChronology;
-import java.time.chrono.HijrahEra;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,7 @@ import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Master;
 import com.uptech.accounted.bean.QTransaction;
 import com.uptech.accounted.bean.Recipient;
+import com.uptech.accounted.bean.SubjectMatter;
 import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.bean.Transaction;
@@ -165,6 +167,8 @@ public class ReportsController implements Initializable {
         .map(item -> new Department(item.split("-")[0], item.split("-")[1])).collect(toList());
     List<Recipient> recipients = cbRecipients.getCheckModel().getCheckedItems().stream()
         .map(item -> new Recipient(item.split("-")[0], item.split("-")[1])).collect(toList());
+    List<SubjectMatter> subjectMatters = cbSubjects.getCheckModel().getCheckedItems().stream()
+        .map(item -> new SubjectMatter(item.split("-")[0], item.split("-")[1])).collect(toList());
     List<TransactionType> transactionTypes = cbTransactions.getCheckModel().getCheckedItems().stream()
         .collect(toList());
     List<Subledger> subledgers = cbSubledgerType.getCheckModel().getCheckedItems().stream().filter(i -> i != null)
@@ -181,10 +185,19 @@ public class ReportsController implements Initializable {
     BooleanExpression in = transaction.department.in(departments).and(transaction.initiator.in(initiators))
         .and(transaction.recipient.in(recipients)).and(transaction.transactionType.in(transactionTypes))
         .and(transaction.subledgerType.in(subledgers)).and(transaction.dateOfTransaction.after(fromDate.getValue()))
-        .and(transaction.dateOfTransaction.before(toDate.getValue()));
+        .and(transaction.dateOfTransaction.before(toDate.getValue())).and(transaction.subjectMatter.in(subjectMatters))
+        .and(transaction.amount.between(new BigDecimal(getFromAmount()), new BigDecimal(getToAmount())));
     Iterable<Transaction> all = transactionRepository.findAll(in);
 
     save(event, all);
+  }
+
+  private String getToAmount() {
+    return tbToAmount.getText().replaceAll(",", "");
+  }
+
+  private String getFromAmount() {
+    return tbFromAmount.getText().replaceAll(",", "");
   }
 
   public static void save(ActionEvent event, Iterable<Transaction> all) {
@@ -198,7 +211,7 @@ public class ReportsController implements Initializable {
     if (file != null) {
       try (FileWriter fileWriter = new FileWriter(file)) {
         fileWriter.write(
-            "\"Id\",\"Initiator\",\"Department\",\"Date\",\"Recipient\",\"Ledger\",\"Sub Ledger\",\"Amount\",\"Subject\",\"Transaction Type\",\"Narration\"");
+            "\"Id\",\"Initiator\",\"Department\",\"Date\",\"Hijri Date\",\"Recipient\",\"Ledger\",\"Sub Ledger\",\"Amount\",\"Subject\",\"Transaction Type\",\"Narration\"");
         fileWriter.write("\n");
         for (Transaction transaction : all) {
           fileWriter.write("" + transaction);
@@ -280,20 +293,21 @@ public class ReportsController implements Initializable {
   private void setupDefaults() {
     fromDate.setValue(LocalDate.now(ZoneId.of("Asia/Kolkata")).minusDays(10));
     toDate.setValue(LocalDate.now(ZoneId.of("Asia/Kolkata")));
-    
+
     HijrahChronology hijriChronology = HijrahChronology.INSTANCE;
     fromDate.setChronology(hijriChronology);
     toDate.setChronology(hijriChronology);
-    
+
     cbInitiators.getCheckModel().checkAll();
     cbDepartments.getCheckModel().checkAll();
     cbRecipients.getCheckModel().checkAll();
     cbTransactions.getCheckModel().checkAll();
     cbSubjects.getCheckModel().checkAll();
     cbLedgerType.getCheckModel().checkAll();
+    double parseDouble = Double.parseDouble("999999999999.0");
+    tbToAmount.setText(formatLakh(parseDouble));
+    tbFromAmount.setText("0.00");
     cbSubledgerType.getCheckModel().checkAll();
-    tbFromAmount.setText("0.0");
-    tbToAmount.setText("99999999.0");
   }
 
   private void makeAmountFieldNumericOnly() {
@@ -306,8 +320,24 @@ public class ReportsController implements Initializable {
     amountField.textProperty().addListener(new ChangeListener<String>() {
       @Override
       public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
+        String newValueWithoutComma = newValue.replaceAll(",", "");
+        if (!newValueWithoutComma.matches("\\d{0,13}([\\.]\\d{0,2})?")) {
           amountField.setText(oldValue);
+        }
+      }
+    });
+
+    amountField.focusedProperty().addListener((obs, inFocus, outFocus) -> {
+      if (outFocus) {
+        String number = amountField.getText();
+        if (number != "" && number != "[]") {
+          number = number.replaceAll(",", "");
+          try {
+            if (isNumeric(number))
+              amountField.setText(formatLakh(new BigDecimal(number).doubleValue()));
+          } catch (Exception e) {
+            return;
+          }
         }
       }
     });

@@ -2,6 +2,9 @@ package com.uptech.accounted.bean;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.HijrahDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +30,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Transaction {
+
+  private static final DateTimeFormatter HijriDateFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,6 +104,7 @@ public class Transaction {
                   ",\"" + initiator.getName() +"\""+
                   ",\"" + department.getName() +"\""+
                   ",\"" + dateOfTransaction +"\""+
+                  ",\"" + getHijriFormattedDate(dateOfTransaction) +"\""+
                   ",\"" + recipient.getName() +"\""+
                   ",\"" + ledgerType.getLedgerName() +"\""+
                   ",\"" + subledgerType.getSubledgerName() +"\""+
@@ -107,7 +113,12 @@ public class Transaction {
                   ",\"" + transactionType+"\""+
                   ",\"" + narration+"\"";
   }
-  
+
+  private String getHijriFormattedDate(LocalDate date) {
+    HijrahDate hijriDate = HijrahChronology.INSTANCE.date(date);
+    return hijriDate.format(HijriDateFormat);
+  }
+
   public String msgWhenSaved() {
     return "New Id: "+transactionId +
                   "\n Initiator: " + initiator.getName() +
