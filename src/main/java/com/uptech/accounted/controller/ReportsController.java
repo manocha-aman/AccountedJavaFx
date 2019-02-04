@@ -20,9 +20,12 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.CheckComboBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.uptech.accounted.bean.Department;
 import com.uptech.accounted.bean.Initiator;
@@ -187,7 +190,7 @@ public class ReportsController implements Initializable {
         .and(transaction.subledgerType.in(subledgers)).and(transaction.dateOfTransaction.after(fromDate.getValue().minusDays(1)))
         .and(transaction.dateOfTransaction.before(toDate.getValue().plusDays(1))).and(transaction.subjectMatter.in(subjectMatters))
         .and(transaction.amount.between(new BigDecimal(getFromAmount()), new BigDecimal(getToAmount())));
-    Iterable<Transaction> all = transactionRepository.findAll(in);
+    Iterable<Transaction> all = transactionRepository.findAll(in, transaction.dateOfTransaction.asc());
 
     save(event, all);
   }
