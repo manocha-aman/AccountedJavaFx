@@ -184,8 +184,8 @@ public class ReportsController implements Initializable {
 
     BooleanExpression in = transaction.department.in(departments).and(transaction.initiator.in(initiators))
         .and(transaction.recipient.in(recipients)).and(transaction.transactionType.in(transactionTypes))
-        .and(transaction.subledgerType.in(subledgers)).and(transaction.dateOfTransaction.after(fromDate.getValue()))
-        .and(transaction.dateOfTransaction.before(toDate.getValue())).and(transaction.subjectMatter.in(subjectMatters))
+        .and(transaction.subledgerType.in(subledgers)).and(transaction.dateOfTransaction.after(fromDate.getValue().minusDays(1)))
+        .and(transaction.dateOfTransaction.before(toDate.getValue().plusDays(1))).and(transaction.subjectMatter.in(subjectMatters))
         .and(transaction.amount.between(new BigDecimal(getFromAmount()), new BigDecimal(getToAmount())));
     Iterable<Transaction> all = transactionRepository.findAll(in);
 
