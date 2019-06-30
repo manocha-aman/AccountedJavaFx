@@ -1,18 +1,20 @@
 package com.uptech.accounted.utils;
 
+import java.time.LocalDate;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.HijrahDate;
+import java.time.format.DateTimeFormatter;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-public class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
+public class ColumnHijriDateFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
 
     private final DateTimeFormatter format;
 
-    public ColumnFormatter(DateTimeFormatter format) {
+    public ColumnHijriDateFormatter(DateTimeFormatter format) {
         super();
         this.format = format;
     }
@@ -27,7 +29,9 @@ public class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableC
                     setGraphic(null);
                 } else {
                     LocalDate ld = (LocalDate) item;
-                    String val = ld.format(format);
+                    HijrahDate date = HijrahChronology.INSTANCE.date(ld);
+                    
+                    String val = date.format(format); //ld.format(format);
                     setGraphic(new Label(val));
                 }
             }

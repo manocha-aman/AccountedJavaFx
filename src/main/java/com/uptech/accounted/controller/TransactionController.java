@@ -1,6 +1,33 @@
 package com.uptech.accounted.controller;
 
-import com.uptech.accounted.bean.*;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.chrono.HijrahChronology;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Controller;
+
+import com.uptech.accounted.Main;
+import com.uptech.accounted.bean.Ledger;
+import com.uptech.accounted.bean.Master;
+import com.uptech.accounted.bean.Subledger;
+import com.uptech.accounted.bean.Transaction;
+import com.uptech.accounted.bean.TransactionType;
 import com.uptech.accounted.config.StageManager;
 import com.uptech.accounted.repository.DepartmentRepository;
 import com.uptech.accounted.repository.InitiatorRepository;
@@ -10,39 +37,34 @@ import com.uptech.accounted.service.LedgerServiceImpl;
 import com.uptech.accounted.service.SubjectMatterServiceImpl;
 import com.uptech.accounted.service.SubledgerServiceImpl;
 import com.uptech.accounted.service.TransactionServiceImpl;
-import com.uptech.accounted.utils.ColumnFormatter;
+import com.uptech.accounted.utils.ColumnDateFormatter;
+import com.uptech.accounted.utils.ColumnHijriDateFormatter;
+
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Controller;
-
-import java.math.BigDecimal;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Controller
 @Log4j
@@ -103,6 +125,9 @@ public class TransactionController implements Initializable {
   private TableColumn<Transaction, LocalDate> colDateOfTransaction;
 
   @FXML
+  private TableColumn<Transaction, LocalDate> colHijriDateOfTransaction;
+
+  @FXML
   private TableColumn<Transaction, String> colRecipient;
 
   @FXML
@@ -130,9 +155,14 @@ public class TransactionController implements Initializable {
   private Button deleteTransactions;
 
   @FXML
+  private Button saveResults;
+
+  @FXML
   private TextField searchTextField;
+
   @FXML
   private Button searchTransactions;
+
   @Lazy
   @Autowired
   private StageManager stageManager;
@@ -187,7 +217,7 @@ public class TransactionController implements Initializable {
     id.clear();
     cbInitiator.getSelectionModel().clearSelection();
     cbDepartment.getSelectionModel().clearSelection();
-    dateOfTransaction.getEditor().clear();
+    // dateOfTransaction.getEditor().clear();
     cbRecipient.getSelectionModel().clearSelection();
     cbLedgerType.getSelectionModel().clearSelection();
     cbSubledgerType.getSelectionModel().clearSelection();
@@ -210,7 +240,7 @@ public class TransactionController implements Initializable {
     transaction
         .setSubledgerType(subledgerServiceImpl.findByLedgerAndSubledgerCode((getLedgerCode()), getSubledgerCode()));
     transaction.setLedgerType(ledgerServiceImpl.findByCode(getLedgerCode()));
-    BigDecimal transactionAmount = new BigDecimal(getAmount());
+    BigDecimal transactionAmount = new BigDecimal(getAmount().replace(",", ""));
     transaction.setAmount(transactionAmount);
     transaction.setNarration(getNarration());
     transaction.setTransactionType(getTransactionType());
@@ -230,13 +260,17 @@ public class TransactionController implements Initializable {
     loadTransactionDetails();
   }
 
+  @FXML
+  private void saveSearchResult(ActionEvent event) {
+    ReportsController.save(event, getSearchTransaction());
+  }
+
   private void saveAlert(Transaction transaction) {
 
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Transaction saved successfully.");
     alert.setHeaderText(null);
-    alert.setContentText(
-        "New entry created by " + transaction.getInitiator().getName() + ". Id - " + transaction.getTransactionId());
+    alert.setContentText("New entry created : \n" + transaction.msgWhenSaved());
     alert.showAndWait();
   }
 
@@ -264,17 +298,17 @@ public class TransactionController implements Initializable {
     String ledgerCode = "";
     try {
       ledgerCode = cbLedgerType.getSelectionModel().getSelectedItem().split("-")[0];
-    } catch(NullPointerException npe) {
+    } catch (NullPointerException npe) {
       log.error("Ledger Type Selection is empty");
     }
     return ledgerCode;
   }
 
   public String getSubledgerCode() {
-    String subledgerCode ="";
+    String subledgerCode = "";
     try {
       subledgerCode = cbSubledgerType.getSelectionModel().getSelectedItem().split("-")[0];
-    } catch(NullPointerException npe) {
+    } catch (NullPointerException npe) {
       log.error("Subledger Type Selection is empty");
     }
     return subledgerCode;
@@ -316,25 +350,27 @@ public class TransactionController implements Initializable {
       int count = 1;
       transactionPagination.setPageCount(getPageCount(count));
       transactionPagination.setPageFactory(this::createPage);
-      Transaction searchedTransaction = getSearchTransaction();
-      transactionList.add(searchedTransaction);
+      List<Transaction> searchedTransaction = getSearchTransaction();
+      transactionList.addAll(searchedTransaction);
 
       transactionTable.setItems(transactionList);
     }
   }
 
   private int getPageCount(int count) {
-    if (count == 0) return 1;
+    if (count == 0)
+      return 1;
     return count % itemsPerPage == 0 ? count / itemsPerPage : count / itemsPerPage + 1;
   }
 
   private Iterable<Transaction> getTransactionsForPage(int pageNumer) {
-    PageRequest request = new PageRequest(pageNumer, itemsPerPage, new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfTransaction")));
+    PageRequest request = new PageRequest(pageNumer, itemsPerPage,
+        new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfTransaction")));
     return transactionService.findAll(request);
   }
 
-  private Transaction getSearchTransaction() {
-    return transactionService.findById(Long.valueOf(searchTextField.getText()));
+  private List<Transaction> getSearchTransaction() {
+    return transactionService.fullTextSearch(searchTextField.getText());
   }
 
   @Override
@@ -347,6 +383,35 @@ public class TransactionController implements Initializable {
     loadRecipients();
     loadSubjectMatters();
     makeAmountFieldNumericOnly();
+    HijrahChronology hijriChronology = HijrahChronology.INSTANCE;
+    dateOfTransaction.setChronology(hijriChronology);
+
+    dateOfTransaction.setConverter(new StringConverter<LocalDate>() {
+      String pattern = "dd-MM-yyyy";
+      DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+      {
+        dateOfTransaction.setPromptText(pattern.toLowerCase());
+      }
+
+      @Override
+      public String toString(LocalDate date) {
+        if (date != null) {
+          return dateFormatter.format(date);
+        } else {
+          return "";
+        }
+      }
+
+      @Override
+      public LocalDate fromString(String string) {
+        if (string != null && !string.isEmpty()) {
+          return LocalDate.parse(string, dateFormatter);
+        } else {
+          return null;
+        }
+      }
+    });
 
     cbSubledgerType.addEventHandler(KeyEvent.KEY_PRESSED, new AutoCompleteComboBoxListener(cbSubledgerType));
 
@@ -368,11 +433,11 @@ public class TransactionController implements Initializable {
         cbSubjectMatter.getSelectionModel()
             .select(selectedItem.getSubjectMatter().getCode() + "-" + selectedItem.getSubjectMatter().getName());
         dateOfTransaction.setValue(selectedItem.getDateOfTransaction());
-        amount.setText(selectedItem.getAmount().toString());
+        amount.setText(getIndianCurrencyFormat(selectedItem.getAmount()));
         narration.setText(selectedItem.getNarration().toString());
         saveTransaction.setText("Update");
       } catch (Exception exception) {
-        //No rows selected in the table
+        // No rows selected in the table
       }
     });
     transactionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -381,13 +446,40 @@ public class TransactionController implements Initializable {
     loadTransactionDetails();
   }
 
+  public static String formatLakh(double d) {
+    String s = String.format(Locale.UK, "%1.2f", Math.abs(d));
+    s = s.replaceAll("(.+)(...\\...)", "$1,$2");
+    while (s.matches("\\d{3,},.+")) {
+      s = s.replaceAll("(\\d+)(\\d{2},.+)", "$1,$2");
+    }
+    return d < 0 ? ("-" + s) : s;
+  }
+
+  private String getIndianCurrencyFormat(BigDecimal newValue) {
+    // DecimalFormat formatter = new DecimalFormat("#,##,##,##,##,###.00");
+    // String newValueStr = formatter.format(newValue);
+    // return newValueStr;
+    return formatLakh(newValue.doubleValue());
+  }
+
+  public static String formatIndianCommaSeparated(String rupee) {
+    Locale indiaLocale = new Locale("en", "IN");
+    NumberFormat india = NumberFormat.getCurrencyInstance(indiaLocale);
+    return india.format(new BigDecimal(rupee));
+  }
+
   private void makeAmountFieldNumericOnly() {
-    // force the field to be numeric only
-    amount.textProperty().addListener(new ChangeListener<String>() {
-      @Override
-      public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
-          amount.setText(oldValue);
+    amount.focusedProperty().addListener((obs, inFocus, outFocus) -> {
+      if (outFocus) {
+        String number = amount.getText();
+        if (number != "" && number != "[]") {
+          number = number.replaceAll(",", "");
+          try {
+            if (Main.isNumeric(number))
+              amount.setText(getIndianCurrencyFormat(new BigDecimal(number)));
+          } catch (Exception e) {
+            return;
+          }
         }
       }
     });
@@ -462,11 +554,17 @@ public class TransactionController implements Initializable {
     colSubledgerType.setCellValueFactory(new PropertyValueFactory<>("subledgerName"));
 
     colDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
-    colDateOfTransaction.setCellFactory(new ColumnFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    colDateOfTransaction.setCellFactory(new ColumnDateFormatter<>(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+    colHijriDateOfTransaction.setCellValueFactory(new PropertyValueFactory<>("dateOfTransaction"));
+    colHijriDateOfTransaction
+        .setCellFactory(new ColumnHijriDateFormatter<>(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+    colAmount.setCellFactory(getCustomCellFactory());
   }
 
   private Node createPage(int pageIndex) {
-    transactionTable.setItems(FXCollections.observableArrayList(StreamSupport.stream(getTransactionsForPage(pageIndex).spliterator(), false).collect(Collectors.toList())));
+    transactionTable.setItems(FXCollections.observableArrayList(
+        StreamSupport.stream(getTransactionsForPage(pageIndex).spliterator(), false).collect(Collectors.toList())));
     return transactionTable;
   }
 
@@ -478,4 +576,27 @@ public class TransactionController implements Initializable {
     if (keyEvent.getCode() == KeyCode.ENTER)
       loadTransactionDetails();
   }
+
+  private Callback<TableColumn<Transaction, BigDecimal>, TableCell<Transaction, BigDecimal>> getCustomCellFactory() {
+    return new Callback<TableColumn<Transaction, BigDecimal>, TableCell<Transaction, BigDecimal>>() {
+      @Override
+      public TableCell<Transaction, BigDecimal> call(TableColumn<Transaction, BigDecimal> param) {
+        TableCell<Transaction, BigDecimal> cell = new TableCell<Transaction, BigDecimal>() {
+
+          @Override
+          public void updateItem(final BigDecimal item, boolean empty) {
+            if (!empty) {
+              if (item.doubleValue() > 0)
+                setText(getIndianCurrencyFormat(item));
+              // setStyle("-fx-text-fill: " + color + ";");
+            } else {
+              setText("");
+            }
+          }
+        };
+        return cell;
+      }
+    };
+  }
+
 }

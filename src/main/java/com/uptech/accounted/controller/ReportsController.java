@@ -1,12 +1,18 @@
 package com.uptech.accounted.controller;
 
+import static com.uptech.accounted.Main.isNumeric;
+import static com.uptech.accounted.controller.TransactionController.formatLakh;
 import static java.util.stream.Collectors.toList;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.chrono.HijrahChronology;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,9 +20,12 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.CheckComboBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.uptech.accounted.bean.Department;
 import com.uptech.accounted.bean.Initiator;
@@ -24,6 +33,7 @@ import com.uptech.accounted.bean.Ledger;
 import com.uptech.accounted.bean.Master;
 import com.uptech.accounted.bean.QTransaction;
 import com.uptech.accounted.bean.Recipient;
+import com.uptech.accounted.bean.SubjectMatter;
 import com.uptech.accounted.bean.Subledger;
 import com.uptech.accounted.bean.SubledgerId;
 import com.uptech.accounted.bean.Transaction;
@@ -53,6 +63,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.util.StringConverter;
 
 @Controller
 public class ReportsController implements Initializable {
@@ -151,45 +162,50 @@ public class ReportsController implements Initializable {
 
   @FXML
   private void generateReports(ActionEvent event) throws IOException {
-//    JPAQuery query = new JPAQuery(entityManager);
+    // JPAQuery query = new JPAQuery(entityManager);
     QTransaction transaction = QTransaction.transaction;
-    List<Initiator> initiators = cbInitiators.getCheckModel().getCheckedItems().stream().map(
-        item -> new Initiator(item.split("-")[0], item.split("-")[1])).collect(toList());
-    List<Department> departments = cbDepartments.getCheckModel().getCheckedItems().stream().map(
-        item -> new Department(item.split("-")[0], item.split("-")[1])).collect(toList());
-    List<Recipient> recipients = cbRecipients.getCheckModel().getCheckedItems().stream().map(
-        item -> new Recipient(item.split("-")[0], item.split("-")[1])).collect(toList());
-    List<TransactionType> transactionTypes = cbTransactions.getCheckModel().getCheckedItems().stream().collect(
-        toList());
-    List<Subledger> subledgers = cbSubledgerType.getCheckModel().getCheckedItems().stream().filter(i -> i != null).map(
-        item -> {
+    List<Initiator> initiators = cbInitiators.getCheckModel().getCheckedItems().stream()
+        .map(item -> new Initiator(item.split("-")[0], item.split("-")[1])).collect(toList());
+    List<Department> departments = cbDepartments.getCheckModel().getCheckedItems().stream()
+        .map(item -> new Department(item.split("-")[0], item.split("-")[1])).collect(toList());
+    List<Recipient> recipients = cbRecipients.getCheckModel().getCheckedItems().stream()
+        .map(item -> new Recipient(item.split("-")[0], item.split("-")[1])).collect(toList());
+    List<SubjectMatter> subjectMatters = cbSubjects.getCheckModel().getCheckedItems().stream()
+        .map(item -> new SubjectMatter(item.split("-")[0], item.split("-")[1])).collect(toList());
+    List<TransactionType> transactionTypes = cbTransactions.getCheckModel().getCheckedItems().stream()
+        .collect(toList());
+    List<Subledger> subledgers = cbSubledgerType.getCheckModel().getCheckedItems().stream().filter(i -> i != null)
+        .map(item -> {
           try {
-            return new Subledger(
-                new SubledgerId(item.split("-")[0], item.split("-")[2]), item.split("-")[3]);
+            return new Subledger(new SubledgerId(item.split("-")[0], item.split("-")[2]), item.split("-")[3]);
           } catch (Exception e) {
             System.out.println(item);
             e.printStackTrace();
             return null;
           }
-        })
-        .collect(toList());
+        }).collect(toList());
 
-    BooleanExpression in = transaction.department.in(departments)
-        .and(transaction.initiator.in(initiators))
-        .and(transaction.recipient.in(recipients))
-        .and(transaction.transactionType.in(transactionTypes))
-        .and(transaction.subledgerType.in(subledgers))
-        .and(transaction.dateOfTransaction.after(fromDate.getValue()))
-        .and(transaction.dateOfTransaction.before(toDate.getValue()));
-    Iterable<Transaction> all = transactionRepository.findAll(in);
+    BooleanExpression in = transaction.department.in(departments).and(transaction.initiator.in(initiators))
+        .and(transaction.recipient.in(recipients)).and(transaction.transactionType.in(transactionTypes))
+        .and(transaction.subledgerType.in(subledgers)).and(transaction.dateOfTransaction.after(fromDate.getValue().minusDays(1)))
+        .and(transaction.dateOfTransaction.before(toDate.getValue().plusDays(1))).and(transaction.subjectMatter.in(subjectMatters))
+        .and(transaction.amount.between(new BigDecimal(getFromAmount()), new BigDecimal(getToAmount())));
+    Iterable<Transaction> all = transactionRepository.findAll(in, transaction.dateOfTransaction.asc());
 
     save(event, all);
   }
 
-  private void save(ActionEvent event, Iterable<Transaction> all) {
+  private String getToAmount() {
+    return tbToAmount.getText().replaceAll(",", "");
+  }
+
+  private String getFromAmount() {
+    return tbFromAmount.getText().replaceAll(",", "");
+  }
+
+  public static void save(ActionEvent event, Iterable<Transaction> all) {
     FileChooser fileChooser = new FileChooser();
-    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-        "CSV files (*.csv)", "*.csv");
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
     fileChooser.getExtensionFilters().add(extFilter);
     Node source = (Node) event.getSource();
     Window stage = source.getScene().getWindow();
@@ -198,7 +214,7 @@ public class ReportsController implements Initializable {
     if (file != null) {
       try (FileWriter fileWriter = new FileWriter(file)) {
         fileWriter.write(
-            "Id,Initiator,Department,Date,Recipient,Ledger,Sub Ledger,Amount,Subject,Transaction Type,Narration");
+            "\"Id\",\"Initiator\",\"Department\",\"Date\",\"Hijri Date\",\"Recipient\",\"Ledger\",\"Sub Ledger\",\"Amount\",\"Subject\",\"Transaction Type\",\"Narration\"");
         fileWriter.write("\n");
         for (Transaction transaction : all) {
           fileWriter.write("" + transaction);
@@ -220,20 +236,81 @@ public class ReportsController implements Initializable {
     loadSubjectMatters();
     makeAmountFieldNumericOnly();
     setupDefaults();
+
+    fromDate.setConverter(new StringConverter<LocalDate>() {
+      String pattern = "dd-MM-yyyy";
+      DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+      {
+        fromDate.setPromptText(pattern.toLowerCase());
+      }
+
+      @Override
+      public String toString(LocalDate date) {
+        if (date != null) {
+          return dateFormatter.format(date);
+        } else {
+          return "";
+        }
+      }
+
+      @Override
+      public LocalDate fromString(String string) {
+        if (string != null && !string.isEmpty()) {
+          return LocalDate.parse(string, dateFormatter);
+        } else {
+          return null;
+        }
+      }
+    });
+
+    toDate.setConverter(new StringConverter<LocalDate>() {
+      String pattern = "dd-MM-yyyy";
+      DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+      {
+        toDate.setPromptText(pattern.toLowerCase());
+      }
+
+      @Override
+      public String toString(LocalDate date) {
+        if (date != null) {
+          return dateFormatter.format(date);
+        } else {
+          return "";
+        }
+      }
+
+      @Override
+      public LocalDate fromString(String string) {
+        if (string != null && !string.isEmpty()) {
+          return LocalDate.parse(string, dateFormatter);
+        } else {
+          return null;
+        }
+      }
+    });
+
   }
 
   private void setupDefaults() {
-    fromDate.setValue(LocalDate.now().minusDays(10));
-    toDate.setValue(LocalDate.now());
+    fromDate.setValue(LocalDate.now(ZoneId.of("Asia/Kolkata")).minusDays(10));
+    toDate.setValue(LocalDate.now(ZoneId.of("Asia/Kolkata")));
+
+    HijrahChronology hijriChronology = HijrahChronology.INSTANCE;
+    fromDate.setChronology(hijriChronology);
+    toDate.setChronology(hijriChronology);
+
     cbInitiators.getCheckModel().checkAll();
     cbDepartments.getCheckModel().checkAll();
     cbRecipients.getCheckModel().checkAll();
     cbTransactions.getCheckModel().checkAll();
     cbSubjects.getCheckModel().checkAll();
     cbLedgerType.getCheckModel().checkAll();
+    double parseDouble = Double.parseDouble("999999999999.0");
+    tbToAmount.setText(formatLakh(parseDouble));
+    tbFromAmount.setText("0.00");
     cbSubledgerType.getCheckModel().checkAll();
-    tbFromAmount.setText("0.0");
-    tbToAmount.setText("99999999.0");
   }
 
   private void makeAmountFieldNumericOnly() {
@@ -246,8 +323,24 @@ public class ReportsController implements Initializable {
     amountField.textProperty().addListener(new ChangeListener<String>() {
       @Override
       public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        if (!newValue.matches("\\d{0,10}([\\.]\\d{0,2})?")) {
+        String newValueWithoutComma = newValue.replaceAll(",", "");
+        if (!newValueWithoutComma.matches("\\d{0,13}([\\.]\\d{0,2})?")) {
           amountField.setText(oldValue);
+        }
+      }
+    });
+
+    amountField.focusedProperty().addListener((obs, inFocus, outFocus) -> {
+      if (outFocus) {
+        String number = amountField.getText();
+        if (number != "" && number != "[]") {
+          number = number.replaceAll(",", "");
+          try {
+            if (isNumeric(number))
+              amountField.setText(formatLakh(new BigDecimal(number).doubleValue()));
+          } catch (Exception e) {
+            return;
+          }
         }
       }
     });
@@ -285,7 +378,7 @@ public class ReportsController implements Initializable {
     loadMaster(recipientRepository, cbRecipients);
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   private void loadLedgers() {
     ledgerComboList.clear();
     List<Ledger> ledgerList = ledgerServiceImpl.findAll();
@@ -304,16 +397,15 @@ public class ReportsController implements Initializable {
   @FXML
   public void loadSubledgers() {
     ObservableList<String> subledgerComboList = FXCollections.observableArrayList();
-    List<String> ledgers = cbLedgerType.getCheckModel().getCheckedItems().stream().map(
-        l -> l.split("-")[0]).collect(toList());
+    List<String> ledgers = cbLedgerType.getCheckModel().getCheckedItems().stream().map(l -> l.split("-")[0])
+        .collect(toList());
     for (String ledger : ledgers) {
-      if (ledger.trim().isEmpty()) continue;
+      if (ledger.trim().isEmpty())
+        continue;
       List<Subledger> subledgers = subledgerServiceImpl.findByLedgerCode(ledger);
       for (Subledger subledger : subledgers) {
-        subledgerComboList.add(
-            subledger.getLedger().getLedgerCode() + "-"
-                + subledger.getLedger().getLedgerName() + "-"
-                + subledger.getSubledgerId().getSubledgerCode() + "-" + subledger.getSubledgerName());
+        subledgerComboList.add(subledger.getLedger().getLedgerCode() + "-" + subledger.getLedger().getLedgerName() + "-"
+            + subledger.getSubledgerId().getSubledgerCode() + "-" + subledger.getSubledgerName());
       }
     }
     cbSubledgerType.getItems().clear();

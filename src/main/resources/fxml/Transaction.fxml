@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.TransactionController">
+<BorderPane stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uptech.accounted.controller.TransactionController">
 	<top>
 		<fx:include source="MenuBar.fxml" />
 	</top>
@@ -130,7 +130,7 @@
 					<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 				</padding>
                <children>
-				   <TextField fx:id="searchTextField" prefHeight="30.0" prefWidth="246.0" promptText="Search by id" onKeyPressed="#searchTransactionsOnEnter" />
+				   <TextField fx:id="searchTextField" onKeyPressed="#searchTransactionsOnEnter" prefHeight="30.0" prefWidth="246.0" promptText="Type here to search" />
 				   <Button fx:id="searchTransactions" mnemonicParsing="false" onAction="#searchTransactions" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Search">
 					   <effect>
 						   <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
@@ -141,6 +141,11 @@
 						   <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
 					   </effect>
 				   </Button>
+                  <Button fx:id="saveResults" mnemonicParsing="false" onAction="#saveSearchResult" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: white;" text="Save Result" textAlignment="CENTER">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
 			   </children>
             </FlowPane>
 
@@ -150,6 +155,7 @@
 						<TableColumn fx:id="colInitiator" maxWidth="4000.0" prefWidth="75.0" text="Initiator" />
 						<TableColumn fx:id="colDepartment" maxWidth="4000.0" prefWidth="75.0" text="Department" />
 						<TableColumn fx:id="colDateOfTransaction" maxWidth="4000.0" prefWidth="75.0" text="Date" />
+						<TableColumn fx:id="colHijriDateOfTransaction" maxWidth="4000.0" prefWidth="75.0" text="Hijri Date" />
 						<TableColumn fx:id="colRecipient" maxWidth="4000.0" prefWidth="60.0" text="Recipient" />
 						<TableColumn fx:id="colLedgerType" maxWidth="4000.0" prefWidth="60.0" text="Ledger" />
 						<TableColumn fx:id="colSubledgerType" maxWidth="4000.0" prefWidth="60.0" text="Subledger" />
